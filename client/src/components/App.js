@@ -1,3 +1,4 @@
+import Hero from "./Hero";
 import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
@@ -15,7 +16,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const check_session_response = await fetch("/api/check_session");
+        const check_session_response = await fetch("/check_session");
         if (check_session_response.ok) {
           const user = await check_session_response.json();
           setUser(user);
@@ -29,6 +30,7 @@ export default function App() {
 
   return (
     <div>
+        <Hero />
         <NavBar user={user} onSetUser={setUser}/>
         <Routes>
           <Route exact path='/' element={<Home user={user}/>}/>

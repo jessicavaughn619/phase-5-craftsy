@@ -1,6 +1,6 @@
 export default function Home({ user }) {
     return (
-        <div>
+        <div className="m-5">
             <h1>Home</h1>
             <div>
                 {user ? 

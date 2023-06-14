@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -30,12 +31,13 @@ export default function LoginForm({ onLogin }) {
   }
 
   return (
-    <div>
+    <div className="m-5">
     <h2>Login to Craftsy</h2>
       <form onSubmit={handleSubmit}>
         <div id="username-input">
           <label htmlFor="username">Username</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="text"
             id="username"
             autoComplete="off"
@@ -46,6 +48,7 @@ export default function LoginForm({ onLogin }) {
           <div id="password-input">
           <label htmlFor="password">Password</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -54,9 +57,7 @@ export default function LoginForm({ onLogin }) {
           />
           </div>
           <div id="submit-button">
-            <button variant="fill" color="primary" type="submit">
-              {isLoading ? "Loading..." : "Login"}
-            </button>
+            <Button type="submit" children={isLoading ? "Loading..." : "Login"}/>
           </div>
           <div id="errors">
             {errors.error}

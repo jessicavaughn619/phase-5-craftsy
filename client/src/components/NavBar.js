@@ -15,23 +15,23 @@ export default function NavBar({ user, onSetUser }) {
         }
 
     return (
-        <nav>
+        <nav className="m-5">
             {user ? 
-            <div className="flex flex-row">
-                <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
-                <Link to="/contact">Contact</Link>
-                <div>
-                    <Link to="/logout" onClick={handleLogoutClick}>Logout</Link>
+            <div className="relative flex flex-column space-x-10">
+                <Link to="/" className="hover:text-amber-600">Home</Link>
+                <Link to="/about" className="hover:text-amber-600">About</Link>
+                <Link to="/contact" className="hover:text-amber-600">Contact</Link>
+                <div className="absolute top-0 right-0">
+                    <Link to="/logout" onClick={handleLogoutClick} className="hover:text-amber-600">Logout</Link>
                 </div>
             </div> : 
-            <div className="flex flex-row">
-                <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
-                <Link to="/contact">Contact</Link>
-                <div>
-                    <Link to='/signup' className="link">Sign Up</Link>
-                    <Link to='/login' className="link">Login</Link>
+            <div className="relative flex flex-column space-x-10">
+                <Link to="/" className="hover:text-amber-600">Home</Link>
+                <Link to="/about" className="hover:text-amber-600">About</Link>
+                <Link to="/contact" className="hover:text-amber-600">Contact</Link>
+                <div className="absolute top-0 right-0 space-x-5">
+                    <Link to='/signup' className="hover:text-amber-600">Sign Up</Link>
+                    <Link to='/login' className="hover:text-amber-600">Login</Link>
                 </div>
             </div>}
         </nav>

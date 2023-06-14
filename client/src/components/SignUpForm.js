@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -63,12 +64,13 @@ export default function SignUpForm({ onLogin }) {
       });
 
   return (
-    <div>
+    <div className="m-5">
     <h2>Register for Craftsy</h2>
       <form onSubmit={formik.handleSubmit}>
       <div id="firstname-input">
           <label htmlFor="firstName">First Name</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="text"
             id="firstName"
             autoComplete="off"
@@ -83,6 +85,7 @@ export default function SignUpForm({ onLogin }) {
         <div id="lastname-input">
           <label htmlFor="lastName">Last Name</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="text"
             id="lastName"
             autoComplete="off"
@@ -97,6 +100,7 @@ export default function SignUpForm({ onLogin }) {
         <div id="username_input">
           <label htmlFor="username">Username</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="text"
             id="username"
             autoComplete="off"
@@ -111,6 +115,7 @@ export default function SignUpForm({ onLogin }) {
         <div id="password-input">
           <label htmlFor="password">Password</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="password"
             id="password"
             name="password"
@@ -124,6 +129,7 @@ export default function SignUpForm({ onLogin }) {
         <div id="password-confirmation-input">
           <label htmlFor="passwordConfirmation">Password Confirmation</label>
           <input
+            className="px-4 py-1 rounded-full"
             type="password"
             id="passwordConfirmation"
             name="passwordConfirmation"
@@ -135,7 +141,7 @@ export default function SignUpForm({ onLogin }) {
         ) : null}
           </div>
         <div id="submit-button">
-          <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+          <Button type="submit" children={isLoading ? "Loading..." : "Sign Up"}/>
         </div>
           <div id="errors">
             {errors.error}
