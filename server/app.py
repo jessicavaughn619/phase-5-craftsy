@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 # Local imports
 from config import app, db, api
-from models import User
+from models import User, Product
 
 @app.route('/')
 def index():
@@ -14,6 +14,11 @@ class Users(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]
         return make_response(users, 200)
+    
+class Products(Resource):
+    def get(self):
+        products = [product.to_dict() for product in Product.query.all()]
+        return make_response(products, 200)
 
 class Signup(Resource):
     def post(self):
@@ -82,3 +87,4 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Users, '/users', endpoint='users')
+api.add_resource(Products, '/products', endpoint='products')

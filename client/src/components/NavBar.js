@@ -21,6 +21,7 @@ export default function NavBar({ user, onSetUser }) {
                 <Link to="/" className="hover:text-amber-600">Home</Link>
                 <Link to="/about" className="hover:text-amber-600">About</Link>
                 <Link to="/contact" className="hover:text-amber-600">Contact</Link>
+                <Link to="/wishlists" className="hover:text-amber-600">Wishlists</Link>
                 <div className="absolute top-0 right-0">
                     <Link to="/logout" onClick={handleLogoutClick} className="hover:text-amber-600">Logout</Link>
                 </div>
