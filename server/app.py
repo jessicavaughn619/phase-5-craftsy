@@ -20,71 +20,71 @@ class Products(Resource):
         products = [product.to_dict() for product in Product.query.all()]
         return make_response(products, 200)
 
-class Signup(Resource):
-    def post(self):
-        request_json = request.get_json()
+# class Signup(Resource):
+#     def post(self):
+#         request_json = request.get_json()
 
-        first_name = request_json.get('firstName')
-        last_name= request_json.get('lastName')
-        username = request_json.get('username')
-        password = request_json.get('password')
+#         first_name = request_json.get('firstName')
+#         last_name= request_json.get('lastName')
+#         username = request_json.get('username')
+#         password = request_json.get('password')
 
-        user = User(
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-        )
+#         user = User(
+#             first_name=first_name,
+#             last_name=last_name,
+#             username=username,
+#         )
 
-        user.password_hash = password
+#         user.password_hash = password
 
-        try:
-            db.session.add(user)
-            db.session.commit()
-            session['user_id'] = user.id
-            return user.to_dict(), 201
-        except IntegrityError:
-            return {'error': '422 Unprocessable Entity'}, 422
+#         try:
+#             db.session.add(user)
+#             db.session.commit()
+#             session['user_id'] = user.id
+#             return user.to_dict(), 201
+#         except IntegrityError:
+#             return {'error': '422 Unprocessable Entity'}, 422
         
-class CheckSession(Resource):
-    def get(self):
-        if session.get('user_id'):
-            user = User.query.filter(User.id == session['user_id']).first()
-            return user.to_dict(), 200
-        return {'error': '401 Unauthorized'}, 401
+# class CheckSession(Resource):
+#     def get(self):
+#         if session.get('user_id'):
+#             user = User.query.filter(User.id == session['user_id']).first()
+#             return user.to_dict(), 200
+#         return {'error': '401 Unauthorized'}, 401
 
-class Login(Resource):
-    def post(self):
+# class Login(Resource):
+#     def post(self):
 
-        request_json = request.get_json()
+#         request_json = request.get_json()
 
-        username = request_json.get('username')
-        password = request_json.get('password')
+#         username = request_json.get('username')
+#         password = request_json.get('password')
 
-        user = User.query.filter(User.username == username).first()
+#         user = User.query.filter(User.username == username).first()
 
-        if user:
-            if user.authenticate(password):
+#         if user:
+#             if user.authenticate(password):
 
-                session['user_id'] = user.id
-                return user.to_dict(), 200
-            return {'error': 'Incorrect password.'}, 401
+#                 session['user_id'] = user.id
+#                 return user.to_dict(), 200
+#             return {'error': 'Incorrect password.'}, 401
 
-        return {'error': '401 Unauthorized'}, 401
+#         return {'error': '401 Unauthorized'}, 401
 
-class Logout(Resource):
-    def delete(self):
+# class Logout(Resource):
+#     def delete(self):
         
-        if session.get('user_id'):
+#         if session.get('user_id'):
             
-            session['user_id'] = None
+#             session['user_id'] = None
             
-            return {}, 204
+#             return {}, 204
         
-        return {'error': '401 Unauthorized'}, 401
+#         return {'error': '401 Unauthorized'}, 401
     
-api.add_resource(Signup, '/signup', endpoint='signup')
-api.add_resource(CheckSession, '/check_session', endpoint='check_session')
-api.add_resource(Login, '/login', endpoint='login')
-api.add_resource(Logout, '/logout', endpoint='logout')
+# api.add_resource(Signup, '/signup', endpoint='signup')
+# api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+# api.add_resource(Login, '/login', endpoint='login')
+# api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Products, '/products', endpoint='products')
