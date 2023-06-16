@@ -18,11 +18,11 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const check_session_response = await fetch("/check_session");
-        // if (check_session_response.ok) {
-        //   const user = await check_session_response.json();
-        //   setUser(user);
-        // }
+        const check_session_response = await fetch("/check_session");
+        if (check_session_response.ok) {
+          const user = await check_session_response.json();
+          setUser(user);
+        }
         const product_response = await fetch("/products");
         const products = await product_response.json();
         setProducts(products);

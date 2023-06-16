@@ -10,6 +10,12 @@ export default function LoginForm({ onLogin }) {
 
   const navigate = useNavigate()
 
+  function handleClick() {
+    fetch("/login")
+    .then(r => r.json())
+    .then(data => console.log(data))
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
@@ -33,6 +39,7 @@ export default function LoginForm({ onLogin }) {
   return (
     <div className="m-5">
     <h2>Login to Craftsy</h2>
+    <button onClick={handleClick}>Login with Google</button>
       <form onSubmit={handleSubmit}>
         <div id="username-input">
           <label htmlFor="username">Username</label>
