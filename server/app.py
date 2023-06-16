@@ -129,7 +129,7 @@ def callback():
     login_user(user)
 
     # Send user back to homepage
-    return redirect('/')
+    return redirect('http://localhost:4000/')
 
 class Logout(Resource):
     def delete(self):

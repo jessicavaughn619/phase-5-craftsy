@@ -11,9 +11,7 @@ export default function LoginForm({ onLogin }) {
   const navigate = useNavigate()
 
   function handleClick() {
-    fetch("/login")
-    .then(r => r.json())
-    .then(data => console.log(data))
+    window.open("http://localhost:5555/login", "_self")
   }
 
   function handleSubmit(e) {
