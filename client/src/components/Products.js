@@ -9,7 +9,7 @@ export default function Products({ products }) {
         />
     ))
     return (
-        <div>
+        <div className="grid grid-flow-col gap-4">
             {allProducts}
         </div>
     )

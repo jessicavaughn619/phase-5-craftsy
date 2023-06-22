@@ -1,12 +1,11 @@
 import os
 import json
-from flask import Flask, redirect, request, session, make_response, url_for
+from flask import redirect, request, session, make_response
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_login import (
     LoginManager,
     current_user,
-    login_required,
     login_user,
     logout_user,
 )
@@ -44,7 +43,7 @@ class CheckSession(Resource):
     def get(self):
         if current_user.is_authenticated:
             return current_user.to_dict(), 200
-        elif session.get('user_id'):
+        if session.get('user_id'):
             user = LocalUser.query.filter(LocalUser.id == session['user_id']).first()
             return user.to_dict(), 200
         return {'error': '401 Unauthorized'}, 401
@@ -139,7 +138,7 @@ class Logout(Resource):
         if current_user:
             logout_user()
             return {}, 204
-        elif session.get('user_id'):
+        if session.get('user_id'):
             session['user_id'] = None
             return {}, 204
         return {"error": "401 Unauthorized"}, 401

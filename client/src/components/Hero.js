@@ -1,7 +1,9 @@
+import hero from '../images/logo.png'
+
 export default function Hero() {
     return (
         <div>
-            <h1>HERO</h1>
+            <img src={hero}/>
         </div>
     )
 }

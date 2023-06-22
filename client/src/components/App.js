@@ -3,6 +3,7 @@ import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
 import Wishlists from "./Wishlists";
+import Cart from "./Cart";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SignUpForm from "./SignUpForm";
@@ -36,10 +37,11 @@ export default function App() {
   }, []);
 
   return (
-    <div>
-        <Hero />
+    <div className="flex flex-col h-screen justify-between hover:cursor-default">
+        <header><Hero />
         <NavBar user={user} onSetUser={setUser}/>
-        <Routes>
+        </header>
+        <main className="mb-auto"><Routes>
           <Route path='/' element={<Home user={user} products={products}/>}/>
           <Route path='/*' element={<Error />}/>
           <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
@@ -47,8 +49,10 @@ export default function App() {
           <Route path='/about' element={<About />}/>
           <Route path='/wishlists' element={<Wishlists />}/>
           <Route path='/contact' element={<Contact />}/>
+          <Route path='/cart' element={<Cart />}/>
         </Routes>
-        <Footer />
+        </main>
+        <footer className="h-10"><Footer /></footer>
     </div>
   )
 }

@@ -71,10 +71,11 @@ export default function SignUpForm({ onLogin }) {
   return (
     <div className="m-5">
       <form onSubmit={formik.handleSubmit}>
-      <div id="firstname-input">
-          <label htmlFor="firstName">First Name</label>
+      <div className="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+          <label htmlFor="firstName" className="block mb-2 font-medium text-gray-900 text-black">First Name</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="text"
             id="firstName"
             autoComplete="off"
@@ -83,13 +84,13 @@ export default function SignUpForm({ onLogin }) {
             onChange={formik.handleChange}
           />
           {formik.errors.firstName && formik.touched.firstName ? (
-          <div className="error">{formik.errors.firstName}</div>
+          <div className="text-amber-600">{formik.errors.firstName}</div>
         ) : null}
         </div>
-        <div id="lastname-input">
-          <label htmlFor="lastName">Last Name</label>
+        <div>
+          <label htmlFor="lastName" className="block mb-2 font-medium text-gray-900 text-black">Last Name</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="text"
             id="lastName"
             autoComplete="off"
@@ -98,13 +99,13 @@ export default function SignUpForm({ onLogin }) {
             onChange={formik.handleChange}
           />
           {formik.errors.lastName && formik.touched.lastName ? (
-          <div className="error">{formik.errors.lastName}</div>
+          <div className="text-amber-600">{formik.errors.lastName}</div>
         ) : null}
         </div>
-        <div id="username_input">
-          <label htmlFor="username">Username</label>
+        <div>
+          <label htmlFor="username" className="block mb-2 font-medium text-gray-900 text-black">Username</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="text"
             id="username"
             autoComplete="off"
@@ -113,13 +114,13 @@ export default function SignUpForm({ onLogin }) {
             onChange={formik.handleChange}
           />
           {formik.errors.username && formik.touched.username ? (
-          <div className="error">{formik.errors.username}</div>
+          <div className="text-amber-600">{formik.errors.username}</div>
         ) : null}
         </div>
-        <div id="password-input">
-          <label htmlFor="password">Password</label>
+        <div>
+          <label htmlFor="password" className="block mb-2 font-medium text-gray-900 text-black">Password</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="password"
             id="password"
             name="password"
@@ -127,13 +128,13 @@ export default function SignUpForm({ onLogin }) {
             onChange={formik.handleChange}
           />
           {formik.errors.password && formik.touched.password ? (
-          <div className="error">{formik.errors.password}</div>
+          <div className="text-amber-600">{formik.errors.password}</div>
         ) : null}
         </div>
-        <div id="password-confirmation-input">
-          <label htmlFor="passwordConfirmation">Password Confirmation</label>
+        <div>
+          <label htmlFor="passwordConfirmation" className="block mb-2 font-medium text-gray-900 text-black">Password Confirmation</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="password"
             id="passwordConfirmation"
             name="passwordConfirmation"
@@ -141,18 +142,19 @@ export default function SignUpForm({ onLogin }) {
             onChange={formik.handleChange}
           />
           {formik.errors.passwordConfirmation && formik.touched.passwordConfirmation ? (
-          <div className="error">{formik.errors.passwordConfirmation}</div>
+          <div className="text-amber-600">{formik.errors.passwordConfirmation}</div>
         ) : null}
           </div>
-        <div id="submit-button">
+        <div>
           <Button type="submit" children={isLoading ? "Loading..." : "Sign Up"}/>
         </div>
-          <div id="errors">
+          <div className="text-amber-600">
             {errors.error}
+          </div>
           </div>
       </form>
       <div>
-      <button onClick={handleClick} className="flex flex-row items-center px-4 py-1 border-solid border-2 border-black rounded-full hover:border-amber-600">
+      <button onClick={handleClick} className="flex border gap-2 rounded-lg hover:border-amber-600 w-full p-2.5 dark:text-black dark:hover:border-amber-600 items-center justify-center max-w-sm mx-auto">
       <img src={google} alt="google-logo" className="h-7 w-7"/>
       Login with Google</button>
     </div>

@@ -18,29 +18,29 @@ export default function NavBar({ user, onSetUser }) {
             {user ? 
             <div className="relative flex flex-column space-x-10">
                 <NavLink to="/" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Home</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Home</NavLink>
                 <NavLink to="/about" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>About</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>About</NavLink>
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Contact</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
                 <NavLink to="/wishlists" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Wishlists</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Wishlists</NavLink>
                 <div className="absolute top-0 right-0">
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>
             </div> : 
             <div className="relative flex flex-column space-x-10">
                 <NavLink to="/" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Home</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Home</NavLink>
                 <NavLink to="/about" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>About</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>About</NavLink>
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Contact</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
                 <div className="absolute top-0 right-0 space-x-5">
                     <NavLink to='/signup' className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Sign Up</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Sign Up</NavLink>
                     <NavLink to='/login' className={({ isActive, isPending }) =>
-                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Login</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Login</NavLink>
                 </div>
             </div>}
         </nav>

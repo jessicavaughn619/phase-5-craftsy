@@ -38,10 +38,11 @@ export default function LoginForm({ onLogin }) {
   return (
     <div className="m-5">
       <form onSubmit={handleSubmit}>
-        <div id="username-input">
-          <label htmlFor="username">Username</label>
+      <div className="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label htmlFor="username" className="block mb-2 font-medium text-gray-900 text-black">Username</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="text"
             id="username"
             autoComplete="off"
@@ -49,10 +50,10 @@ export default function LoginForm({ onLogin }) {
             onChange={(e) => setUsername(e.target.value)}
           />
           </div>
-          <div id="password-input">
-          <label htmlFor="password">Password</label>
+          <div>
+          <label htmlFor="password" className="block mb-2 font-medium text-gray-900 text-black">Password</label>
           <input
-            className="px-4 py-1 rounded-full"
+            className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -60,18 +61,18 @@ export default function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
           </div>
-          <div id="submit-button">
+          <div>
             <Button type="submit" children={isLoading ? "Loading..." : "Login"}/>
           </div>
-          <div id="errors">
+          <div className="text-amber-600">
             {errors.error}
           </div>
+        </div>
       </form>
-      <div>
-      <button onClick={handleClick} className="flex flex-row items-center px-4 py-1 border-solid border-2 border-black rounded-full hover:border-amber-600">
-      <img src={google} alt="google-logo" className="h-7 w-7"/>
-      Login with Google</button>
-    </div>
+      <button onClick={handleClick} className="flex border gap-2 rounded-lg hover:border-amber-600 w-full p-2.5 dark:text-black dark:hover:border-amber-600 items-center justify-center max-w-sm mx-auto">
+        <img src={google} alt="google-logo" className="h-7 w-7"/>
+        <span>Login with Google</span>
+      </button>
     </div>
   )
 }
