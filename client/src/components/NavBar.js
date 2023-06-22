@@ -23,7 +23,7 @@ export default function NavBar({ user, onSetUser }) {
                 <Link to="/contact" className="hover:text-amber-600">Contact</Link>
                 <Link to="/wishlists" className="hover:text-amber-600">Wishlists</Link>
                 <div className="absolute top-0 right-0">
-                    <Link to="/logout" onClick={handleLogoutClick} className="hover:text-amber-600">Logout</Link>
+                    <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>
             </div> : 
             <div className="relative flex flex-column space-x-10">

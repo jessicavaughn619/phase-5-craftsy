@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
+import Error from "./Error";
 import { Routes, Route } from "react-router-dom";
 
 import React, { useEffect, useState } from 'react';
@@ -39,13 +40,13 @@ export default function App() {
         <Hero />
         <NavBar user={user} onSetUser={setUser}/>
         <Routes>
-          <Route exact path='/' element={<Home user={user} products={products}/>}/>
+          <Route path='/' element={<Home user={user} products={products}/>}/>
+          <Route path='/*' element={<Error />}/>
           <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
           <Route path='/login' element={<LoginForm onLogin={setUser}/>}/>
           <Route path='/about' element={<About />}/>
           <Route path='/wishlists' element={<Wishlists />}/>
           <Route path='/contact' element={<Contact />}/>
-          <Route path='/logout'/>
         </Routes>
         <Footer />
     </div>
