@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import google from "../images/google.png"
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -36,8 +37,6 @@ export default function LoginForm({ onLogin }) {
 
   return (
     <div className="m-5">
-    <h2>Login to Craftsy</h2>
-    <button onClick={handleClick}>Login with Google</button>
       <form onSubmit={handleSubmit}>
         <div id="username-input">
           <label htmlFor="username">Username</label>
@@ -68,6 +67,11 @@ export default function LoginForm({ onLogin }) {
             {errors.error}
           </div>
       </form>
+      <div>
+      <button onClick={handleClick} className="flex flex-row items-center px-4 py-1 border-solid border-2 border-black rounded-full hover:border-amber-600">
+      <img src={google} alt="google-logo" className="h-7 w-7"/>
+      Login with Google</button>
+    </div>
     </div>
   )
 }

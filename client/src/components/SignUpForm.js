@@ -3,12 +3,17 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import google from "../images/google.png"
 
 export default function SignUpForm({ onLogin }) {
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate()
+
+    function handleClick() {
+      window.open("http://localhost:5555/login", "_self")
+    }
 
     const formSchema = yup.object().shape({
         firstName: yup.string().required("First name is required"),
@@ -65,7 +70,6 @@ export default function SignUpForm({ onLogin }) {
 
   return (
     <div className="m-5">
-    <h2>Register for Craftsy</h2>
       <form onSubmit={formik.handleSubmit}>
       <div id="firstname-input">
           <label htmlFor="firstName">First Name</label>
@@ -147,6 +151,11 @@ export default function SignUpForm({ onLogin }) {
             {errors.error}
           </div>
       </form>
+      <div>
+      <button onClick={handleClick} className="flex flex-row items-center px-4 py-1 border-solid border-2 border-black rounded-full hover:border-amber-600">
+      <img src={google} alt="google-logo" className="h-7 w-7"/>
+      Login with Google</button>
+    </div>
     </div>
   )
 }

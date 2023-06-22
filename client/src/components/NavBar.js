@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 export default function NavBar({ user, onSetUser }) {
 
@@ -18,21 +17,30 @@ export default function NavBar({ user, onSetUser }) {
         <nav className="m-5">
             {user ? 
             <div className="relative flex flex-column space-x-10">
-                <Link to="/" className="hover:text-amber-600">Home</Link>
-                <Link to="/about" className="hover:text-amber-600">About</Link>
-                <Link to="/contact" className="hover:text-amber-600">Contact</Link>
-                <Link to="/wishlists" className="hover:text-amber-600">Wishlists</Link>
+                <NavLink to="/" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Home</NavLink>
+                <NavLink to="/about" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>About</NavLink>
+                <NavLink to="/contact" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Contact</NavLink>
+                <NavLink to="/wishlists" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Wishlists</NavLink>
                 <div className="absolute top-0 right-0">
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>
             </div> : 
             <div className="relative flex flex-column space-x-10">
-                <Link to="/" className="hover:text-amber-600">Home</Link>
-                <Link to="/about" className="hover:text-amber-600">About</Link>
-                <Link to="/contact" className="hover:text-amber-600">Contact</Link>
+                <NavLink to="/" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Home</NavLink>
+                <NavLink to="/about" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>About</NavLink>
+                <NavLink to="/contact" className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Contact</NavLink>
                 <div className="absolute top-0 right-0 space-x-5">
-                    <Link to='/signup' className="hover:text-amber-600">Sign Up</Link>
-                    <Link to='/login' className="hover:text-amber-600">Login</Link>
+                    <NavLink to='/signup' className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Sign Up</NavLink>
+                    <NavLink to='/login' className={({ isActive, isPending }) =>
+                    isPending ? "hover:text-amber-600" : isActive ? "text-amber-600" : ""}>Login</NavLink>
                 </div>
             </div>}
         </nav>
