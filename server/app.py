@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
-from models import User, Product
+from models import User, Product, LocalUser
 
 CORS(app)
 
@@ -44,6 +44,9 @@ class CheckSession(Resource):
     def get(self):
         if current_user.is_authenticated:
             return current_user.to_dict(), 200
+        elif session.get('user_id'):
+            user = LocalUser.query.filter(LocalUser.id == session['user_id']).first()
+            return user.to_dict(), 200
         return {'error': '401 Unauthorized'}, 401
 
 def get_google_provider_cfg():
@@ -136,45 +139,62 @@ class Logout(Resource):
         if current_user:
             logout_user()
             return {}, 204
+        elif session.get('user_id'):
+            session['user_id'] = None
+            return {}, 204
         return {"error": "401 Unauthorized"}, 401
-
-class Users(Resource):
-    def get(self):
-        users = [user.to_dict() for user in User.query.all()]
-        return make_response(users, 200)
     
 class Products(Resource):
     def get(self):
         products = [product.to_dict() for product in Product.query.all()]
         return make_response(products, 200)
 
-# class Signup(Resource):
-#     def post(self):
-#         request_json = request.get_json()
+class Signup(Resource):
+    def post(self):
+        request_json = request.get_json()
 
-#         first_name = request_json.get('firstName')
-#         last_name= request_json.get('lastName')
-#         username = request_json.get('username')
-#         password = request_json.get('password')
+        first_name = request_json.get('firstName')
+        last_name= request_json.get('lastName')
+        username = request_json.get('username')
+        password = request_json.get('password')
 
-#         user = User(
-#             first_name=first_name,
-#             last_name=last_name,
-#             username=username,
-#         )
+        user = LocalUser(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+        )
 
-#         user.password_hash = password
+        user.password_hash = password
 
-#         try:
-#             db.session.add(user)
-#             db.session.commit()
-#             session['user_id'] = user.id
-#             return user.to_dict(), 201
-#         except IntegrityError:
-#             return {'error': '422 Unprocessable Entity'}, 422
+        try:
+            db.session.add(user)
+            db.session.commit()
+            session['user_id'] = user.id
+            return user.to_dict(), 201
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
+        
+class LocalLogin(Resource):
+    def post(self):
+
+        request_json = request.get_json()
+
+        username = request_json.get('username')
+        password = request_json.get('password')
+
+        user = LocalUser.query.filter(LocalUser.username == username).first()
+
+        if user:
+            if user.authenticate(password):
+
+                session['user_id'] = user.id
+                return user.to_dict(), 200
+            return {'error': 'Incorrect password.'}, 401
+
+        return {'error': '401 Unauthorized'}, 401
     
-# api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
+api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
-api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Products, '/products', endpoint='products')

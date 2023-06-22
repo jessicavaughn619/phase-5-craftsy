@@ -5,7 +5,7 @@ export default function Home({ user, products }) {
         <div className="m-5">
             <div>
                 {user ? 
-                <p>Welcome, {user.name}!</p> :
+                <p>Welcome, {(user.name) ? user.name : user.first_name}!</p> :
                 <p>Check out our site!</p>}
                 <Products products={products}/>
             </div>
