@@ -1,12 +1,16 @@
+import CartCard from "./CartCard"
+
 export default function Cart({ products }) {
-    console.log(products)
-    
+
+    const cartItems = products.map(product => (
+        <CartCard 
+        key={product.id}
+        product={product}/>
+    ))
     return (
-        <div className="m-5">
+        <div className="grid grid-flow-col gap-4">
             {products ?
-            products.map(product => (
-                <li>{product.item}</li>
-            ))
+            cartItems
             : <p>You have no products in your cart!</p>
             }
         </div>

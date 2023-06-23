@@ -7,6 +7,8 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
+    serialize_rules = ('-products.user', )
+
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
@@ -22,7 +24,7 @@ class User(db.Model, SerializerMixin, UserMixin):
 class LocalUser(db.Model, SerializerMixin):
     __tablename__ = 'local_users'
 
-    serialize_rules = ('-_password_hash', )
+    serialize_rules = ('-_password_hash', '-products.local_user', )
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
@@ -50,6 +52,8 @@ class LocalUser(db.Model, SerializerMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
 
+    serialize_rules = ('-user', '-local_user', )
+
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
@@ -59,4 +63,3 @@ class Product(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} >'
-    

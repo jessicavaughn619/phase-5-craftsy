@@ -1,6 +1,6 @@
 import os
 import json
-from flask import redirect, request, session, make_response
+from flask import redirect, request, session, make_response, jsonify
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_login import (
@@ -191,9 +191,20 @@ class LocalLogin(Resource):
             return {'error': 'Incorrect password.'}, 401
 
         return {'error': '401 Unauthorized'}, 401
+
+class Cart(Resource):
+    def get(self):
+        cart_data = session.get('cart', [])
+        return jsonify(cart_data)
+    
+    def post(self):
+        cart_data = request.get_json()
+        session['cart'] = cart_data
+        return jsonify({'message': 'Cart updated successfully'})
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Products, '/products', endpoint='products')
+api.add_resource(Cart, '/cart', endpoint='cart')

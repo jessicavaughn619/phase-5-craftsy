@@ -40,6 +40,7 @@ export default function App() {
     const productToAdd = products.find(product => (product.id===id))
     const updatedCart = [...productsInCart, productToAdd]
     setProductsInCart(updatedCart)
+    alert("Item added to cart!")
 } 
 
   return (
