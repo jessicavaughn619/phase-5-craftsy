@@ -38,7 +38,7 @@ export default function LoginForm({ onLogin }) {
   return (
     <div className="m-5">
       <form onSubmit={handleSubmit}>
-      <div className="grid gap-6 mb-6 md:grid-cols-2">
+      <div className="grid gap-6 mb-6 md:grid-cols-1">
         <div>
           <label htmlFor="username" className="block mb-2 font-medium text-gray-900 text-black">Username</label>
           <input
@@ -61,17 +61,15 @@ export default function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
           </div>
-          <div>
             <Button type="submit" children={isLoading ? "Loading..." : "Login"}/>
-          </div>
           <div className="text-amber-600">
             {errors.error}
           </div>
         </div>
       </form>
       <button onClick={handleClick} className="flex border gap-2 rounded-lg hover:border-amber-600 w-full p-2.5 dark:text-black dark:hover:border-amber-600 items-center justify-center max-w-sm mx-auto">
-        <img src={google} alt="google-logo" className="h-7 w-7"/>
-        <span>Login with Google</span>
+            <img src={google} alt="google-logo" className="h-7 w-7"/>
+            <span>Login with Google</span>
       </button>
     </div>
   )

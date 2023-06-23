@@ -2,7 +2,6 @@ import Hero from "./Hero";
 import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
-import Wishlists from "./Wishlists";
 import Cart from "./Cart";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -16,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 export default function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([])
+  const [productsInCart, setProductsInCart]= useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,20 +36,35 @@ export default function App() {
     fetchData()
   }, []);
 
+  function handleAddItemToCart(id) {
+    const productToAdd = products.find(product => (product.id===id))
+    const updatedCart = [...productsInCart, productToAdd]
+    setProductsInCart(updatedCart)
+} 
+
   return (
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
         <header><Hero />
         <NavBar user={user} onSetUser={setUser}/>
         </header>
         <main className="mb-auto"><Routes>
-          <Route path='/' element={<Home user={user} products={products}/>}/>
+          <Route path='/' element={
+          <Home 
+            user={user} 
+            products={products}
+            onSetProductsInCart={handleAddItemToCart}
+            />}
+            />
           <Route path='/*' element={<Error />}/>
           <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
           <Route path='/login' element={<LoginForm onLogin={setUser}/>}/>
           <Route path='/about' element={<About />}/>
-          <Route path='/wishlists' element={<Wishlists />}/>
           <Route path='/contact' element={<Contact />}/>
-          <Route path='/cart' element={<Cart />}/>
+          <Route path='/cart' element={
+          <Cart 
+            products={productsInCart}
+          />}
+          />
         </Routes>
         </main>
         <footer className="h-10"><Footer /></footer>

@@ -71,7 +71,7 @@ export default function SignUpForm({ onLogin }) {
   return (
     <div className="m-5">
       <form onSubmit={formik.handleSubmit}>
-      <div className="grid gap-6 mb-6 md:grid-cols-2">
+      <div className="grid gap-6 mb-6 md:grid-cols-1">
       <div>
           <label htmlFor="firstName" className="block mb-2 font-medium text-gray-900 text-black">First Name</label>
           <input
@@ -145,19 +145,16 @@ export default function SignUpForm({ onLogin }) {
           <div className="text-amber-600">{formik.errors.passwordConfirmation}</div>
         ) : null}
           </div>
-        <div>
           <Button type="submit" children={isLoading ? "Loading..." : "Sign Up"}/>
-        </div>
           <div className="text-amber-600">
             {errors.error}
           </div>
-          </div>
-      </form>
-      <div>
-      <button onClick={handleClick} className="flex border gap-2 rounded-lg hover:border-amber-600 w-full p-2.5 dark:text-black dark:hover:border-amber-600 items-center justify-center max-w-sm mx-auto">
+      </div>
+    </form>
+    <button onClick={handleClick} className="flex border gap-2 rounded-lg hover:border-amber-600 w-full p-2.5 dark:text-black dark:hover:border-amber-600 items-center justify-center max-w-sm mx-auto">
       <img src={google} alt="google-logo" className="h-7 w-7"/>
-      Login with Google</button>
-    </div>
-    </div>
+      <span>Login with Google</span>
+    </button>
+  </div>
   )
 }

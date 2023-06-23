@@ -23,8 +23,6 @@ export default function NavBar({ user, onSetUser }) {
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>About</NavLink>
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
-                <NavLink to="/wishlists" className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Wishlists</NavLink>
                 <div className="absolute top-0 right-0">
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>

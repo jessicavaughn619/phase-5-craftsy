@@ -4,10 +4,6 @@ from flask_login import UserMixin
 
 from config import db, bcrypt
 
-wishlist_product = db.Table('wishlist_products',
-                            db.Column('wishlist_id', db.Integer, db.ForeignKey('wishlists.id'), primary_key=True),
-                            db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True))
-
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
@@ -54,8 +50,6 @@ class LocalUser(db.Model, SerializerMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
 
-    serialize_rules = ('-wishlists', )
-
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
@@ -63,19 +57,6 @@ class Product(db.Model, SerializerMixin):
     price = db.Column(db.Integer, nullable=False)
     in_stock = db.Column(db.Boolean, default=False, nullable=False)
 
-    wishlists = db.relationship('Wishlist', secondary=wishlist_product, back_populates='products')
-
     def __repr__(self):
         return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} >'
     
-class Wishlist(db.Model, SerializerMixin):
-    __tablename__ = "wishlists"
-
-    serialize_rules = ()
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    products = db.relationship('Product', secondary=wishlist_product, back_populates='wishlists')
-
-    def __repr__(self):
-        return f'<Wishlist ID: {self.id} | User ID: {self.user_id} >'

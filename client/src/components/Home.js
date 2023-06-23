@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Products from "./Products"
 import { BsCartCheck } from "react-icons/bs"
 
-export default function Home({ user, products }) {
+export default function Home({ user, products, onSetProductsInCart }) {
     return (
         <div className="m-5 mt-0">
             <div>
@@ -11,10 +11,15 @@ export default function Home({ user, products }) {
                 <p>Welcome, {(user.name) ? user.name : user.first_name}!</p> :
                 <p>Check out our site!</p>}
                 <div>
-                <Link to="/cart"><BsCartCheck className="text-gray-700 text-base hover:cursor-pointer hover:text-amber-600"/></Link>
+                <Link to="/cart">
+                    <BsCartCheck 
+                    className="text-gray-700 text-base hover:cursor-pointer hover:text-amber-600"/></Link>
                 </div>
             </div>
-                <Products products={products}/>
+                <Products 
+                    onSetProductsInCart={onSetProductsInCart}
+                    products={products}
+                />
             </div>
         </div>
     )

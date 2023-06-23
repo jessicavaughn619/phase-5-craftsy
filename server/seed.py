@@ -1,21 +1,15 @@
 from config import app, db
-from models import User, Wishlist, Product, wishlist_product
+from models import User, Product
 
 with app.app_context():
     
-    wishlists = []
     products = []
 
-    print("Deleting existing wishlists and products...")
-    db.session.query(wishlist_product).delete()
-    db.session.commit()
+    # print("Deleting existing users...")
+    # User.query.delete()
+    # db.session.commit()
 
-    User.query.delete()
-    db.session.commit()
-
-    Wishlist.query.delete()
-    db.session.commit()
-
+    print("Deleting existing products...")
     Product.query.delete()
     db.session.commit()
 
