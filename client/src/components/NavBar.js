@@ -1,6 +1,7 @@
 import { useNavigate, NavLink } from 'react-router-dom';
+import { BsCartCheck } from "react-icons/bs"
 
-export default function NavBar({ user, onSetUser }) {
+export default function NavBar({ user, onSetUser, message, onSetMessage }) {
 
     const navigate = useNavigate()
 
@@ -8,6 +9,7 @@ export default function NavBar({ user, onSetUser }) {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               onSetUser(null);
+              onSetMessage("Logged out!")
               navigate("/")
             }
           });
@@ -41,6 +43,17 @@ export default function NavBar({ user, onSetUser }) {
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Login</NavLink>
                 </div>
             </div>}
+            <div className="flex justify-between mt-5">
+                {user ? 
+                <p>Welcome, {(user.name) ? user.name : user.first_name}!</p> :
+                <p>Welcome to Craftsy!</p>}
+            <div className="flex space-x-6 items-center">
+                <span className="text-amber-600">{message}</span>
+                <NavLink to="/cart" className={({ isActive, isPending }) =>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>
+                    <BsCartCheck /></NavLink>
+                </div>
+            </div>
         </nav>
     )
 }

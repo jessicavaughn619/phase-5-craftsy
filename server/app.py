@@ -138,12 +138,12 @@ def callback():
 class Logout(Resource):
     def delete(self):
         if current_user:
-            logout_user()
             session['cart'] = []
+            logout_user()
             return {}, 204
         if session.get('user_id'):
-            session['user_id'] = None
             session['cart'] = []
+            session['user_id'] = None
             return {}, 204
         return {"error": "401 Unauthorized"}, 401
 

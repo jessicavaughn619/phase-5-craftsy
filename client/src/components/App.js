@@ -16,6 +16,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([])
   const [productsInCart, setProductsInCart]= useState([])
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,27 +43,44 @@ export default function App() {
   }, []);
 
   function handleAddItemToCart(id) {
-    const productToAdd = products.find(product => (product.id===id))
-    const updatedCart = [...productsInCart, productToAdd]
-    setProductsInCart(updatedCart)
-    alert("Item added to cart!")
-} 
+    const productToAdd = products.find(product => (product.id===id));
+    const updatedCart = [...productsInCart, productToAdd];
+    setProductsInCart(updatedCart);
+    setMessage("Added to Cart!")
+    setTimeout(() => {
+      setMessage(null);
+    } , 3000);
+  }
 
   function handleDeleteItemFromCart(id) {
-    const updatedCart = productsInCart.filter(product => (product.id !== id))
-    setProductsInCart(updatedCart)
-    alert("Item removed from cart!")
+    const updatedCart = productsInCart.filter(product => (product.id !== id));
+    setProductsInCart(updatedCart);
+    setMessage("Removed from Cart!");
+    setTimeout(() => {
+      setMessage(null);
+    } , 3000);
+  }
+
+  function handleSetMessage(text) {
+    setMessage(text)
+    setTimeout(() => {
+      setMessage(null);
+    } , 3000);
   }
 
   return (
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
         <header><Hero />
-        <NavBar user={user} onSetUser={setUser}/>
+        <NavBar 
+          user={user} 
+          onSetUser={setUser}
+          message={message}
+          onSetMessage={handleSetMessage}
+        />
         </header>
         <main className="mb-auto"><Routes>
           <Route path='/' element={
           <Home 
-            user={user} 
             products={products}
             onSetProductsInCart={handleAddItemToCart}
             />}
