@@ -56,10 +56,12 @@ class Product(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     category = db.Column(db.String, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     in_stock = db.Column(db.Boolean, default=False, nullable=False)
+    quantity = db.Column(db.Integer, default=1, nullable=False)
 
     def __repr__(self):
-        return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} >'
+        return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} | Quantity: {self.quantity} >'

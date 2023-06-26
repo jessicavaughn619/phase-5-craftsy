@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { MdRemoveShoppingCart } from 'react-icons/md'
 
 export default function CardCard({ product, onDeleteItem }) {
-    const { id, item, price } = product;    
+    const { id, item, image, price, quantity } = product;    
     
     const [isError, setIsError] = useState(false)
 
@@ -31,13 +32,17 @@ export default function CardCard({ product, onDeleteItem }) {
 
     return (
         <div className="max-w-sm rounded shadow-lg hover:cursor-default">
-            <img className="w-full" src="" alt=""></img>
+            <img className="object-contain h-48 w-96" src={image} alt=""></img>
             <div className="px-6 py-6">
                 <div className="font-bold text-xl mb-2">{item}</div>
-                <p className="text-gray-700 text-base">${price}</p>
-                <p onClick={handleClick} className="hover:cursor-pointer">X</p>
+            </div>
+                <div className="flex justify-evenly px-6 pt-4 pb-2">
+                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price} - Only {quantity} left!</span>
+                <div>
+                <MdRemoveShoppingCart onClick={handleClick} className="inline-block mb-1 hover:cursor-pointer hover:text-amber-600" />
                 {isError ? <p>Problem removing item from cart, please try again</p> : null}
             </div>
+        </div>
         </div>
     )
 }

@@ -10,7 +10,7 @@ export default function Products({ products, onSetProductsInCart }) {
         />
     ))
     return (
-        <div className="grid grid-flow-col gap-4">
+        <div className="grid grid-rows-3 grid-flow-col gap-4">
             {allProducts}
         </div>
     )

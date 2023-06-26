@@ -70,7 +70,8 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
-        <header><Hero />
+        <header>
+        <Hero />
         <NavBar 
           user={user} 
           onSetUser={setUser}
