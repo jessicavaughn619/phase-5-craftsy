@@ -46,7 +46,9 @@ class CheckSession(Resource):
         if session.get('user_id'):
             user = LocalUser.query.filter(LocalUser.id == session['user_id']).first()
             return user.to_dict(), 200
-        return {'error': '401 Unauthorized'}, 401
+        else:
+            session['cart'] = []
+            return {'error': '401 Unauthorized'}, 401
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
@@ -137,16 +139,13 @@ class Logout(Resource):
     def delete(self):
         if current_user:
             logout_user()
+            session['cart'] = []
             return {}, 204
         if session.get('user_id'):
             session['user_id'] = None
+            session['cart'] = []
             return {}, 204
         return {"error": "401 Unauthorized"}, 401
-    
-class Products(Resource):
-    def get(self):
-        products = [product.to_dict() for product in Product.query.all()]
-        return make_response(products, 200)
 
 class Signup(Resource):
     def post(self):
@@ -191,16 +190,39 @@ class LocalLogin(Resource):
             return {'error': 'Incorrect password.'}, 401
 
         return {'error': '401 Unauthorized'}, 401
-
+        
+class Products(Resource):
+    def get(self):
+        products = [product.to_dict() for product in Product.query.all()]
+        return make_response(products, 200)
+    
+class ProductByID(Resource):
+    def get(self, id):
+        product = [product.to_dict() for product in Product.query.filter_by(id=id).first()]
+        return make_response(product, 200)
+    
 class Cart(Resource):
     def get(self):
         cart_data = session.get('cart', [])
-        return jsonify(cart_data)
-    
-    def post(self):
-        cart_data = request.get_json()
-        session['cart'] = cart_data
-        return jsonify({'message': 'Cart updated successfully'})
+        if cart_data:
+            cart_ids = tuple(cart_data)
+            products = Product.query.filter(Product.id.in_(cart_ids)).all()
+            product_dicts = [product.to_dict() for product in products]
+            return make_response(product_dicts, 200)
+        else:
+            return jsonify(cart_data)
+        
+class CartByID(Resource):
+    def post(self, id):
+        session['cart'].append(id)
+        session.modified=True
+        return {'message': 'Successfully added item to cart'}, 201
+    def delete(self, id):
+        if id in session['cart']:
+            session['cart'].remove(id)
+            session.modified=True
+            return {'message': 'Successfully removed item from cart'}, 204
+        return {'error': 'Item not found in cart'}, 404
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
 api.add_resource(Signup, '/signup', endpoint='signup')
@@ -208,3 +230,5 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Products, '/products', endpoint='products')
 api.add_resource(Cart, '/cart', endpoint='cart')
+api.add_resource(ProductByID, '/product/<int:id>')
+api.add_resource(CartByID, '/cart/<int:id>')

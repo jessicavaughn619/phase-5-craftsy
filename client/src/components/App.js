@@ -25,6 +25,11 @@ export default function App() {
           const user = await check_session_response.json();
           setUser(user);
         }
+        const check_cart_response = await fetch("/cart");
+        if (check_cart_response.ok) {
+          const productsInCart = await check_cart_response.json();
+          setProductsInCart(productsInCart)
+        }
         const product_response = await fetch("/products");
         const products = await product_response.json();
         setProducts(products);
@@ -42,6 +47,12 @@ export default function App() {
     setProductsInCart(updatedCart)
     alert("Item added to cart!")
 } 
+
+  function handleDeleteItemFromCart(id) {
+    const updatedCart = productsInCart.filter(product => (product.id !== id))
+    setProductsInCart(updatedCart)
+    alert("Item removed from cart!")
+  }
 
   return (
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
@@ -64,6 +75,7 @@ export default function App() {
           <Route path='/cart' element={
           <Cart 
             products={productsInCart}
+            onDeleteItem={handleDeleteItemFromCart}
           />}
           />
         </Routes>

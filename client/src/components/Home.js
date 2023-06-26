@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Products from "./Products"
 import { BsCartCheck } from "react-icons/bs"
 
-export default function Home({ user, products, onSetProductsInCart }) {
+export default function Home({ user, products, onSetProductsInCart}) {
     return (
         <div className="m-5 mt-0">
             <div>

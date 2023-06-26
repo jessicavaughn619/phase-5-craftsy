@@ -1,15 +1,21 @@
 import CartCard from "./CartCard"
 
-export default function Cart({ products }) {
-
-    const cartItems = products.map(product => (
-        <CartCard 
-        key={product.id}
-        product={product}/>
-    ))
+export default function Cart({ products, onDeleteItem }) {
+    let cartItems;
+    if ((products.length) > 0) {
+        cartItems = products.map(product => (
+            <CartCard 
+            key={product.id}
+            product={product}
+            onDeleteItem={onDeleteItem}/>
+        ))
+        }
+        else {
+            cartItems = null
+        }
     return (
-        <div className="grid grid-flow-col gap-4">
-            {products ?
+        <div className="ml-5 grid grid-flow-col gap-4">
+            {cartItems ?
             cartItems
             : <p>You have no products in your cart!</p>
             }
