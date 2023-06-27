@@ -4,19 +4,27 @@ from flask_login import UserMixin
 from sqlalchemy import func
 
 from config import db, bcrypt
+
+product_user = db.Table('product_users',
+                        db.Column('product_id', db.Integer, db.ForeignKey('products.id')),
+                        db.Column('user_id', db.String, db.ForeignKey('users.id'))
+)
     
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     serialize_rules = ('-_password_hash', '-products.user', )
 
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.String, primary_key=True, unique=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
     username = db.Column(db.String, unique=True)
     profile_pic = db.Column(db.String)
     _password_hash = db.Column(db.String)
+
+    products = db.relationship('Product', secondary=product_user, back_populates='users')
+    reviews = db.relationship('Review', backref='user')
 
     def get(user_id):
         user = User.query.filter_by(id=user_id).first()
@@ -53,6 +61,9 @@ class Product(db.Model, SerializerMixin):
     in_stock = db.Column(db.Boolean, default=False, nullable=False)
     quantity = db.Column(db.Integer, default=1, nullable=False)
 
+    users = db.relationship('User', secondary=product_user, back_populates='products')
+    reviews = db.relationship('Review', backref='product')
+
     def __repr__(self):
         return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} | Quantity: {self.quantity} >'
     
@@ -63,6 +74,9 @@ class Review(db.Model, SerializerMixin):
     rating = db.Column(db.Integer, nullable=False)
     content = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=func.now())
+
+    user_id = db.Column(db.String, db.ForeignKey('users.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
 
     def __repr__(self):
         return f'<Review ID: {self.id} | Rating: {self.rating} | Content: {self.content} >'
