@@ -45,7 +45,7 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
             </div>}
             <div className="flex justify-between mt-5">
                 {user ? 
-                <p>Welcome, {(user.name) ? user.name : user.first_name}!</p> :
+                <p>Welcome, {user.first_name}!</p> :
                 <p>Welcome to Craftsy!</p>}
             <div className="flex space-x-6 items-center">
                 <span className="text-amber-600">{message}</span>

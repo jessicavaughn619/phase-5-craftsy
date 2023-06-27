@@ -1,36 +1,26 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from flask_login import UserMixin
+from sqlalchemy import func
 
 from config import db, bcrypt
-
+    
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-products.user', )
+    serialize_rules = ('-_password_hash', '-products.user', )
 
     id = db.Column(db.String, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    profile_pic = db.Column(db.String, nullable=False)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
+    email = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
+    profile_pic = db.Column(db.String)
+    _password_hash = db.Column(db.String)
 
     def get(user_id):
         user = User.query.filter_by(id=user_id).first()
         return user
-
-    def __repr__(self):
-        return f'<User Name: {self.name} | Email: {self.email} >'
-    
-class LocalUser(db.Model, SerializerMixin):
-    __tablename__ = 'local_users'
-
-    serialize_rules = ('-_password_hash', '-products.local_user', )
-
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=False)
-    username = db.Column(db.String, unique=True, nullable=False)
-    _password_hash = db.Column(db.String)
 
     @hybrid_property
     def password_hash(self):
@@ -47,7 +37,7 @@ class LocalUser(db.Model, SerializerMixin):
             self._password_hash, password.encode('utf-8'))
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User ID: {self.id} | First Name: {self.first_name} | Last Name: {self.last_name} | Email: {self.email} | Username: {self.username} | Profile Pic: {self.profile_pic} >'
     
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
@@ -65,3 +55,14 @@ class Product(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | In Stock: {self.in_stock} | Quantity: {self.quantity} >'
+    
+class Review(db.Model, SerializerMixin):
+    __tablename__ = "reviews"
+
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, nullable=False)
+    content = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=func.now())
+
+    def __repr__(self):
+        return f'<Review ID: {self.id} | Rating: {self.rating} | Content: {self.content} >'

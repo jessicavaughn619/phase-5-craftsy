@@ -1,5 +1,6 @@
 import os
 import json
+import uuid
 from flask import redirect, request, session, make_response, jsonify
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
@@ -15,7 +16,7 @@ from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
-from models import User, Product, LocalUser
+from models import Product, User
 
 CORS(app)
 
@@ -44,7 +45,7 @@ class CheckSession(Resource):
         if current_user.is_authenticated:
             return current_user.to_dict(), 200
         if session.get('user_id'):
-            user = LocalUser.query.filter(LocalUser.id == session['user_id']).first()
+            user = User.query.filter(User.id == session['user_id']).first()
             return user.to_dict(), 200
         else:
             session['cart'] = []
@@ -116,14 +117,14 @@ def callback():
     # Create a user in our db with the information provided
     # by Google
     user = User(
-        id=unique_id, name=users_name, email=users_email, profile_pic=picture
+        id=unique_id, first_name=users_name, email=users_email, profile_pic=picture
     )
 
     # Doesn't exist? Add to database
-    if not User.query.get(unique_id):
+    if not User.get(unique_id):
         user = User(
             id=unique_id, 
-            name=users_name, 
+            first_name=users_name, 
             email=users_email, 
             profile_pic=picture
         )
@@ -151,12 +152,13 @@ class Signup(Resource):
     def post(self):
         request_json = request.get_json()
 
-        first_name = request_json.get('firstName')
-        last_name= request_json.get('lastName')
+        first_name = request_json.get('first_name')
+        last_name = request_json.get('first_name')
         username = request_json.get('username')
         password = request_json.get('password')
 
-        user = LocalUser(
+        user = User(
+            id=str(uuid.uuid4()),
             first_name=first_name,
             last_name=last_name,
             username=username,
@@ -180,7 +182,7 @@ class LocalLogin(Resource):
         username = request_json.get('username')
         password = request_json.get('password')
 
-        user = LocalUser.query.filter(LocalUser.username == username).first()
+        user = User.query.filter_by(username=username).first()
 
         if user:
             if user.authenticate(password):

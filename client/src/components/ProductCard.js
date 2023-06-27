@@ -1,14 +1,11 @@
 import { BsCartCheck, BsCartX } from 'react-icons/bs'
 import { useState } from "react"
-import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({ product, onSetProductsInCart }) {
     const { id, item, description, image, price, in_stock, quantity } = product;
 
     const [isError, setIsError] = useState(false)
     const [isActive, setIsActive] = useState(false)
-
-    const navigate = useNavigate()
 
     function handleSetError() {
         setIsError(true);
@@ -35,9 +32,6 @@ export default function ProductCard({ product, onSetProductsInCart }) {
         .catch((error) => {
             console.log(error);
             handleSetError();
-        })
-        .finally(() => {
-            navigate('/cart')
         })
     }
 

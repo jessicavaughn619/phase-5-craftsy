@@ -1,17 +1,17 @@
 from config import app, db
-from models import Product
+from models import Product, User
 
 with app.app_context():
     
-    products = []
+    # products = []
 
-    # print("Deleting existing users...")
-    # User.query.delete()
-    # db.session.commit()
-
-    print("Deleting existing products...")
-    Product.query.delete()
+    print("Deleting existing users...")
+    User.query.delete()
     db.session.commit()
+
+    # print("Deleting existing products...")
+    # Product.query.delete()
+    # db.session.commit()
 
     def create_products():
         print("Creating product instances...")
@@ -118,8 +118,8 @@ with app.app_context():
         db.session.add_all(products)
         db.session.commit()
     
-    create_products()
-    db.session.commit()
+    # create_products()
+    # db.session.commit()
 
     print("Complete!")
     
