@@ -50,7 +50,7 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
             <div className="flex space-x-6 items-center">
                 <span className="text-amber-600">{message}</span>
                 <NavLink to="/cart" className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>
+                    isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
                     <BsCartCheck /></NavLink>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import Products from "./Products"
 
-export default function Home({ products, onSetProductsInCart}) {
+export default function Home({ products, onSetProductsInCart }) {
 
     return (
         <div className="m-5 mt-0">

@@ -3,6 +3,7 @@ import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
 import Cart from "./Cart";
+import ProductPage from "./ProductPage";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SignUpForm from "./SignUpForm";
@@ -68,6 +69,19 @@ export default function App() {
     } , 3000);
   }
 
+  function handleAddReview(review) {
+    const productToUpdate = products.find(product => (product.id===review.product_id))
+    const updatedProducts = products.map(product => {
+      if (product.id===productToUpdate.id) {
+        const updatedReviews = [...product.reviews, review]
+        return {...product, reviews: updatedReviews}
+      }
+      return product;
+    })
+    setProducts(updatedProducts)
+    handleSetMessage("Review successfully submitted!")
+  }
+
   return (
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
         <header>
@@ -96,6 +110,12 @@ export default function App() {
             products={productsInCart}
             onDeleteItem={handleDeleteItemFromCart}
           />}
+          />
+          <Route path='/products/:id' element={
+          <ProductPage 
+            products={products}
+            onAddReview={handleAddReview}
+            />} 
           />
         </Routes>
         </main>

@@ -202,6 +202,39 @@ class ProductByID(Resource):
     def get(self, id):
         product = [product.to_dict() for product in Product.query.filter_by(id=id).first()]
         return make_response(product, 200)
+    def post(self, id):
+        request_json = request.get_json()
+
+        rating = request_json.get('rating')
+        content = request_json.get('content')
+
+        if session.get('user_id'):
+            review = Review(
+                rating=rating,
+                content=content,
+                product_id=id,
+                user_id=session['user_id'],
+            )
+        if current_user.is_authenticated:
+            review = Review(
+                rating=rating,
+                content=content,
+                product_id=id,
+                user_id=current_user,
+            )
+        
+        review = Review(
+            rating=rating,
+            content=content,
+            product_id=id,
+        )
+
+        try:
+            db.session.add(review)
+            db.session.commit()
+            return review.to_dict(), 201
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
     
 class Cart(Resource):
     def get(self):

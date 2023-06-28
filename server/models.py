@@ -44,7 +44,7 @@ class User(db.Model, SerializerMixin, UserMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
 
-    serialize_rules = ('-reviews.product', )
+    serialize_rules = ('-reviews.product', '-reviews.user', )
 
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)

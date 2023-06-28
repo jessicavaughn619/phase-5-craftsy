@@ -21,7 +21,7 @@ export default function CardCard({ product, onDeleteItem }) {
                 onDeleteItem(id)
             }
             else {
-                throw new Error('Failed to remove item to cart');
+                throw new Error('Failed to remove item from cart');
             }
         })
         .catch((error) => {
@@ -39,7 +39,7 @@ export default function CardCard({ product, onDeleteItem }) {
                 <div className="flex justify-evenly px-6 pt-4 pb-2">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price} - Only {quantity} left!</span>
                 <div>
-                <MdRemoveShoppingCart onClick={handleClick} className="inline-block mb-1 hover:cursor-pointer hover:text-amber-600" />
+                <MdRemoveShoppingCart onClick={handleClick} className="inline-block text-xl mb-1 hover:cursor-pointer hover:text-amber-600" />
                 {isError ? <p>Problem removing item from cart, please try again</p> : null}
             </div>
         </div>
