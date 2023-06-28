@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
-from models import Product, User
+from models import Product, User, Review
 
 CORS(app)
 
@@ -225,6 +225,11 @@ class CartByID(Resource):
             session.modified=True
             return {'message': 'Successfully removed item from cart'}, 204
         return {'error': 'Item not found in cart'}, 404
+
+class Reviews(Resource):
+    def get(self):
+        reviews = [review.to_dict() for review in Review.query.all()]
+        return make_response(reviews, 200)
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
 api.add_resource(Signup, '/signup', endpoint='signup')
@@ -234,3 +239,4 @@ api.add_resource(Products, '/products', endpoint='products')
 api.add_resource(Cart, '/cart', endpoint='cart')
 api.add_resource(ProductByID, '/product/<int:id>')
 api.add_resource(CartByID, '/cart/<int:id>')
+api.add_resource(Reviews, '/reviews', endpoint='reviews')

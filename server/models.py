@@ -4,16 +4,11 @@ from flask_login import UserMixin
 from sqlalchemy import func
 
 from config import db, bcrypt
-
-product_user = db.Table('product_users',
-                        db.Column('product_id', db.Integer, db.ForeignKey('products.id')),
-                        db.Column('user_id', db.String, db.ForeignKey('users.id'))
-)
     
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-_password_hash', '-products.user', )
+    serialize_rules = ('-_password_hash', '-products.user', '-reviews.user', '-user', )
 
     id = db.Column(db.String, primary_key=True, unique=True)
     first_name = db.Column(db.String)
@@ -23,7 +18,6 @@ class User(db.Model, SerializerMixin, UserMixin):
     profile_pic = db.Column(db.String)
     _password_hash = db.Column(db.String)
 
-    products = db.relationship('Product', secondary=product_user, back_populates='users')
     reviews = db.relationship('Review', backref='user')
 
     def get(user_id):
@@ -50,7 +44,7 @@ class User(db.Model, SerializerMixin, UserMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
 
-    serialize_rules = ('-user', '-local_user', )
+    serialize_rules = ('-reviews.product', )
 
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)
@@ -61,7 +55,6 @@ class Product(db.Model, SerializerMixin):
     in_stock = db.Column(db.Boolean, default=False, nullable=False)
     quantity = db.Column(db.Integer, default=1, nullable=False)
 
-    users = db.relationship('User', secondary=product_user, back_populates='products')
     reviews = db.relationship('Review', backref='product')
 
     def __repr__(self):
@@ -69,6 +62,8 @@ class Product(db.Model, SerializerMixin):
     
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
+
+    serialize_rules = ('-products.review', '-users.review', )
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)

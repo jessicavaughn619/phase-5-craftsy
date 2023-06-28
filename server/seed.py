@@ -1,15 +1,19 @@
 from config import app, db
-from models import Product, User
+from models import Product, User, Review
 
 with app.app_context():
     
-    # products = []
+    products = []
+    reviews = []
 
-    print("Deleting existing users...")
-    User.query.delete()
+    print("Deleting existing data...")
+
+    Review.query.delete()
     db.session.commit()
 
-    # print("Deleting existing products...")
+    # User.query.delete()
+    # db.session.commit()
+
     # Product.query.delete()
     # db.session.commit()
 
@@ -117,9 +121,34 @@ with app.app_context():
 
         db.session.add_all(products)
         db.session.commit()
-    
+
+    def create_reviews():
+        print("Adding reviews...")
+
+        duck_family_review = Review(
+            rating=5,
+            content="I love this beautiful duck family!",
+            product_id=64
+        )
+
+        reviews.append(duck_family_review)
+
+        birdbath_large_review = Review(
+            rating=5,
+            content="This birdbath is so bright and beautiful - so many little birds visit for a drink during the day!",
+            product_id=65
+        )
+
+        reviews.append(birdbath_large_review)
+
+        db.session.add_all(reviews)
+        db.session.commit()
+        
     # create_products()
     # db.session.commit()
+
+    create_reviews()
+    db.session.commit()
 
     print("Complete!")
     

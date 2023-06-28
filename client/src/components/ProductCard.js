@@ -2,7 +2,7 @@ import { BsCartCheck, BsCartX } from 'react-icons/bs'
 import { useState } from "react"
 
 export default function ProductCard({ product, onSetProductsInCart }) {
-    const { id, item, description, image, price, in_stock, quantity } = product;
+    const { id, item, description, image, price, in_stock, quantity, reviews } = product;
 
     const [isError, setIsError] = useState(false)
     const [isActive, setIsActive] = useState(false)
@@ -15,6 +15,7 @@ export default function ProductCard({ product, onSetProductsInCart }) {
       }
 
     function handleClick() {
+        console.log(id)
         fetch(`/cart/${id}`, {
             method: "POST",
             headers: {
@@ -39,6 +40,10 @@ export default function ProductCard({ product, onSetProductsInCart }) {
         setIsActive(isActive => !isActive)
     }
 
+    const allReviews = reviews.map(review => (
+        <li>{review.rating}</li>
+    ))
+
     return (
         <div className="max-w-sm rounded shadow-lg hover:cursor-default">
             <img className={isActive ? "object-cover hover:cursor-pointer" : "object-contain h-48 w-96 hover:cursor-pointer"} src={image} alt={item} onClick={handleImgClick}/>
@@ -50,11 +55,12 @@ export default function ProductCard({ product, onSetProductsInCart }) {
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{in_stock ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {in_stock ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}</span> : null}
-                <div>
+            </div>
+            <div className="flex justify-evenly">
+                <div>Reviews: {allReviews}</div>
                 {in_stock ? <BsCartCheck onClick={handleClick} className="inline-block mb-1 hover:cursor-pointer hover:text-amber-600"/> : <BsCartX className="inline-block mb-1 hover:cursor-not-allowed hover:text-amber-600"/>}
                 {isError ? <p>Problem adding item to cart, please try again</p> : null}
                 </div>
-            </div>
         </div>
     )
 }
