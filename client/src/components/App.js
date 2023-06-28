@@ -10,7 +10,6 @@ import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import Error from "./Error";
 import { Routes, Route } from "react-router-dom";
-
 import React, { useEffect, useState } from 'react';
 
 export default function App() {
@@ -115,6 +114,7 @@ export default function App() {
           <ProductPage 
             products={products}
             onAddReview={handleAddReview}
+            user={user}
             />} 
           />
         </Routes>

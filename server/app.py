@@ -207,34 +207,21 @@ class ProductByID(Resource):
 
         rating = request_json.get('rating')
         content = request_json.get('content')
+        user_id = request_json.get('user_id')
 
-        if session.get('user_id'):
+        user = User.query.filter_by(id=user_id).first()
+
+        if user:
             review = Review(
                 rating=rating,
                 content=content,
                 product_id=id,
-                user_id=session['user_id'],
+                user_id=user_id,
             )
-        if current_user.is_authenticated:
-            review = Review(
-                rating=rating,
-                content=content,
-                product_id=id,
-                user_id=current_user,
-            )
-        
-        review = Review(
-            rating=rating,
-            content=content,
-            product_id=id,
-        )
-
-        try:
             db.session.add(review)
             db.session.commit()
             return review.to_dict(), 201
-        except IntegrityError:
-            return {'error': '422 Unprocessable Entity'}, 422
+        return {'error': '401 Unauthorized'}, 401
     
 class Cart(Resource):
     def get(self):

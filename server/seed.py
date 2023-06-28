@@ -147,8 +147,8 @@ with app.app_context():
     # create_products()
     # db.session.commit()
 
-    create_reviews()
-    db.session.commit()
+    # create_reviews()
+    # db.session.commit()
 
     print("Complete!")
     

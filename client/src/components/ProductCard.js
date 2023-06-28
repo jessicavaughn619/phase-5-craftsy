@@ -1,16 +1,14 @@
 import { BsCartCheck, BsCartX } from 'react-icons/bs'
 import { useState } from "react"
-import { Rating } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
+import { Rating } from "flowbite-react"
 
 export default function ProductCard({ product, onSetProductsInCart }) {
-    const { id, item, description, image, price, in_stock, quantity, reviews } = product;
-
     const [isError, setIsError] = useState(false)
     const [isActive, setIsActive] = useState(false)
-
     const navigate = useNavigate()
 
+    const { id, item, description, image, price, in_stock, quantity, reviews } = product;
     function handleSetError() {
         setIsError(true);
         setTimeout(() => {
@@ -75,7 +73,23 @@ export default function ProductCard({ product, onSetProductsInCart }) {
                 {in_stock ? <BsCartCheck onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/> : <BsCartX className="inline-block mb-1 hover:cursor-not-allowed hover:text-amber-600"/>}
                 {isError ? <p>Problem adding item to cart, please try again</p> : null}
                 <div>
-                <Rating icon='star' defaultRating={avgRating} maxRating={5} disabled/>
+                <Rating size="sm">
+                <Rating.Star
+                    filled={avgRating >= 1}
+                />
+                <Rating.Star
+                    filled={avgRating >= 2}
+                />
+                <Rating.Star
+                    filled={avgRating >= 3}
+                />
+                <Rating.Star
+                    filled={avgRating >= 4}
+                />
+                <Rating.Star
+                    filled={avgRating >= 5}
+                />
+            </Rating>
                 </div>
             </div>
         </div>
