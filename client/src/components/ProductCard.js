@@ -1,13 +1,16 @@
-import { BsCartCheck, BsCartX } from 'react-icons/bs'
+import { BsCartCheck, BsCartX, BsCartPlus } from 'react-icons/bs'
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 
-export default function ProductCard({ product, onSetProductsInCart }) {
+export default function ProductCard({ product, productsInCart, onSetProductsInCart }) {
     const [isError, setIsError] = useState(false)
     const navigate = useNavigate()
 
     const { id, item, description, image, price, in_stock, quantity, reviews } = product;
+
+    const inCart = productsInCart.filter(productInCart => productInCart.id===id)
+
     function handleSetError() {
         setIsError(true);
         setTimeout(() => {
@@ -66,8 +69,13 @@ export default function ProductCard({ product, onSetProductsInCart }) {
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}</span> : null}
             </div>
             <div className="flex items-center justify-between px-6 pb-2">
-                {in_stock ? <BsCartCheck onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/> : <BsCartX className="inline-block text-xl mb-1 hover:cursor-not-allowed hover:text-amber-600"/>}
-                {isError ? <p>Problem adding item to cart, please try again</p> : null}
+                {(inCart.length > 0) ? 
+                    <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed hover:text-amber-600"/>
+                     : in_stock ?
+                    <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
+                 : <BsCartX className="inline-block text-xl hover:cursor-not-allowed hover:text-amber-600"/>
+                 }
+                {isError ? <p>Item already in cart!</p> : null}
                 <div className="flex">
                 <Rating size="sm">
                 <Rating.Star

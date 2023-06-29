@@ -236,6 +236,8 @@ class Cart(Resource):
         
 class CartByID(Resource):
     def post(self, id):
+        if id in session['cart']:
+            return {'error': 'Item already added to cart!'}, 401
         session['cart'].append(id)
         session.modified=True
         return {'message': 'Successfully added item to cart'}, 201

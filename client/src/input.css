@@ -5,3 +5,7 @@
 .grid-template-row-auto-1fr {
     grid-template-rows: auto 1fr;
 }
+
+.grid-template-col-auto-1fr {
+    grid-template-columns: auto 1fr;
+}

@@ -1,10 +1,23 @@
 import { useState } from "react";
-import { MdRemoveShoppingCart } from 'react-icons/md'
+import { BsCartX } from 'react-icons/bs'
 
 export default function CardCard({ product, onDeleteItem }) {
-    const { id, item, image, price, quantity } = product;    
-    
-    const [isError, setIsError] = useState(false)
+   const [isError, setIsError] = useState(false)
+   const [quantityInCart, setQuantityInCart] = useState(1)
+
+   const { id, item, description, image, price, quantity } = product; 
+
+   function handleDecrementClick() {
+    if (quantityInCart > 1) {
+    setQuantityInCart(quantityInCart => quantityInCart - 1)
+    }
+   }
+
+   function handleIncrementClick() {
+    if (quantityInCart < quantity) {
+    setQuantityInCart(quantityInCart => quantityInCart + 1)
+    }
+   }
 
     function handleSetError() {
         setIsError(true);
@@ -31,18 +44,33 @@ export default function CardCard({ product, onDeleteItem }) {
     }
 
     return (
-        <div className="max-w-sm rounded shadow-lg hover:cursor-default">
-            <img className="object-contain h-48 w-96" src={image} alt=""></img>
-            <div className="px-6 py-6">
+        <div className="max-w-full rounded shadow-lg hover:cursor-default">
+        <div className="flex">
+            <img className="object-contain h-48" src={image} alt={item}></img>
+            <div className="flex flex-col px-6 py-3 justify-between">
                 <div className="font-bold text-xl mb-2">{item}</div>
-            </div>
-                <div className="flex justify-evenly px-6 pt-4 pb-2">
-                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price} - Only {quantity} left!</span>
+                <div>{description}</div>
+            <div className="flex flex-col py-3">
+                <div className="flex">
+                <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                ${price}</span>
+                <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                {quantity} In Stock</span>
+                </div>
+                <div className="flex space-x-6 items-center">
+                <div className="space-x-2 p-1 border">
+                    <button onClick={handleDecrementClick}>-</button>
+                    <span>{quantityInCart}</span>
+                    <button onClick={handleIncrementClick}>+</button>
+                </div>
                 <div>
-                <MdRemoveShoppingCart onClick={handleClick} className="inline-block text-xl mb-1 hover:cursor-pointer hover:text-amber-600" />
+                <BsCartX onClick={handleClick} className="inline-block mb-1 text-xl hover:cursor-pointer hover:text-amber-600" />
                 {isError ? <p>Problem removing item from cart, please try again</p> : null}
+                </div>
+                </div>
+                </div>
             </div>
-        </div>
+            </div>
         </div>
     )
 }

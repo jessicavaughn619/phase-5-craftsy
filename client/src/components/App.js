@@ -97,6 +97,7 @@ export default function App() {
           <Home 
             products={products}
             onSetProductsInCart={handleAddItemToCart}
+            productsInCart={productsInCart}
             />}
             />
           <Route path='/*' element={<Error />}/>

@@ -16,7 +16,7 @@ export default function Review({ review }) {
     return (
         <div className="max-w-md rounded shadow-lg hover:cursor-default">
             <div className="px-6 py-4">
-                <div className="flex py-4 space-x-8 items-center justify-around">
+                <div className="grid grid-template-col-auto-1fr py-4 space-x-8">
                 <div className="flex flex-col space-y-2 items-center">
                 <img className="object-contain w-20" src={user.profile_pic ? user.profile_pic : pic} alt="user-avatar"/>
                 <p className="font-semibold">{user.first_name}</p>

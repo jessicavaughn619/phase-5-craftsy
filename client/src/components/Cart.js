@@ -14,11 +14,16 @@ export default function Cart({ products, onDeleteItem }) {
             cartItems = null
         }
     return (
-        <div className="ml-5 grid grid-rows-3 grid-flow-col gap-4">
+        <div>
+        <div>
             {cartItems ?
             cartItems
             : <p>You have no products in your cart!</p>
             }
+        </div>
+        <div className="m-5">
+        Check Out
+        </div>
         </div>
     )
 }

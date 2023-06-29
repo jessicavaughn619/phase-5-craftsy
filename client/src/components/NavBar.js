@@ -18,7 +18,7 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
     return (
         <nav className="m-10 pb-4">
             {user ? 
-            <div className="relative flex flex-column space-x-10">
+            <div className="relative flex flex-column space-x-5">
                 <NavLink to="/" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Products</NavLink>
                     <span>|</span>
@@ -33,7 +33,7 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>
             </div> : 
-            <div className="relative flex flex-column space-x-10">
+            <div className="relative flex flex-column space-x-5">
                 <NavLink to="/" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Products</NavLink>
                     <span>|</span>
