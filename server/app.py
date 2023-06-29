@@ -221,7 +221,7 @@ class ProductByID(Resource):
             db.session.add(review)
             db.session.commit()
             return review.to_dict(), 201
-        return {'error': '401 Unauthorized'}, 401
+        return {'error': 'Please login to leave a review!'}, 401
     
 class Cart(Resource):
     def get(self):

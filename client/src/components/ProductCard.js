@@ -5,7 +5,6 @@ import { Rating } from "flowbite-react"
 
 export default function ProductCard({ product, onSetProductsInCart }) {
     const [isError, setIsError] = useState(false)
-    const [isActive, setIsActive] = useState(false)
     const navigate = useNavigate()
 
     const { id, item, description, image, price, in_stock, quantity, reviews } = product;
@@ -37,10 +36,6 @@ export default function ProductCard({ product, onSetProductsInCart }) {
         })
     }
 
-    function handleImgClick() {
-        setIsActive(isActive => !isActive)
-    }
-
     let sum = 0;
     let reviewCount = 0;
 
@@ -49,30 +44,31 @@ export default function ProductCard({ product, onSetProductsInCart }) {
         reviewCount++;
     });
 
-    const avgRating = reviewCount > 0 ? sum / reviewCount : 0;
+    const avgRatingLong = reviewCount > 0 ? sum / reviewCount : 0;
+    const avgRating = avgRatingLong.toFixed(2)
 
     function handleReviewClick() {
         navigate(`/products/${id}`)
     }
 
     return (
-        <div className="max-w-sm rounded shadow-lg hover:cursor-default">
-            <img className={isActive ? "object-cover hover:cursor-pointer" : "object-contain h-48 w-96 hover:cursor-pointer"} src={image} alt={item} onClick={handleImgClick}/>
+        <div className="max-w-sm rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default">
+            <img className="object-contain h-48 w-96 hover:cursor-pointer active:object-cover" src={image} alt={item}/>
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{item}</div>
                 <p className="text-gray-700 text-base">{description}
                     <span className="hover:cursor-pointer hover:text-amber-600 pl-1 text-sm" onClick={handleReviewClick}>...more info</span>
                 </p>
             </div>
-                <div className="flex justify-between px-6 pt-4 pb-2">
+                <div className="flex justify-between items-center px-6 pt-4 pb-2">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{in_stock ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {in_stock ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}</span> : null}
             </div>
-            <div className="flex justify-between px-6 pb-2">
-                {in_stock ? <BsCartCheck onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/> : <BsCartX className="inline-block mb-1 hover:cursor-not-allowed hover:text-amber-600"/>}
+            <div className="flex items-center justify-between px-6 pb-2">
+                {in_stock ? <BsCartCheck onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/> : <BsCartX className="inline-block text-xl mb-1 hover:cursor-not-allowed hover:text-amber-600"/>}
                 {isError ? <p>Problem adding item to cart, please try again</p> : null}
-                <div>
+                <div className="flex">
                 <Rating size="sm">
                 <Rating.Star
                     filled={avgRating >= 1}
@@ -90,6 +86,7 @@ export default function ProductCard({ product, onSetProductsInCart }) {
                     filled={avgRating >= 5}
                 />
             </Rating>
+            <p className="text-sm pl-1">{(avgRating > 0) ? avgRating : null}</p>
                 </div>
             </div>
         </div>

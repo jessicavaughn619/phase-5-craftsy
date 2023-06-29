@@ -11,7 +11,14 @@ export default function ProductPage({ products, onAddReview, user }) {
     const [errors, setErrors] = useState([]);
 
     const { id } = useParams()
-    const user_id = user.id
+
+    let user_id;
+    if (user) {
+        user_id = user.id
+    } else {
+        user_id = null
+    }
+
     const currentProduct = products.find(product => product.id === parseInt(id))
     const { item, description, image, reviews } = currentProduct;
 
@@ -61,12 +68,12 @@ export default function ProductPage({ products, onAddReview, user }) {
                 <p className="text-gray-700 text-base">{description}</p>
             </div>
         </div>
-        <div className="flex flex-col px-6 py-4 gap-4 items-stretch">
-        <div className="text-gray-700 text-base text-center hover:text-amber-600 hover:cursor-pointer" onClick={handleClick}>{isReview ? "Close Product Review Form" : "Add Product Review"}</div>
+        <div className="flex flex-col px-6 py-4 gap-4">
+        <div className="mb-4 text-gray-700 text-base text-center hover:text-amber-600 hover:cursor-pointer" onClick={handleClick}>{isReview ? "Close Product Review Form" : "Add Product Review"}</div>
         {isReview ? 
         <form onSubmit={handleSubmit}>
             <div className="grid gap-6 mb-6 md:grid-cols-1">
-            <div className="grid px-10 pt-2 pb-2">
+            <div className="grid px-10 pt-2 pb-2 place-items-center">
             <Rating size="md">
                 <Rating.Star
                     filled={rating >= 1}

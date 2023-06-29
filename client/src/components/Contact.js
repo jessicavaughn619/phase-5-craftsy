@@ -1,6 +1,6 @@
 export default function Contact() {
     return (
-        <div className="m-5">
+        <div className="ml-5">
             <h1>Contact</h1>
         </div>
     )
