@@ -70,10 +70,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             </div>
             <div className="flex items-center justify-between px-6 pb-2">
                 {(inCart.length > 0) ? 
-                    <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed hover:text-amber-600"/>
+                    <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed"/>
                      : in_stock ?
                     <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
-                 : <BsCartX className="inline-block text-xl hover:cursor-not-allowed hover:text-amber-600"/>
+                 : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
                  }
                 {isError ? <p>Item already in cart!</p> : null}
                 <div className="flex">

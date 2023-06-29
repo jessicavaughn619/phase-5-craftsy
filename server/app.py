@@ -253,6 +253,11 @@ class Reviews(Resource):
         reviews = [review.to_dict() for review in Review.query.all()]
         return make_response(reviews, 200)
     
+@app.route('/payment', methods=['POST'])
+def payment():
+    return jsonify({'paymentID': 'PAYMENTID'})
+
+    
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
