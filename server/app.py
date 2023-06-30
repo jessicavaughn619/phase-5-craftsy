@@ -253,9 +253,13 @@ class Reviews(Resource):
         reviews = [review.to_dict() for review in Review.query.all()]
         return make_response(reviews, 200)
     
-@app.route('/payment', methods=['POST'])
-def payment():
-    return jsonify({'paymentID': 'PAYMENTID'})
+# @app.route('/create-paypal-order', methods=['POST'])
+# def payment():
+#     return jsonify({'paymentID': 'PAYMENTID'})
+
+# @app.route('/capture-paypal-order', methods=['POST'])
+# def payment():
+#     return jsonify({'paymentID': 'PAYMENTID'})
 
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')

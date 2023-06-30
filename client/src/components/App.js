@@ -11,6 +11,7 @@ import LoginForm from "./LoginForm";
 import Error from "./Error";
 import { Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
+import { Context } from "../context";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -82,11 +83,11 @@ export default function App() {
   }
 
   return (
+    <Context.Provider value={user}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
         <header>
         <Hero />
         <NavBar 
-          user={user} 
           onSetUser={setUser}
           message={message}
           onSetMessage={handleSetMessage}
@@ -122,6 +123,7 @@ export default function App() {
         </main>
         <footer className="h-10"><Footer /></footer>
     </div>
+    </Context.Provider>
   )
 }
 

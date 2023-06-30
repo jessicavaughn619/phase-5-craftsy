@@ -50,13 +50,14 @@ export default function Cart({ products, onDeleteItem }) {
             cartItems = null
         }
     return (
-        <div>
-        <div>
+        <div className="flex flex-col">
+        <div className="m-5">
             {cartItems ?
             cartItems
             : <p>You have no products in your cart!</p>
             }
         </div>
+        <div className="flex flex-col items-center">
         <PayPalScriptProvider options={{
             "client-id": 
             "AXmdt024Q6sKUwG88HayNtol9x5fLiFOQzLOkS1Q87iBiKP98mCWF5_HVibYMVAIIUv7YmYoRHATOZRU"
@@ -66,6 +67,7 @@ export default function Cart({ products, onDeleteItem }) {
         onApprove={(data) => onApprove(data)}
             />
         </PayPalScriptProvider>
+        </div>
         </div>
     )
 }

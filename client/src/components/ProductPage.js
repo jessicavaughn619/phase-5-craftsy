@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Rating } from "flowbite-react"
+import { Context } from "../context";
 import Review from "./Review";
 import Button from "./Button";
 
-export default function ProductPage({ products, onAddReview, user }) {
+export default function ProductPage({ products, onAddReview }) {
+    const user = useContext(Context)
     const [isReview, setIsReview] = useState(false)
     const [rating, setRating] = useState(0);
     const [content, setContent] = useState("")
@@ -60,6 +62,8 @@ export default function ProductPage({ products, onAddReview, user }) {
     }
 
     return (
+        <Context.Consumer>
+        {user =>
         <div className="flex justify-evenly">
         <div className="max-w-sm rounded shadow-lg hover:cursor-default">
             <img className="object-cover" src={image} alt={item} />
@@ -119,5 +123,7 @@ export default function ProductPage({ products, onAddReview, user }) {
     {allReviews}
     </div>
     </div>
+        }
+    </Context.Consumer>
     )
 }

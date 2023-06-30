@@ -1,8 +1,8 @@
 import { useNavigate, NavLink } from 'react-router-dom';
 import { BsCartCheck } from "react-icons/bs"
+import { Context } from '../context';
 
-export default function NavBar({ user, onSetUser, message, onSetMessage }) {
-
+export default function NavBar({ onSetUser, message, onSetMessage }) {
     const navigate = useNavigate()
 
     function handleLogoutClick() {
@@ -16,7 +16,8 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
         }
 
     return (
-        <nav className="m-10 pb-4">
+        <Context.Consumer>
+        {user => <nav className="m-10 pb-4">
             {user ? 
             <div className="relative flex flex-column space-x-5">
                 <NavLink to="/" className={({ isActive, isPending }) =>
@@ -57,5 +58,7 @@ export default function NavBar({ user, onSetUser, message, onSetMessage }) {
                     <BsCartCheck /></NavLink>
             </div>
         </nav>
+        }
+        </Context.Consumer>
     )
 }
