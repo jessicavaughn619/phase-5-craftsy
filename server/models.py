@@ -63,7 +63,7 @@ class Product(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
 
-    serialize_rules = ('-products.review', '-users.review', )
+    serialize_rules = ('-products.review', '-user.review', '-product', )
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)

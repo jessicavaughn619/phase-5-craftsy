@@ -1,9 +1,10 @@
 import { Rating } from "flowbite-react"
+import { Context } from "../context";
+import { BsPencilSquare } from 'react-icons/bs'
 import pic from "../images/profile_pic.png"
 
-export default function Review({ review }) {
-
-    const { rating, content, created_at, user } = review;
+export default function Review({ review, onEditReview, onSetEditedReview }) {
+    const { id, rating, content, created_at, user } = review;
     const dateString = String(created_at)
     const date = new Date(dateString)
     const formattedDate = date.toLocaleDateString('en-US', {
@@ -11,9 +12,15 @@ export default function Review({ review }) {
         month: 'long',
         day: 'numeric',
     });
-    console.log(review)
+
+    function handleClick() {
+        onEditReview()
+        onSetEditedReview({rating: rating, content: content}, id)
+    }
 
     return (
+        <Context.Consumer>
+        {currentUser =>
         <div className="max-w-md rounded shadow-lg hover:cursor-default">
             <div className="px-6 py-4">
                 <div className="grid grid-template-col-auto-1fr py-4 space-x-8">
@@ -40,10 +47,16 @@ export default function Review({ review }) {
                 />
             </Rating>
                 <p>{content}</p>
+                <div className="flex space-x-2 items-center">
                 <p className="text-sm italic">{formattedDate}</p>
+                {(currentUser.id === user.id) ? 
+                <BsPencilSquare className="hover:text-amber-600 hover:cursor-pointer" onClick={handleClick}/> : null}
+                </div>
                 </div>
                 </div>
             </div>
         </div>
+        }
+        </Context.Consumer>
     )
 }

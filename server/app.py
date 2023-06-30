@@ -202,6 +202,7 @@ class ProductByID(Resource):
     def get(self, id):
         product = [product.to_dict() for product in Product.query.filter_by(id=id).first()]
         return make_response(product, 200)
+    
     def post(self, id):
         request_json = request.get_json()
 
@@ -253,6 +254,30 @@ class Reviews(Resource):
         reviews = [review.to_dict() for review in Review.query.all()]
         return make_response(reviews, 200)
     
+class ReviewByID(Resource):
+    def patch(self, id):
+        review = Review.query.filter_by(id=id).first()
+
+        request_json = request.get_json()
+
+        for attr in request_json:
+            setattr(review, attr, request_json[attr])
+        
+        db.session.add(review)
+        db.session.commit()
+
+        return make_response(review.to_dict(), 200)
+    
+    def delete(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if review:
+            db.session.delete(review)
+            db.session.commit()
+            return {"message": "Review deleted successfully."}, 204
+        else: 
+            return {"error": "Review not found."}, 404
+
+    
 # @app.route('/create-paypal-order', methods=['POST'])
 # def payment():
 #     return jsonify({'paymentID': 'PAYMENTID'})
@@ -271,3 +296,4 @@ api.add_resource(Cart, '/cart', endpoint='cart')
 api.add_resource(ProductByID, '/product/<int:id>')
 api.add_resource(CartByID, '/cart/<int:id>')
 api.add_resource(Reviews, '/reviews', endpoint='reviews')
+api.add_resource(ReviewByID, '/review/<int:id>')

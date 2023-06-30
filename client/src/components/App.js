@@ -82,6 +82,48 @@ export default function App() {
     handleSetMessage("Review successfully submitted!")
   }
 
+  function handleEditReview(updatedReview) {
+    const { id, rating, content } = updatedReview;
+    const productToUpdate = products.find(product => (product.id===(updatedReview.product_id)))
+
+    const updatedProducts = products.map(product => {
+      if (product.id===productToUpdate.id) {
+        const updatedReviews = product.reviews.map(review => {
+          if (review.id === id) {
+            return {...review, rating: rating, content: content};
+          }
+          return review;
+        })
+        return {...product, reviews: updatedReviews}
+      }
+      return product;
+    })
+    setProducts(updatedProducts)
+    handleSetMessage("Review successfully updated!")
+
+  }
+
+  function handleDeleteReview(id) {
+    fetch(`/review/${id}`, {
+        method: "DELETE"
+    })
+
+    const allReviews = products.flatMap(product => (product.reviews))
+    const reviewToDelete = allReviews.find(review => (review.id===id))
+
+    const productToUpdate = products.find(product => (product.id===(reviewToDelete.product_id)))
+
+    const updatedProducts = products.map(product => {
+      if (product.id===productToUpdate.id) {
+        const updatedReviews = product.reviews.filter(review => (review.id !== reviewToDelete.id))
+        return {...product, reviews: updatedReviews}
+      }
+      return product;
+    })
+    setProducts(updatedProducts)
+    handleSetMessage("Review successfully deleted!")
+}
+
   return (
     <Context.Provider value={user}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
@@ -116,6 +158,8 @@ export default function App() {
           <ProductPage 
             products={products}
             onAddReview={handleAddReview}
+            onDeleteReview={handleDeleteReview}
+            onEditReview={handleEditReview}
             user={user}
             />} 
           />

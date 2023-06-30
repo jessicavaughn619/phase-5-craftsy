@@ -4,13 +4,19 @@ import { Rating } from "flowbite-react"
 import { Context } from "../context";
 import Review from "./Review";
 import Button from "./Button";
+import ButtonSec from "./ButtonSec";
+import EditReview from "./EditReview";
+import { AiOutlineClose } from 'react-icons/ai'
 
-export default function ProductPage({ products, onAddReview }) {
+export default function ProductPage({ products, onAddReview, onDeleteReview, onEditReview }) {
     const user = useContext(Context)
     const [isReview, setIsReview] = useState(false)
     const [rating, setRating] = useState(0);
     const [content, setContent] = useState("")
     const [errors, setErrors] = useState([]);
+    const [isEditReview, setIsEditReview] = useState(false)
+    const [reviewId, setReviewId] = useState(null)
+    const [editedReview, setEditedReview] = useState({rating: null, content: null})
 
     const { id } = useParams()
 
@@ -21,6 +27,16 @@ export default function ProductPage({ products, onAddReview }) {
         user_id = null
     }
 
+    function handleEditReview() {
+        setIsEditReview(isEditReview => !isEditReview)
+        setIsReview(false)
+    }
+
+    function handleSetEditedReview({rating, content}, reviewId) {
+        setEditedReview({rating: rating, content: content})
+        setReviewId(reviewId)
+    }
+
     const currentProduct = products.find(product => product.id === parseInt(id))
     const { item, description, image, reviews } = currentProduct;
 
@@ -28,6 +44,8 @@ export default function ProductPage({ products, onAddReview }) {
         <Review 
         key={review.id}
         review={review}
+        onEditReview={handleEditReview}
+        onSetEditedReview={handleSetEditedReview}
         />
     ))
 
@@ -73,12 +91,22 @@ export default function ProductPage({ products, onAddReview }) {
             </div>
         </div>
         <div className="flex flex-col px-6 py-4 gap-4">
-        <div className="mb-4 text-gray-700 text-base text-center hover:text-amber-600 hover:cursor-pointer" onClick={handleClick}>{isReview ? "Close Product Review Form" : "Add Product Review"}</div>
+        {isEditReview ? null : 
+        <ButtonSec
+        onClick={handleClick} children={isReview ? <div className="flex items-center justify-center space-x-2"><AiOutlineClose /><p>Close Form</p></div> : "Add Product Review"}></ButtonSec>}
+        {isEditReview ? 
+        <EditReview 
+            editedReview={editedReview}
+            id={reviewId}
+            onSetEditReview={handleEditReview}
+            onDeleteReview={onDeleteReview}
+            onEditReview={onEditReview}
+        /> : null}
         {isReview ? 
         <form onSubmit={handleSubmit}>
             <div className="grid gap-6 mb-6 md:grid-cols-1">
             <div className="grid px-10 pt-2 pb-2 place-items-center">
-            <Rating size="md">
+            <Rating size="md" className="hover:cursor-pointer">
                 <Rating.Star
                     filled={rating >= 1}
                     onClick={() => handleStarClick(1)}
