@@ -12,6 +12,7 @@ import Error from "./Error";
 import { Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { Context } from "../context";
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -73,6 +74,21 @@ export default function App() {
     setTimeout(() => {
       setMessage(null);
     } , 3000);
+  }
+
+  function handleEmptyCart(productsFromCart) {
+    const updatedProducts = products.map(product => {
+      const cartItem = productsFromCart.find(item => item.id === product.id);
+      if (cartItem) {
+        return {...product, quantity: cartItem.quantity - cartItem.quantity_in_cart, quantity_in_cart: 0}
+      }
+      return product;
+    })
+    setProducts(updatedProducts)
+
+    const productIds = productsFromCart.map(product => product.id)
+    const updatedCart = productsFromCart.filter(product => product.id === productIds)
+    setProductsInCart(updatedCart)
   }
 
   function handleSetMessage(text) {
@@ -137,8 +153,15 @@ export default function App() {
     handleSetMessage("Review successfully deleted!")
 }
 
+const initialOptions = {
+  clientId: "AXmdt024Q6sKUwG88HayNtol9x5fLiFOQzLOkS1Q87iBiKP98mCWF5_HVibYMVAIIUv7YmYoRHATOZRU",
+  currency: "USD",
+  intent: "capture",
+};
+
   return (
     <Context.Provider value={user}>
+      <PayPalScriptProvider options={initialOptions}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
         <header>
         <Hero />
@@ -166,6 +189,7 @@ export default function App() {
             products={productsInCart}
             onDeleteItem={handleDeleteItemFromCart}
             onUpdateQuantityInCart={handleUpdateQuantityInCart}
+            onEmptyCart={handleEmptyCart}
           />}
           />
           <Route path='/products/:id' element={
@@ -181,6 +205,7 @@ export default function App() {
         </main>
         <footer className="h-10"><Footer /></footer>
     </div>
+    </PayPalScriptProvider>
     </Context.Provider>
   )
 }

@@ -1,5 +1,5 @@
 from config import app, db
-from models import Product, User, Review
+from models import Product, User, Review, Order, order_product
 
 with app.app_context():
     
@@ -7,6 +7,9 @@ with app.app_context():
     reviews = []
 
     print("Deleting existing data...")
+
+    db.session.query(order_product).delete()
+    db.session.commit()
 
     Review.query.delete()
     db.session.commit()
@@ -17,6 +20,9 @@ with app.app_context():
     Product.query.delete()
     db.session.commit()
 
+    Order.query.delete()
+    db.session.commit()
+
     def create_products():
         print("Creating product instances...")
 
@@ -25,7 +31,7 @@ with app.app_context():
             image="https://i.imgur.com/mfqf985.jpg",
             description="Blue ceramic duck with white speckles",
             category="Ceramic",
-            price=50,
+            price=50.00,
             quantity=2
         )
         products.append(duck_family)
@@ -35,7 +41,7 @@ with app.app_context():
             image="https://i.imgur.com/MJvLDfO.jpg",
             description="Blue ceramic birdbath with white speckles",
             category="Ceramic",
-            price=75,
+            price=75.00,
             quantity=1
         )
         products.append(birdbath_large)
@@ -45,7 +51,7 @@ with app.app_context():
             image="https://i.imgur.com/Q7sHnTu.jpg",
             description="Large green ceramic frog",
             category="Ceramic",
-            price=30,
+            price=30.00,
             quantity=2
         )
         products.append(frog_large)
@@ -55,8 +61,8 @@ with app.app_context():
             image="https://i.imgur.com/nGDkNnj.jpg",
             description="Medium brown rabbit",
             category="Ceramic",
-            price=20,
-            quantity=1
+            price=20.00,
+            quantity=2
         )
         products.append(rabbit_medium)
 
@@ -65,8 +71,8 @@ with app.app_context():
             image="https://i.imgur.com/Blfj1ij.jpg",
             description="Large gray rabbit",
             category="Ceramic",
-            price=30,
-            quantity=1
+            price=30.00,
+            quantity=2
         )
         products.append(rabbit_large)
 
@@ -75,7 +81,7 @@ with app.app_context():
             image="https://i.imgur.com/HelV5vJ.jpg",
             description="Medium brown snail with red shell",
             category="Ceramic",
-            price=20,
+            price=20.00,
             quantity=3
         )
         products.append(snail_medium)
@@ -85,7 +91,7 @@ with app.app_context():
             image="https://i.imgur.com/VWqfw0N.jpg",
             description="Small gray rabbit",
             category="Ceramic",
-            price=10,
+            price=10.00,
             quantity=1
         )
         products.append(rabbit_small)
@@ -95,8 +101,8 @@ with app.app_context():
             image="https://i.imgur.com/FBWy1Jm.jpg",
             description="Small green frog with brown speckles",
             category="Ceramic",
-            price=10,
-            quantity=2
+            price=10.00,
+            quantity=0
         )
         products.append(frog_small)
 
@@ -105,7 +111,7 @@ with app.app_context():
             image="https://i.imgur.com/ESsh9WF.jpg",
             description="Small green lizard",
             category="Ceramic",
-            price=10,
+            price=10.00,
             quantity=4
         )
         products.append(lizard_small)

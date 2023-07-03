@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
-from models import Product, User, Review
+from models import Product, User, Review, Order, order_product
 
 CORS(app)
 
@@ -277,15 +277,47 @@ class ReviewByID(Resource):
         else: 
             return {"error": "Review not found."}, 404
 
+class Orders(Resource):
+    def get(self):
+        orders = [order.to_dict() for order in Order.query.all()]
+        return make_response(orders, 200)
     
-# @app.route('/create-paypal-order', methods=['POST'])
-# def payment():
-#     return jsonify({'paymentID': 'PAYMENTID'})
+    def post(self):
+        request_json = request.get_json()
 
-# @app.route('/capture-paypal-order', methods=['POST'])
-# def payment():
-#     return jsonify({'paymentID': 'PAYMENTID'})
+        paypal_id = request_json.get('paypal_id')
+        products = request_json.get('products')
+        user_id = request_json.get('user_id')
+        total_cost = request_json.get('total_cost')
 
+        product_ids = [product['id'] for product in products]
+
+        allProducts = Product.query.filter(Product.id.in_(product_ids)).all()
+
+        exists = Order.query.filter_by(paypal_id=paypal_id).first()
+        if exists:
+            return {'error': 'Order already exists in database.'}, 401
+        
+
+        else:
+            for product in products:
+                product_obj = Product.query.get(product['id'])
+                amount_to_decrement = product['quantity_in_cart']
+                product_obj.quantity -= amount_to_decrement
+                db.session.commit()
+
+            order = Order(
+                paypal_id=paypal_id,
+                user_id=user_id,
+                total_cost=total_cost,
+                products=allProducts
+            )
+            db.session.add(order)
+            db.session.commit()
+
+            session['cart'] = []
+            
+            return {'message': 'Successfully created order and updated database.'}, 201
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')
 api.add_resource(Signup, '/signup', endpoint='signup')
@@ -297,3 +329,4 @@ api.add_resource(ProductByID, '/product/<int:id>')
 api.add_resource(CartByID, '/cart/<int:id>')
 api.add_resource(Reviews, '/reviews', endpoint='reviews')
 api.add_resource(ReviewByID, '/review/<int:id>')
+api.add_resource(Orders, '/orders', endpoint='orders')

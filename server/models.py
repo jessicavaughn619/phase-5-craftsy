@@ -4,6 +4,10 @@ from flask_login import UserMixin
 from sqlalchemy import func
 
 from config import db, bcrypt
+
+order_product = db.Table('order_products',
+                         db.Column('order_id', db.Integer, db.ForeignKey('orders.id'), primary_key=True),
+                         db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True))
     
 class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
@@ -19,6 +23,7 @@ class User(db.Model, SerializerMixin, UserMixin):
     _password_hash = db.Column(db.String)
 
     reviews = db.relationship('Review', backref='user')
+    orders = db.relationship('Order', backref='user')
 
     def get(user_id):
         user = User.query.filter_by(id=user_id).first()
@@ -44,7 +49,7 @@ class User(db.Model, SerializerMixin, UserMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
 
-    serialize_rules = ('-reviews.product', '-reviews.user.reviews', )
+    serialize_rules = ('-reviews.product', '-reviews.user.reviews', '-orders', )
 
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String, nullable=False)
@@ -55,6 +60,7 @@ class Product(db.Model, SerializerMixin):
     quantity = db.Column(db.Integer, default=1, nullable=False)
 
     reviews = db.relationship('Review', backref='product')
+    orders = db.relationship('Order', secondary=order_product, back_populates='products')
 
     def __repr__(self):
         return f'<Product Item: {self.item} | Description: {self.description} | Category: {self.category} | Price: {self.price} | Quantity: {self.quantity} >'
@@ -74,3 +80,18 @@ class Review(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Review ID: {self.id} | Rating: {self.rating} | Content: {self.content} >'
+
+class Order(db.Model, SerializerMixin):
+    __tablename__ = 'orders'
+
+    serialize_rules = ('-products', '-user', )
+
+    id = db.Column(db.Integer, primary_key=True)
+    paypal_id = db.Column(db.String)
+    total_cost = db.Column(db.Integer, nullable=False)
+    
+    user_id = db.Column(db.String, db.ForeignKey('users.id'))
+    products = db.relationship('Product', secondary=order_product, back_populates='orders')
+
+    def __repr__(self):
+        return f'<Order ID: {self.id} | Total Cost: {self.total_cost} >'
