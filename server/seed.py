@@ -14,8 +14,8 @@ with app.app_context():
     # User.query.delete()
     # db.session.commit()
 
-    # Product.query.delete()
-    # db.session.commit()
+    Product.query.delete()
+    db.session.commit()
 
     def create_products():
         print("Creating product instances...")
@@ -26,7 +26,6 @@ with app.app_context():
             description="Blue ceramic duck with white speckles",
             category="Ceramic",
             price=50,
-            in_stock=True,
             quantity=2
         )
         products.append(duck_family)
@@ -37,7 +36,6 @@ with app.app_context():
             description="Blue ceramic birdbath with white speckles",
             category="Ceramic",
             price=75,
-            in_stock=True,
             quantity=1
         )
         products.append(birdbath_large)
@@ -48,7 +46,6 @@ with app.app_context():
             description="Large green ceramic frog",
             category="Ceramic",
             price=30,
-            in_stock=True,
             quantity=2
         )
         products.append(frog_large)
@@ -59,7 +56,6 @@ with app.app_context():
             description="Medium brown rabbit",
             category="Ceramic",
             price=20,
-            in_stock=True,
             quantity=1
         )
         products.append(rabbit_medium)
@@ -70,7 +66,6 @@ with app.app_context():
             description="Large gray rabbit",
             category="Ceramic",
             price=30,
-            in_stock=False,
             quantity=1
         )
         products.append(rabbit_large)
@@ -81,7 +76,6 @@ with app.app_context():
             description="Medium brown snail with red shell",
             category="Ceramic",
             price=20,
-            in_stock=True,
             quantity=3
         )
         products.append(snail_medium)
@@ -92,7 +86,6 @@ with app.app_context():
             description="Small gray rabbit",
             category="Ceramic",
             price=10,
-            in_stock=True,
             quantity=1
         )
         products.append(rabbit_small)
@@ -103,7 +96,6 @@ with app.app_context():
             description="Small green frog with brown speckles",
             category="Ceramic",
             price=10,
-            in_stock=True,
             quantity=2
         )
         products.append(frog_small)
@@ -114,7 +106,6 @@ with app.app_context():
             description="Small green lizard",
             category="Ceramic",
             price=10,
-            in_stock=True,
             quantity=4
         )
         products.append(lizard_small)
@@ -144,8 +135,8 @@ with app.app_context():
         db.session.add_all(reviews)
         db.session.commit()
         
-    # create_products()
-    # db.session.commit()
+    create_products()
+    db.session.commit()
 
     # create_reviews()
     # db.session.commit()

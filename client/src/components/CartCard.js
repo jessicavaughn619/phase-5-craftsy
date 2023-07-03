@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { BsCartX } from 'react-icons/bs'
 
-export default function CardCard({ product, onDeleteItem }) {
+export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart }) {
+    const { id, item, description, image, price, quantity, quantity_in_cart } = product;
    const [isError, setIsError] = useState(false)
-   const [quantityInCart, setQuantityInCart] = useState(1)
+   const [quantityInCart, setQuantityInCart] = useState(quantity_in_cart)
+   const numRef = useRef(quantityInCart)
 
-   const { id, item, description, image, price, quantity } = product; 
 
    function handleDecrementClick() {
     if (quantityInCart > 1) {
-    setQuantityInCart(quantityInCart => quantityInCart - 1)
+    setQuantityInCart(quantityInCart => quantityInCart - 1);
+    numRef.current--;
+    onUpdateQuantityInCart(id, numRef.current)
     }
    }
 
    function handleIncrementClick() {
     if (quantityInCart < quantity) {
     setQuantityInCart(quantityInCart => quantityInCart + 1)
+    numRef.current++;
+    onUpdateQuantityInCart(id, numRef.current)
     }
    }
 

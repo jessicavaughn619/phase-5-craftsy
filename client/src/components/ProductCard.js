@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 
 export default function ProductCard({ product, productsInCart, onSetProductsInCart }) {
-    const [isError, setIsError] = useState(false)
     const navigate = useNavigate()
-
-    const { id, item, description, image, price, in_stock, quantity, reviews } = product;
-
+   
+    const [isError, setIsError] = useState(false)
+    const { id, item, description, image, price, quantity, reviews } = product;
+    
     const inCart = productsInCart.filter(productInCart => productInCart.id===id)
 
     function handleSetError() {
@@ -64,20 +64,20 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 </p>
             </div>
                 <div className="flex justify-between items-center px-6 pt-4 pb-2">
-                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{in_stock ? `In Stock: ${quantity}` : "Sold Out"}</span>
-                    {in_stock ? 
+                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
+                    {(quantity > 0) ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}</span> : null}
             </div>
             <div className="flex items-center justify-between px-6 pb-2">
                 {(inCart.length > 0) ? 
                     <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed"/>
-                     : in_stock ?
+                     : (quantity > 0) ?
                     <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
                  : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
                  }
                 {isError ? <p>Item already in cart!</p> : null}
                 <div className="flex">
-                <Rating size="sm">
+            <Rating size="sm">
                 <Rating.Star
                     filled={avgRating >= 1}
                 />

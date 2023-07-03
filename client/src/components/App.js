@@ -45,12 +45,25 @@ export default function App() {
 
   function handleAddItemToCart(id) {
     const productToAdd = products.find(product => (product.id===id));
+    productToAdd.quantity_in_cart = 1;
     const updatedCart = [...productsInCart, productToAdd];
     setProductsInCart(updatedCart);
     setMessage("Added to Cart!")
     setTimeout(() => {
       setMessage(null);
     } , 3000);
+  }
+
+  function handleUpdateQuantityInCart(id, quantityInCart) {
+    const productToUpdate = productsInCart.find(product => (product.id===id))
+    const updatedProducts = productsInCart.map(product => {
+      if (product.id===productToUpdate.id) {
+        return {...product, quantity_in_cart: quantityInCart}
+      }
+      return product;
+    })
+    setProductsInCart(updatedProducts)
+    handleSetMessage("Successfully updated quantity in cart!")
   }
 
   function handleDeleteItemFromCart(id) {
@@ -152,6 +165,7 @@ export default function App() {
           <Cart 
             products={productsInCart}
             onDeleteItem={handleDeleteItemFromCart}
+            onUpdateQuantityInCart={handleUpdateQuantityInCart}
           />}
           />
           <Route path='/products/:id' element={
