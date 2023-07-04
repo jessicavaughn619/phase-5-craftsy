@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
-from models import Product, User, Review, Order, order_product
+from models import Product, User, Review, Order
 
 CORS(app)
 

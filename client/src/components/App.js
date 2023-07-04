@@ -183,7 +183,10 @@ const initialOptions = {
           <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
           <Route path='/login' element={<LoginForm onLogin={setUser}/>}/>
           <Route path='/about' element={<About />}/>
-          <Route path='/contact' element={<Contact />}/>
+          <Route 
+          path='/contact' 
+          element={<Contact
+           />}/>
           <Route path='/cart' element={
           <Cart 
             products={productsInCart}

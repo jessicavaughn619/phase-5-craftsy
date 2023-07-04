@@ -48,7 +48,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     });
 
     const avgRatingLong = reviewCount > 0 ? sum / reviewCount : 0;
-    const avgRating = avgRatingLong.toFixed(2)
+    const avgRating = avgRatingLong.toFixed(1)
 
     function handleReviewClick() {
         navigate(`/products/${id}`)
@@ -66,7 +66,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <div className="flex justify-between items-center px-6 pt-4 pb-2">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {(quantity > 0) ? 
-                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}</span> : null}
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
             </div>
             <div className="flex items-center justify-between px-6 pb-2">
                 {(inCart.length > 0) ? 
@@ -94,7 +94,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                     filled={avgRating >= 5}
                 />
             </Rating>
-            <p className="text-sm pl-1">{(avgRating > 0) ? avgRating : null}</p>
+            <p className="pl-1">{(avgRating > 0) ? avgRating : null}</p>
                 </div>
             </div>
         </div>

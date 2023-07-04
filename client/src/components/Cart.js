@@ -2,7 +2,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useState, useContext } from "react";
 import { Context } from '../context';
 import CartCard from "./CartCard"
-import ButtonSec from "./ButtonSec";
+import Button from "./Button";
 
 export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, onEmptyCart }) {
   const user = useContext(Context)
@@ -68,21 +68,20 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
     return (
       <Context.Consumer>
         {user => 
-        <div className="flex flex-col">
-        <div className="m-5">
+        <div className="flex flex-col m-5">
           {orderPlaced ? <div className="flex justify-center mb-5">
             <span className="text-xl">Thank you for your order, {user.first_name}!</span>
           </div> : null}
             {cartItems ?
-            <div>
+            <div className="space-y-4 mb-4">
             {cartItems}
-              <div className="m-5">
-                <p>Order Total: ${totalCost}</p>
+              <div className="flex space-x-2">
+                <p className="font-semibold">Order Total:</p>
+                <p>${totalCost}</p>
               </div>
             </div>
             : <p>You have no products in your cart!</p>
             }
-        </div>
         <div className="grid place-items-center">
           {checkout && cartItems ? 
         <PayPalButtons
@@ -110,7 +109,9 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
               handleCreateOrder(products, orderId, totalCost);
           })
       }}
-            /> : cartItems ? <ButtonSec onClick={() => setCheckout(true)} children={"Checkout"}></ButtonSec> : null }
+            /> : cartItems ? 
+            <Button onClick={() => setCheckout(true)} children={"Checkout"}></Button>
+            : null }
         </div>
         <div className="text-amber-600">
             {errors.error}

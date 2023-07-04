@@ -4,7 +4,8 @@ export default function Footer() {
     return (
         <div className="flex flex-col items-center py-5">
             <span>Made with ❤️ & 🍺</span>
-            <span>© Jessica Vaughn {today}</span>
+            <span>© 
+            <a className="hover:text-amber-600" href="https://jessicavaughn.netlify.app/" target="_blank" rel="noreferrer"> Jessica Vaughn</a> {today}</span>
         </div>
     )
 }

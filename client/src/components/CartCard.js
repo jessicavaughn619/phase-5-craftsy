@@ -3,7 +3,6 @@ import { BsCartX } from 'react-icons/bs'
 
 export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart }) {
     const { id, item, description, image, price, quantity, quantity_in_cart } = product;
-   const [isError, setIsError] = useState(false)
    const [quantityInCart, setQuantityInCart] = useState(quantity_in_cart)
    const numRef = useRef(quantityInCart)
 
@@ -24,13 +23,6 @@ export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart
     }
    }
 
-    function handleSetError() {
-        setIsError(true);
-        setTimeout(() => {
-          setIsError(false);
-        }, 3000);
-      }
-
     function handleClick() {
         fetch(`/cart/${id}`, {
             method: "DELETE"
@@ -42,39 +34,32 @@ export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart
                 throw new Error('Failed to remove item from cart');
             }
         })
-        .catch((error) => {
-            console.log(error);
-            handleSetError();
-        })
     }
 
     return (
-        <div className="max-w-full rounded shadow-lg hover:cursor-default">
-        <div className="flex">
+        <div className="grid grid-template-col-auto-1fr rounded shadow-lg hover:cursor-default">
             <img className="object-contain h-48" src={image} alt={item}></img>
-            <div className="flex flex-col px-6 py-3 justify-between">
-                <div className="font-bold text-xl mb-2">{item}</div>
-                <div>{description}</div>
-            <div className="flex flex-col py-3">
-                <div className="flex">
-                <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                ${price}</span>
-                <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                {quantity} In Stock</span>
+            <div className="flex flex-col justify-between px-6">
+                <div className="space-y-1">
+                <p className="font-bold text-xl">{item}</p>
+                <p>{description}</p>
                 </div>
-                <div className="flex space-x-6 items-center">
-                <div className="space-x-2 p-1 border">
-                    <button onClick={handleDecrementClick}>-</button>
-                    <span>{quantityInCart}</span>
-                    <button onClick={handleIncrementClick}>+</button>
+                <div className="pb-4 space-y-2">
+                        <div className="flex justify-between">
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        ${price}.00</span>
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        {quantity} In Stock</span>
+                        </div>
+                    <div className="flex justify-between items-center">
+                    <BsCartX onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600" />
+                        <div className="space-x-2 py-1 px-2 border rounded-lg">
+                            <button onClick={handleDecrementClick}>-</button>
+                            <span>{quantityInCart}</span>
+                            <button onClick={handleIncrementClick}>+</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                <BsCartX onClick={handleClick} className="inline-block mb-1 text-xl hover:cursor-pointer hover:text-amber-600" />
-                {isError ? <p>Problem removing item from cart, please try again</p> : null}
-                </div>
-                </div>
-                </div>
-            </div>
             </div>
         </div>
     )
