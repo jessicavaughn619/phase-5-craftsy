@@ -2,7 +2,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { BsCartCheck } from "react-icons/bs"
 import { Context } from '../context';
 
-export default function NavBar({ onSetUser, message, onSetMessage }) {
+export default function NavBar({ onSetUser, message, onSetMessage, productsInCart, onSetProductsInCart }) {
     const navigate = useNavigate()
 
     function handleLogoutClick() {
@@ -10,6 +10,7 @@ export default function NavBar({ onSetUser, message, onSetMessage }) {
             if (r.ok) {
               onSetUser(null);
               onSetMessage("Logged out!")
+              onSetProductsInCart(productsInCart)
               navigate("/")
             }
           });

@@ -49,7 +49,7 @@ export default function Review({ review, onEditReview, onSetEditedReview }) {
                 <p>{content}</p>
                 <div className="flex space-x-2 items-center">
                 <p className="text-sm italic">{formattedDate}</p>
-                {(currentUser.id === user.id) ? 
+                {currentUser && (currentUser.id === user.id) ? 
                 <BsPencilSquare className="hover:text-amber-600 hover:cursor-pointer" onClick={handleClick}/> : null}
                 </div>
                 </div>

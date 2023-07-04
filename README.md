@@ -1,6 +1,6 @@
 # Craftsy
 
-Craftsy is a React-Flask full-stack e-commerce application. All users can browse the products available, add and remove items from their session cart, update the quantity of products in their cart, and check out using Paypal, Venmo, or a debit-card card. Users can create an account or login with their Google credentials. Authenticated users can leave product reviews and can edit or delete their own reviews. The ceramic products listed on this site are actual products for sale - created by Doyle and Sandy Sebold out of their home business in La Junta, Colorado.
+Craftsy is a React-Flask full-stack e-commerce application. All users can browse the products available, and authenticated users can add and remove items from their session cart, update the quantity of products in their cart, and check out using Paypal, Venmo, or a debit-card card. Users can create an account or login with their Google credentials. Authenticated users can leave product reviews and can edit or delete their own reviews. The ceramic products listed on this site are actual products for sale - created by Doyle and Sandy Sebold out of their home business in La Junta, Colorado.
 
 ## Installation
 
@@ -32,7 +32,7 @@ The React front end will be available at localhost:4000; the Flask backend will 
 
 ## Usage
 
-Users can browse products and check out as a guest, create an account by signing up on the Sign Up Page, or login with Google credentials to create a local account on Craftsy. Only authenticated users can leave product reviews. All users can shop the product catalogue, add/update/delete items from their cart, and complete the order checkout process using PayPal, Venmo, or a credit or debit card. Authenticated users can create, edit, and delete reviews for each product on the product page. Once leaving a review, the average rating for the product will update to reflect the new rating and will be displayed on the front of the product card. 
+Users can create an account by signing up on the Sign Up Page or login with Google credentials to create a local account on Craftsy. Authenticated users can leave product reviews. All users can browse the product catalogue, and authenticated users can add/update/delete items from their cart and complete the order checkout process using PayPal, Venmo, or a credit or debit card. Authenticated users can create, edit, and delete reviews for each product on the product page. Once leaving a review, the average rating for the product will update to reflect the new rating and will be displayed on the front of the product card. 
 
 ## Final Thoughts
 

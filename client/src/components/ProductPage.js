@@ -8,7 +8,7 @@ import ButtonSec from "./ButtonSec";
 import EditReview from "./EditReview";
 import { AiOutlineClose } from 'react-icons/ai'
 
-export default function ProductPage({ products, onAddReview, onDeleteReview, onEditReview }) {
+export default function ProductPage({ products, onAddReview, onDeleteReview, onEditReview, onSetMessage }) {
     const user = useContext(Context)
     const [isReview, setIsReview] = useState(false)
     const [rating, setRating] = useState(0);
@@ -54,10 +54,14 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     }
 
     function handleClick() {
+        if (user) {
         setIsReview(isReview => !isReview)
         setContent("")
         setRating(0)
+    } else {
+        onSetMessage("Please login or sign up to leave a review!")
     }
+}
 
     function handleSubmit(e) {
         e.preventDefault();

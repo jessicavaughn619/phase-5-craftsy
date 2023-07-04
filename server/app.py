@@ -298,7 +298,6 @@ class Orders(Resource):
         if exists:
             return {'error': 'Order already exists in database.'}, 401
         
-
         else:
             for product in products:
                 product_obj = Product.query.get(product['id'])
@@ -316,7 +315,6 @@ class Orders(Resource):
             db.session.commit()
 
             session['cart'] = []
-            
             return {'message': 'Successfully created order and updated database.'}, 201
     
 api.add_resource(LocalLogin, '/local_login', endpoint='local_login')

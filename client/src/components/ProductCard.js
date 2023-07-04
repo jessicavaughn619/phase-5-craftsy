@@ -1,9 +1,11 @@
 import { BsCartCheck, BsCartX, BsCartPlus } from 'react-icons/bs'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
+import { Context } from '../context';
 
-export default function ProductCard({ product, productsInCart, onSetProductsInCart }) {
+export default function ProductCard({ product, productsInCart, onSetProductsInCart, onSetMessage }) {
+    const user = useContext(Context)
     const navigate = useNavigate()
    
     const [isError, setIsError] = useState(false)
@@ -19,6 +21,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
       }
 
     function handleClick() {
+        if (user) {
         fetch(`/cart/${id}`, {
             method: "POST",
             headers: {
@@ -37,7 +40,9 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             console.log(error);
             handleSetError();
         })
-    }
+    } else {
+        onSetMessage("Please login or sign up to add items to cart!")
+    }}
 
     let sum = 0;
     let reviewCount = 0;
@@ -55,6 +60,8 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     }
 
     return (
+        <Context.Consumer>
+        { user =>
         <div className="max-w-sm rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default">
             <img className="object-contain h-48 w-96 hover:cursor-pointer active:object-cover" src={image} alt={item}/>
             <div className="px-6 py-4">
@@ -98,5 +105,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 </div>
             </div>
         </div>
+        }
+        </Context.Consumer>
     )
 }

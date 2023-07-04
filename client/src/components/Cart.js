@@ -70,7 +70,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
         {user => 
         <div className="flex flex-col m-5">
           {orderPlaced ? <div className="flex justify-center mb-5">
-            <span className="text-xl">Thank you for your order, {user.first_name}!</span>
+            <span className="text-xl">{user ? `Thank you for your order, ${user.first_name}` : "Thank you for your order!"}</span>
           </div> : null}
             {cartItems ?
             <div className="space-y-4 mb-4">
@@ -80,7 +80,10 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
                 <p>${totalCost}</p>
               </div>
             </div>
-            : <p>You have no products in your cart!</p>
+            : <div className="space-y-4">
+            <p>You have no products in your cart! </p>
+            {user ? null : <p>Login or sign up to start shopping!</p>}
+            </div>
             }
         <div className="grid place-items-center">
           {checkout && cartItems ? 
@@ -109,9 +112,9 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
               handleCreateOrder(products, orderId, totalCost);
           })
       }}
-            /> : cartItems ? 
+            /> : cartItems && user ? 
             <Button onClick={() => setCheckout(true)} children={"Checkout"}></Button>
-            : null }
+            : null}
         </div>
         <div className="text-amber-600">
             {errors.error}

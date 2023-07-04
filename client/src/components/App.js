@@ -169,6 +169,8 @@ const initialOptions = {
           onSetUser={setUser}
           message={message}
           onSetMessage={handleSetMessage}
+          productsInCart={productsInCart}
+          onSetProductsInCart={handleEmptyCart}
         />
         </header>
         <main className="mb-auto"><Routes>
@@ -177,6 +179,7 @@ const initialOptions = {
             products={products}
             onSetProductsInCart={handleAddItemToCart}
             productsInCart={productsInCart}
+            onSetMessage={handleSetMessage}
             />}
             />
           <Route path='/*' element={<Error />}/>
@@ -201,6 +204,7 @@ const initialOptions = {
             onAddReview={handleAddReview}
             onDeleteReview={handleDeleteReview}
             onEditReview={handleEditReview}
+            onSetMessage={handleSetMessage}
             user={user}
             />} 
           />

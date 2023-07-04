@@ -23,13 +23,16 @@ with app.app_context():
     Order.query.delete()
     db.session.commit()
 
+    User.query.delete()
+    db.session.commit()
+
     def create_products():
         print("Creating product instances...")
 
         duck_family = Product(
             item="Duck Family",
             image="https://i.imgur.com/mfqf985.jpg",
-            description="Blue ceramic duck with white speckles",
+            description="Blue ceramic duck with white speckles with two baby ducklings",
             category="Ceramic",
             price=50.00,
             quantity=2
@@ -49,20 +52,20 @@ with app.app_context():
         frog_large = Product(
             item="Frog",
             image="https://i.imgur.com/Q7sHnTu.jpg",
-            description="Large green ceramic frog",
+            description="Large green ceramic frog painted with brown speckles",
             category="Ceramic",
             price=30.00,
-            quantity=2
+            quantity=0
         )
         products.append(frog_large)
 
         rabbit_medium = Product(
             item="Rabbit",
             image="https://i.imgur.com/nGDkNnj.jpg",
-            description="Medium brown rabbit",
+            description="Medium brown rabbit with dark brown streaks in fur",
             category="Ceramic",
             price=20.00,
-            quantity=2
+            quantity=3
         )
         products.append(rabbit_medium)
 
@@ -102,7 +105,7 @@ with app.app_context():
             description="Small green frog with brown speckles",
             category="Ceramic",
             price=10.00,
-            quantity=0
+            quantity=2
         )
         products.append(frog_small)
 
