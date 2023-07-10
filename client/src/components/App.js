@@ -91,6 +91,20 @@ export default function App() {
     setProductsInCart(updatedCart)
   }
 
+  function handleResetCart(productsFromCart) {
+    const updatedProducts = products.map(product => {
+      const cartItem = productsFromCart.find(item => item.id === product.id);
+      if (cartItem) {
+        return {...product, quantity_in_cart: 0}
+      }
+      return product;
+    })
+    setProducts(updatedProducts)
+    const productIds = productsFromCart.map(product => product.id)
+    const updatedCart = productsFromCart.filter(product => product.id === productIds)
+    setProductsInCart(updatedCart)
+  }
+
   function handleSetMessage(text) {
     setMessage(text)
     setTimeout(() => {
@@ -170,7 +184,7 @@ const initialOptions = {
           message={message}
           onSetMessage={handleSetMessage}
           productsInCart={productsInCart}
-          onSetProductsInCart={handleEmptyCart}
+          onSetProductsInCart={handleResetCart}
         />
         </header>
         <main className="mb-auto"><Routes>
