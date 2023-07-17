@@ -2,6 +2,10 @@
 
 Craftsy is a React-Flask full-stack e-commerce application. All users can browse the products available, and authenticated users can add and remove items from their session cart, update the quantity of products in their cart, and check out using Paypal, Venmo, or a debit-card card. Users can create an account or login with their Google credentials. Authenticated users can leave product reviews and can edit or delete their own reviews. The ceramic products listed on this site are actual products for sale - created by Doyle and Sandy Sebold out of their home business in La Junta, Colorado.
 
+## Walkthrough
+
+<a href="https://youtu.be/jWwT2GTx5rs" title="Craftsy eCommerce Application Walkthrough"><img src="./client/src/images/craftsy.png" height="200px" alt="Craftsy Walkthrough" /></a>
+
 ## Installation
 
 For local installation, fork and clone this repository, then cd into your project folder and run the following commands:
