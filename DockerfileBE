@@ -1,7 +1,0 @@
-FROM tiangolo/uwsgi-nginx-flask
-
-ADD ./requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
-ADD ./server /app/
-
-CMD gunicorn flask app:app -p 5555

@@ -1,7 +1,0 @@
-FROM busybox as build
-COPY ./client /app/
-
-RUN npm build prod
-
-FROM nginx-static
-COPY --from:build /build ./src
