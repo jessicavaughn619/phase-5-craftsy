@@ -4,7 +4,7 @@ Craftsy is a React-Flask full-stack e-commerce application. All users can browse
 
 ## Walkthrough
 
-<a href="https://youtu.be/jWwT2GTx5rs" title="Craftsy eCommerce Application Walkthrough"><img src="./client/src/images/craftsy.png" height="200px" alt="Craftsy Walkthrough" /></a>
+<a href="https://youtu.be/jWwT2GTx5rs" title="Craftsy eCommerce Application Walkthrough"><img src="./client/src/images/craftsy-play.jpeg" height="200px" alt="Craftsy Walkthrough" /></a>
 
 ## Installation
 
