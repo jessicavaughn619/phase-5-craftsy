@@ -113,7 +113,7 @@ def callback():
         db.session.add(user)
         db.session.commit()
     login_user(user)
-    return redirect(FRONTEND_URL)
+    return redirect("https://craftsy-live.onrender.com/")
 
 class Logout(Resource):
     def delete(self):
