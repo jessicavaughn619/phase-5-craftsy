@@ -120,11 +120,13 @@ class Logout(Resource):
     def delete(self):
         if current_user:
             session['cart'] = []
+            session['user_id'] = []
             logout_user()
             return {}, 204
         if session.get('user_id'):
             session['cart'] = []
             session['user_id'] = None
+            logout_user()
             return {}, 204
         return {"error": "401 Unauthorized"}, 401
 
