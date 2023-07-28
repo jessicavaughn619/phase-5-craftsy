@@ -110,8 +110,6 @@ def callback():
             profile_pic=picture)
         db.session.add(user)
         db.session.commit()
-        return user.to_dict(), 201
-    
     login_user(user)
     return redirect("https://craftsy-live.onrender.com/")
 
