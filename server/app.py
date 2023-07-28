@@ -47,6 +47,8 @@ class CheckSession(Resource):
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
             return user.to_dict(), 200
+        if current_user:
+            return current_user.to_dict(), 200
         else:
             session['cart'] = []
             return {'error': '401 Unauthorized'}, 401
