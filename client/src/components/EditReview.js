@@ -13,7 +13,7 @@ export default function EditReview({ editedReview, id, onDeleteReview, onSetEdit
 
     function handleSubmit(e) {
         e.preventDefault()
-        fetch(`/review/${id}`, {
+        fetch(`/api/review/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function EditReview({ editedReview, id, onDeleteReview, onSetEdit
     }
 
     return (
-        <div className="">
+        <div>
         <ButtonSec onClick={handleClick} children={<div className="flex items-center justify-center space-x-2">
             <AiOutlineClose /><p>Close Form</p></div>}></ButtonSec>
         <form onSubmit={handleSubmit}>

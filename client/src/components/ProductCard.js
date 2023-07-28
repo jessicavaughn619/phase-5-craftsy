@@ -22,7 +22,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
 
     function handleClick() {
         if (user) {
-        fetch(`/cart/${id}`, {
+        fetch(`/api/cart/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

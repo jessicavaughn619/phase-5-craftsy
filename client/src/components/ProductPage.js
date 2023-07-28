@@ -65,7 +65,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch(`/product/${id}`, {
+        fetch(`/api/product/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

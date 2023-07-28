@@ -147,7 +147,7 @@ export default function App() {
   }
 
   function handleDeleteReview(id) {
-    fetch(`/review/${id}`, {
+    fetch(`/api/review/${id}`, {
         method: "DELETE"
     })
 

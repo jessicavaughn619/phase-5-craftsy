@@ -24,7 +24,7 @@ export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart
    }
 
     function handleClick() {
-        fetch(`/cart/${id}`, {
+        fetch(`/api/cart/${id}`, {
             method: "DELETE"
         }).then((r) => {
             if (r.ok) {

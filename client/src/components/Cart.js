@@ -44,7 +44,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
 
   function handleCreateOrder(products, orderId, totalCost) {
     const cost = parseInt(totalCost)
-    fetch("/orders", {
+    fetch("/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
         {user => 
         <div className="flex flex-col m-5">
           {orderPlaced ? <div className="flex justify-center mb-5">
-            <span className="text-xl">{user ? `Thank you for your order, ${user.first_name}` : "Thank you for your order!"}</span>
+            <span className="text-xl">`Thank you for your order, ${user.first_name}!`</span>
           </div> : null}
             {cartItems ?
             <div className="space-y-4 mb-4">
