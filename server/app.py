@@ -111,10 +111,10 @@ def callback():
         try: 
             db.session.add(user)
             db.session.commit()
+            login_user(user)
         except IntegrityError:
             return {"error": "422 Unprocessable entity"}, 422
         
-    user.is_authenticated = True
     login_user(user)
     return redirect("https://craftsy-live.onrender.com/")
 
