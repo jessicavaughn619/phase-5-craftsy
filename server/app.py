@@ -24,10 +24,9 @@ login_manager.init_app(app)
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
-GOOGLE_DISCOVERY_URL = (
-    "https://accounts.google.com/.well-known/openid-configuration"
-)
-# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+GOOGLE_DISCOVERY_URL = ("https://accounts.google.com/.well-known/openid-configuration")
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 FRONTEND_URL = os.environ.get("FRONTEND_URL")
 
@@ -44,7 +43,6 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user.is_authenticated:
-            login_user()
             return current_user.to_dict(), 200
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
