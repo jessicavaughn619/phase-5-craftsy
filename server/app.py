@@ -26,7 +26,7 @@ GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = ("https://accounts.google.com/.well-known/openid-configuration")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' - Use in testing only
 
 FRONTEND_URL = os.environ.get("FRONTEND_URL")
 
@@ -62,8 +62,8 @@ def login():
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=request.base_url + "/callback",
-        scope=["openid", "email", "profile"],
-    )
+        scope=["openid", "email", "profile"],)
+    
     return redirect(request_uri)
 
 @app.route("/login/callback")
@@ -77,14 +77,13 @@ def callback():
         token_endpoint,
         authorization_response=request.url,
         redirect_url=request.base_url,
-        code=code,
-    )
+        code=code,)
+    
     token_response = requests.post(
         token_url,
         headers=headers,
         data=body,
-        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
-    )
+        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),)
 
     client.parse_request_body_response(json.dumps(token_response.json()))
 
@@ -98,7 +97,7 @@ def callback():
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["given_name"]
     else:
-        return "User email not available or not verified by Google.", 400
+        return {"error": "User email not available or not verified by Google."}, 400
 
     user = User(
         id=unique_id, first_name=users_name, email=users_email, profile_pic=picture
@@ -108,11 +107,11 @@ def callback():
             id=unique_id, 
             first_name=users_name, 
             email=users_email, 
-            profile_pic=picture
-        )
+            profile_pic=picture)
         db.session.add(user)
         db.session.commit()
-        return user.to_dict(), 200
+        return user.to_dict(), 201
+    
     login_user(user)
     return redirect("https://craftsy-live.onrender.com/")
 
@@ -143,8 +142,7 @@ class Signup(Resource):
             id=str(uuid.uuid4()),
             first_name=first_name,
             last_name=last_name,
-            username=username,
-        )
+            username=username,)
 
         user.password_hash = password
 
@@ -153,6 +151,7 @@ class Signup(Resource):
             db.session.commit()
             session['user_id'] = user.id
             return user.to_dict(), 201
+        
         except IntegrityError:
             return {'error': '422 Unprocessable Entity'}, 422
         
@@ -168,9 +167,9 @@ class LocalLogin(Resource):
 
         if user:
             if user.authenticate(password):
-
                 session['user_id'] = user.id
                 return user.to_dict(), 200
+            
             return {'error': 'Incorrect password.'}, 401
 
         return {'error': '401 Unauthorized'}, 401
