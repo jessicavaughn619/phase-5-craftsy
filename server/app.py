@@ -108,8 +108,12 @@ def callback():
             first_name=users_name, 
             email=users_email, 
             profile_pic=picture)
-        db.session.add(user)
-        db.session.commit()
+        try: 
+            db.session.add(user)
+            db.session.commit()
+        except IntegrityError:
+            return {"error": "422 Unprocessable entity"}, 422
+        
     login_user(user)
     return redirect("https://craftsy-live.onrender.com/")
 
