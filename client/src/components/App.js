@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const check_session_response = await fetch("/api/check_session");
+        const check_session_response = await fetch("https://craftsy.onrender.com/check_session");
         if (check_session_response.ok) {
           const user = await check_session_response.json();
           setUser(user);
