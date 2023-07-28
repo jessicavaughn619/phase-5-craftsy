@@ -42,7 +42,7 @@ export default function App() {
       }
     }
     fetchData()
-  }, []);
+  }, [user]);
 
   function handleAddItemToCart(id) {
     const productToAdd = products.find(product => (product.id===id));
