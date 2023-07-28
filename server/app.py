@@ -47,8 +47,6 @@ class CheckSession(Resource):
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
             return user.to_dict(), 200
-        if current_user:
-            return current_user.to_dict(), 200
         else:
             session['cart'] = []
             return {'error': '401 Unauthorized'}, 401
@@ -116,6 +114,7 @@ def callback():
         except IntegrityError:
             return {"error": "422 Unprocessable entity"}, 422
         
+    user.is_authenticated = True
     login_user(user)
     return redirect("https://craftsy-live.onrender.com/")
 
