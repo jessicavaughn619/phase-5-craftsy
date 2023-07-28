@@ -34,6 +34,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 @login_manager.user_loader
 def load_user(user_id):
+    print(user_id)
     return User.get(user_id)
 
 @app.route("/")
