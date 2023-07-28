@@ -4,7 +4,6 @@ from models import Product, User, Review, Order, order_product
 with app.app_context():
     
     products = []
-    reviews = []
 
     print("Deleting existing data...")
 
@@ -14,17 +13,15 @@ with app.app_context():
     Review.query.delete()
     db.session.commit()
 
-    # User.query.delete()
-    # db.session.commit()
-
-    Product.query.delete()
-    db.session.commit()
-
     Order.query.delete()
     db.session.commit()
 
     User.query.delete()
     db.session.commit()
+
+    Product.query.delete()
+    db.session.commit()
+
 
     def create_products():
         print("Creating product instances...")
@@ -121,34 +118,9 @@ with app.app_context():
 
         db.session.add_all(products)
         db.session.commit()
-
-    def create_reviews():
-        print("Adding reviews...")
-
-        duck_family_review = Review(
-            rating=5,
-            content="I love this beautiful duck family!",
-            product_id=64
-        )
-
-        reviews.append(duck_family_review)
-
-        birdbath_large_review = Review(
-            rating=5,
-            content="This birdbath is so bright and beautiful - so many little birds visit for a drink during the day!",
-            product_id=65
-        )
-
-        reviews.append(birdbath_large_review)
-
-        db.session.add_all(reviews)
-        db.session.commit()
         
     create_products()
     db.session.commit()
-
-    # create_reviews()
-    # db.session.commit()
 
     print("Complete!")
     
