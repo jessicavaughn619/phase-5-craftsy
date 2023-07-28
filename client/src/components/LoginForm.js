@@ -13,7 +13,7 @@ export default function LoginForm({ onLogin }) {
   const navigate = useNavigate()
 
   function handleClick() {
-    window.open("http://localhost:5555/login", "_self")
+    window.open("https://craftsy.onrender.com/login", "_self")
   }
 
   function handleSubmit(e) {
