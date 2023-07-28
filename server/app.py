@@ -49,6 +49,7 @@ class CheckSession(Resource):
             return user.to_dict(), 200
         else:
             session['cart'] = []
+            session['user_id'] = None
             return {'error': '401 Unauthorized'}, 401
 
 def get_google_provider_cfg():
