@@ -111,11 +111,11 @@ def callback():
         try: 
             db.session.add(user)
             db.session.commit()
-            login_user(user)
+            session['user_id'] = user.id
+            return user.to_dict(), 200
         except IntegrityError:
             return {"error": "422 Unprocessable entity"}, 422
-        
-    login_user(user)
+
     return redirect("https://craftsy-live.onrender.com")
 
 class Logout(Resource):
