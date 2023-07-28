@@ -116,7 +116,7 @@ def callback():
             return {"error": "422 Unprocessable entity"}, 422
         
     login_user(user)
-    return redirect("https://craftsy-live.onrender.com/")
+    return redirect("https://craftsy-live.onrender.com")
 
 class Logout(Resource):
     def delete(self):
