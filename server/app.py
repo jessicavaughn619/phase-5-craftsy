@@ -29,7 +29,7 @@ GOOGLE_DISCOVERY_URL = (
 )
 # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-BACKEND_URL = os.environ.get("BACKEND_URL")
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
@@ -114,7 +114,7 @@ def callback():
         db.session.add(user)
         db.session.commit()
     login_user(user)
-    return redirect(BACKEND_URL)
+    return redirect(FRONTEND_URL)
 
 class Logout(Resource):
     def delete(self):
