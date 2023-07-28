@@ -19,7 +19,7 @@ export default function LoginForm({ onLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/local_login", {
+    fetch("/api/local_login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

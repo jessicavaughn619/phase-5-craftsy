@@ -13,7 +13,7 @@ export default function SignUpForm({ onLogin }) {
     const navigate = useNavigate()
 
     function handleClick() {
-      window.open("http://localhost:5555/login", "_self")
+      window.open("https://craftsy.onrender.com/login", "_self")
     }
 
     const formSchema = yup.object().shape({
@@ -46,7 +46,7 @@ export default function SignUpForm({ onLogin }) {
             setErrors([]);
             setIsLoading(true);
     
-            const response = await fetch("/signup", {
+            const response = await fetch("/api/signup", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

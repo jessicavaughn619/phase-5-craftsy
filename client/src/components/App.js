@@ -23,17 +23,17 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const check_session_response = await fetch("/check_session");
+        const check_session_response = await fetch("/api/check_session");
         if (check_session_response.ok) {
           const user = await check_session_response.json();
           setUser(user);
         }
-        const check_cart_response = await fetch("/cart");
+        const check_cart_response = await fetch("/api/cart");
         if (check_cart_response.ok) {
           const productsInCart = await check_cart_response.json();
           setProductsInCart(productsInCart)
         }
-        const product_response = await fetch("/products");
+        const product_response = await fetch("/api/products");
         const products = await product_response.json();
         setProducts(products);
 

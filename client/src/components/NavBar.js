@@ -6,7 +6,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
     const navigate = useNavigate()
 
     function handleLogoutClick() {
-        fetch("/logout", { method: "DELETE" }).then((r) => {
+        fetch("/api/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               onSetUser(null);
               onSetMessage("Logged out!")
