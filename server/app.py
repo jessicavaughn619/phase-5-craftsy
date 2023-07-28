@@ -27,7 +27,9 @@ GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+BACKEND_URL = os.environ.get("BACKEND_URL")
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
@@ -112,7 +114,7 @@ def callback():
         db.session.add(user)
         db.session.commit()
     login_user(user)
-    return redirect('https://craftsy-live.onrender.com/')
+    return redirect(BACKEND_URL)
 
 class Logout(Resource):
     def delete(self):
