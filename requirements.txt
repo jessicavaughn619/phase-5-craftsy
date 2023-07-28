@@ -30,4 +30,4 @@ werkzeug==2.3.6 ; python_version >= '3.8'
 zipp==3.15.0 ; python_version >= '3.7'
 requests==2.21.0
 oauthlib==3.0.1
-pyOpenSSL==19.0.0
+pyOpenSSL==23.2.0
