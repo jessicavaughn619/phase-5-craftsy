@@ -111,7 +111,7 @@ def callback():
         db.session.add(user)
         db.session.commit()
     login_user(user)
-    return redirect("https://craftsy-live.onrender.com/")
+    return user.to_dict(), 200
 
 class Logout(Resource):
     def delete(self):
