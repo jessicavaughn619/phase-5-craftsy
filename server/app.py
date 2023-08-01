@@ -43,9 +43,7 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user:
-            if current_user.is_authenticated:
-                return current_user.to_dict(), 200
-            return {"message": "Current user is not authenticated"}, 401
+            return current_user.to_dict(), 200
         elif session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
             return user.to_dict(), 200
@@ -115,7 +113,7 @@ def callback():
 
     login_user(user)
     session.modified = True
-    return redirect("https://craftsy-live.onrender.com/cart")
+    return redirect("https://craftsy-live.onrender.com")
 
 class Logout(Resource):
     def delete(self):
