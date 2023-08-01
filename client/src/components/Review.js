@@ -25,7 +25,7 @@ export default function Review({ review, onEditReview, onSetEditedReview }) {
             <div className="px-6 py-4">
                 <div className="grid grid-template-col-auto-1fr py-4 space-x-8">
                 <div className="flex flex-col space-y-2 items-center">
-                <img className="object-contain w-20" src={user.profile_pic ? user.profile_pic : pic} alt="user-avatar"/>
+                <img className="object-cover w-100 h-100 rounded-full" src={user.profile_pic ? user.profile_pic : pic} alt="user-avatar"/>
                 <p className="font-semibold">{user.first_name}</p>
                 </div>
                 <div className="space-y-2">
