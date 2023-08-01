@@ -122,12 +122,12 @@ class Logout(Resource):
             session['cart'] = []
             # session['user_id'] = None
             logout_user()
-            return {}, 204
+            return {"message": "Successfully logged out Google user!"}, 204
         if session.get('user_id'):
             session['cart'] = []
             session['user_id'] = None
             # logout_user()
-            return {}, 204
+            return {"message": "Successfully logged out local user!"}, 204
         return {"error": "401 Unauthorized"}, 401
 
 class Signup(Resource):
