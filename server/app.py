@@ -100,19 +100,16 @@ def callback():
         return {"error": "User email not available or not verified by Google."}, 400
 
     user = User(
-        id=unique_id, first_name=users_name, email=users_email, profile_pic=picture
-    )
+        id=unique_id, first_name=users_name, email=users_email, profile_pic=picture)
+    
     if not User.get(unique_id):
         user = User(
             id=unique_id, 
             first_name=users_name, 
             email=users_email, 
-            profile_pic=picture)
-        try: 
-            db.session.add(user)
-            db.session.commit()
-        except IntegrityError:
-            return {"error": "422 Unprocessable entity"}, 422
+            profile_pic=picture) 
+        db.session.add(user)
+        db.session.commit()
     login_user(user)
     return redirect("https://craftsy-live.onrender.com")
 
@@ -123,11 +120,6 @@ class Logout(Resource):
             session['user_id'] = None
             logout_user()
             return {"message": "Successfully logged out user!"}, 204
-        # elif session.get('user_id'):
-        #     session['cart'] = []
-        #     session['user_id'] = None
-        #     # logout_user()
-        #     return {"message": "Successfully logged out local user!"}, 204
         return {"error": "401 Unauthorized"}, 401
 
 class Signup(Resource):
