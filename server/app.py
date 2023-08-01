@@ -124,7 +124,7 @@ def callback():
     db_user = User.get(unique_id)
     login_user(db_user)
 
-    return redirect("https://craftsy-live.onrender.com")
+    return db_user.to_dict(), 200
 
 
 class Logout(Resource):
@@ -317,6 +317,10 @@ class Orders(Resource):
             session["cart"] = []
             return {"message": "Successfully created order and updated database."}, 201
 
+class Users(Resource):
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+        return make_response(users, 200)
 
 api.add_resource(LocalLogin, "/local_login", endpoint="local_login")
 api.add_resource(Signup, "/signup", endpoint="signup")
@@ -329,3 +333,4 @@ api.add_resource(CartByID, "/cart/<int:id>")
 api.add_resource(Reviews, "/reviews", endpoint="reviews")
 api.add_resource(ReviewByID, "/review/<int:id>")
 api.add_resource(Orders, "/orders", endpoint="orders")
+api.add_resource(Users, "/users", endpoint="users")
