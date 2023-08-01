@@ -120,14 +120,14 @@ class Logout(Resource):
     def delete(self):
         if current_user:
             session['cart'] = []
-            # session['user_id'] = None
-            logout_user()
-            return {"message": "Successfully logged out Google user!"}, 204
-        elif session.get('user_id'):
-            session['cart'] = []
             session['user_id'] = None
-            # logout_user()
-            return {"message": "Successfully logged out local user!"}, 204
+            logout_user()
+            return {"message": "Successfully logged out user!"}, 204
+        # elif session.get('user_id'):
+        #     session['cart'] = []
+        #     session['user_id'] = None
+        #     # logout_user()
+        #     return {"message": "Successfully logged out local user!"}, 204
         return {"error": "401 Unauthorized"}, 401
 
 class Signup(Resource):
