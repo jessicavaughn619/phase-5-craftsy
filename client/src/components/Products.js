@@ -12,7 +12,7 @@ export default function Products({ products, productsInCart, onSetProductsInCart
         />
     ))
     return (
-        <div className="grid grid-col-3 gap-4">
+        <div className="grid grid-rows-3 gap-4">
             {allProducts}
         </div>
     )
