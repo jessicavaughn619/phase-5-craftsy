@@ -46,6 +46,7 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user:
+            return current_user
             if current_user.is_authenticated:
                 return current_user.to_dict(), 200
             return {"message": "Current user is not authenticated"}, 401
@@ -124,7 +125,7 @@ def callback():
     db_user = User.get(unique_id)
     login_user(db_user)
 
-    return db_user.to_dict(), 200
+    return redirect("https://craftsy-live.onrender.com")
 
 
 class Logout(Resource):
