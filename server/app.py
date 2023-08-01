@@ -110,9 +110,9 @@ def callback():
             profile_pic=picture) 
         db.session.add(user)
         db.session.commit()
-        
+
     login_user(user)
-    return user.to_dict(), 200
+    return redirect("https://craftsy-live.onrender.com/cart")
 
 class Logout(Resource):
     def delete(self):
