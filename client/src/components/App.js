@@ -44,6 +44,8 @@ export default function App() {
     fetchData()
   }, []);
 
+  console.log(user)
+
   function handleAddItemToCart(id) {
     const productToAdd = products.find(product => (product.id===id));
     productToAdd.quantity_in_cart = 1;
