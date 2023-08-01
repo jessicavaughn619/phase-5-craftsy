@@ -116,6 +116,46 @@ with app.app_context():
         )
         products.append(lizard_small)
 
+        pig_family = Product(
+            item="Pig Family",
+            image="https://i.imgur.com/8dziTIR.jpg",
+            description="Medium tower of five pigs stacked on each others' shoulders",
+            category="Ceramic",
+            price=20.00,
+            quantity=2
+        )
+        products.append(pig_family)
+
+        medium_pig = Product(
+            item="Medium Pig",
+            image="https://i.imgur.com/wNrRp85.jpg",
+            description="Medium pink pig with reddish spots",
+            category="Ceramic",
+            price=20.00,
+            quantity=3
+        )
+        products.append(medium_pig)
+
+        toadstool = Product(
+            item="Toadstool",
+            image="https://i.imgur.com/FzINcuC.jpg",
+            description="Medium colorful toadstool",
+            category="Ceramic",
+            price=20.00,
+            quantity=1
+        )
+        products.append(toadstool)
+
+        frog_medium = Product(
+            item="Medium Frog",
+            image="https://i.imgur.com/lU4ZO0v.jpg",
+            description="Medium frog holding fly",
+            category="Ceramic",
+            price=20.00,
+            quantity=2
+        )
+        products.append(frog_medium)
+
         db.session.add_all(products)
         db.session.commit()
         
