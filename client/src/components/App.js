@@ -44,7 +44,7 @@ export default function App() {
     fetchData()
   }, []);
 
-  console.log(`User: ${user}`)
+  console.log(user)
 
   function handleAddItemToCart(id) {
     const productToAdd = products.find(product => (product.id===id));
