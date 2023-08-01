@@ -45,11 +45,8 @@ def index():
 
 class CheckSession(Resource):
     def get(self):
-        if current_user:
-            return current_user.to_dict()
-            if current_user.is_authenticated:
-                return current_user.to_dict(), 200
-            return {"message": "Current user is not authenticated"}, 401
+        if current_user.is_authenticated:
+            return current_user.to_dict(), 200
         elif session.get("user_id"):
             user = User.query.filter(User.id == session["user_id"]).first()
             return user.to_dict(), 200
@@ -57,10 +54,8 @@ class CheckSession(Resource):
             session["cart"] = []
             return {"error": "401 Unauthorized"}, 401
 
-
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
-
 
 @app.route("/login")
 def login():
@@ -72,9 +67,7 @@ def login():
         redirect_uri=request.base_url + "/callback",
         scope=["openid", "email", "profile"],
     )
-
     return redirect(request_uri)
-
 
 @app.route("/login/callback")
 def callback():
@@ -127,7 +120,6 @@ def callback():
 
     return redirect("https://craftsy-live.onrender.com")
 
-
 class Logout(Resource):
     def delete(self):
         if current_user:
@@ -136,7 +128,6 @@ class Logout(Resource):
             logout_user()
             return {"message": "Successfully logged out user!"}, 204
         return {"error": "401 Unauthorized"}, 401
-
 
 class Signup(Resource):
     def post(self):
@@ -153,7 +144,6 @@ class Signup(Resource):
             last_name=last_name,
             username=username,
         )
-
         user.password_hash = password
 
         try:
@@ -164,7 +154,6 @@ class Signup(Resource):
 
         except IntegrityError:
             return {"error": "422 Unprocessable Entity"}, 422
-
 
 class LocalLogin(Resource):
     def post(self):
@@ -184,12 +173,10 @@ class LocalLogin(Resource):
 
         return {"error": "401 Unauthorized"}, 401
 
-
 class Products(Resource):
     def get(self):
         products = [product.to_dict() for product in Product.query.all()]
         return make_response(products, 200)
-
 
 class ProductByID(Resource):
     def get(self, id):
@@ -219,7 +206,6 @@ class ProductByID(Resource):
             return review.to_dict(), 201
         return {"error": "Please login to leave a review!"}, 401
 
-
 class Cart(Resource):
     def get(self):
         cart_data = session.get("cart", [])
@@ -230,7 +216,6 @@ class Cart(Resource):
             return make_response(product_dicts, 200)
         else:
             return jsonify(cart_data)
-
 
 class CartByID(Resource):
     def post(self, id):
@@ -247,12 +232,10 @@ class CartByID(Resource):
             return {"message": "Successfully removed item from cart"}, 204
         return {"error": "Item not found in cart"}, 404
 
-
 class Reviews(Resource):
     def get(self):
         reviews = [review.to_dict() for review in Review.query.all()]
         return make_response(reviews, 200)
-
 
 class ReviewByID(Resource):
     def patch(self, id):
@@ -276,7 +259,6 @@ class ReviewByID(Resource):
             return {"message": "Review deleted successfully."}, 204
         else:
             return {"error": "Review not found."}, 404
-
 
 class Orders(Resource):
     def get(self):
