@@ -150,10 +150,10 @@ export default function SignUpForm({ onLogin }) {
           <div className="text-amber-600">{formik.errors.passwordConfirmation}</div>
         ) : null}
           </div>
-          <Button type="submit" children={isLoading ? "Loading..." : "Sign Up"}/>
           <div className="text-amber-600">
             {errors.error}
           </div>
+          <Button type="submit" children={isLoading ? "Loading..." : "Sign Up"}/>
       </div>
     </form>
     <ButtonSec onClick={handleClick}

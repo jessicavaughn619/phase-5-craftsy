@@ -64,10 +64,10 @@ export default function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
           </div>
-            <Button type="submit" children={isLoading ? "Loading..." : "Login"}/>
           <div className="text-amber-600">
             {errors.error}
           </div>
+            <Button type="submit" children={isLoading ? "Loading..." : "Login"}/>
         </div>
       </form>
       <ButtonSec onClick={handleClick}
