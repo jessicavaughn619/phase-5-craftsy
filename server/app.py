@@ -30,8 +30,6 @@ GOOGLE_DISCOVERY_URL = ("https://accounts.google.com/.well-known/openid-configur
 
 FRONTEND_URL = os.environ.get("FRONTEND_URL")
 
-SESSION_COOKIE_DOMAIN = ".onrender.com"
-
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 @login_manager.user_loader
