@@ -114,19 +114,19 @@ def callback():
         except IntegrityError:
             return {"error": "422 Unprocessable entity"}, 422
     login_user(user)
-    return {"message": "Successfully logged in user"}, 200
+    return redirect("https://craftsy-live.onrender.com")
 
 class Logout(Resource):
     def delete(self):
         if current_user:
             session['cart'] = []
-            session['user_id'] = None
+            # session['user_id'] = None
             logout_user()
             return {}, 204
         if session.get('user_id'):
             session['cart'] = []
             session['user_id'] = None
-            logout_user()
+            # logout_user()
             return {}, 204
         return {"error": "401 Unauthorized"}, 401
 
