@@ -46,7 +46,7 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user:
-            return current_user
+            return current_user.to_dict()
             if current_user.is_authenticated:
                 return current_user.to_dict(), 200
             return {"message": "Current user is not authenticated"}, 401
