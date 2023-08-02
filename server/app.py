@@ -41,6 +41,7 @@ def load_user(user_id):
 @app.route("/")
 def index():
     if current_user.is_authenticated:
+        redirect("https://craftsy-live.onrender.com/")
         return current_user.to_dict(), 200
     return f"<h1>Craftsy Backend Development</h1>"
 
