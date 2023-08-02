@@ -36,6 +36,9 @@ class User(db.Model, SerializerMixin, UserMixin):
     def get(user_id):
         user = User.query.filter_by(id=user_id).first()
         return user
+    
+    def is_authenticated(self):
+        return True
 
     @hybrid_property
     def password_hash(self):
