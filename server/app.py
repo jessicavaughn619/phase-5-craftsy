@@ -1,7 +1,7 @@
 import os
 import json
 import uuid
-from flask import redirect, request, session, make_response, jsonify
+from flask import redirect, request, session, make_response, jsonify, url_for
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_login import (
@@ -40,6 +40,8 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        return current_user.to_dict(), 200
     return f"<h1>Craftsy Backend Development</h1>"
 
 
@@ -118,7 +120,7 @@ def callback():
     db_user = User.get(unique_id)
     login_user(db_user)
 
-    return redirect("https://craftsy-live.onrender.com")
+    return redirect(url_for("index"))
 
 class Logout(Resource):
     def delete(self):
