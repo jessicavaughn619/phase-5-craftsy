@@ -117,7 +117,6 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    redirect("https://craftsy-live.onrender.com/")
     return current_user.to_dict(), 200
 
 class Logout(Resource):
