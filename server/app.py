@@ -45,7 +45,9 @@ def index():
 
 class CheckSession(Resource):
     def get(self):
-        if session.get("user_id"):
+        if current_user.is_authenticated:
+            return current_user.to_dict(), 200
+        elif session.get("user_id"):
             user = User.query.filter(User.id == session["user_id"]).first()
             return user.to_dict(), 200
         else:
