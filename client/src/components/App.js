@@ -26,7 +26,9 @@ export default function App() {
     setIsLoading(true)
     const fetchData = async () => {
       try {
-        const check_session_response = await fetch("/api/check_session");
+        const check_session_response = await fetch("/api/check_session", {
+          credentials: "include",
+        });
         if (check_session_response.ok) {
           const user = await check_session_response.json();
           setUser(user);

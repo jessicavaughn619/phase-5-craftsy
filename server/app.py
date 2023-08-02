@@ -17,7 +17,7 @@ from flask_cors import CORS
 from config import app, db, api
 from models import Product, User, Review, Order
 
-CORS(app)
+CORS(app, resources={r"*": {"origins": "https://craftsy.onrender.com/"}}, supports_credentials=True)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
