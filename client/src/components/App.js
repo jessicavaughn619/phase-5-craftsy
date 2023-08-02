@@ -23,8 +23,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
-      setIsLoading(true)
       try {
         const check_session_response = await fetch("/api/check_session");
         if (check_session_response.ok) {
@@ -46,7 +46,7 @@ export default function App() {
     }
     fetchData()
     setIsLoading(false)
-  }, []);
+  }, [user]);
 
   console.log(user)
 
