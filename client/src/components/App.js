@@ -27,7 +27,7 @@ export default function App() {
     const fetchData = async () => {
       try {
         const check_session_response = await fetch("/api/check_session", {
-          credentials: "include",
+          credentials: "same-origin",
         });
         if (check_session_response.ok) {
           const user = await check_session_response.json();
