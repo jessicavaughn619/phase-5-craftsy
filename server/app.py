@@ -119,7 +119,7 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    return redirect(url_for("check_session"))
+    return redirect(url_for("index"))
 
 class Logout(Resource):
     def delete(self):
