@@ -47,6 +47,7 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user.is_authenticated:
+            redirect("https://craftsy-live.onrender.com")
             return current_user.to_dict(), 200
         elif session.get("user_id"):
             user = User.query.filter(User.id == session["user_id"]).first()
@@ -118,7 +119,7 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    return redirect(url_for("index"))
+    return redirect(url_for("/check_session"))
 
 class Logout(Resource):
     def delete(self):
