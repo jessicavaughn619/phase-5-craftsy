@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import Error from "./Error";
+import Loading from "./Loading";
 import { Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { Context } from "../context";
@@ -19,9 +20,11 @@ export default function App() {
   const [products, setProducts] = useState([])
   const [productsInCart, setProductsInCart]= useState([])
   const [message, setMessage] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       try {
         const check_session_response = await fetch("/api/check_session");
         if (check_session_response.ok) {
@@ -42,6 +45,7 @@ export default function App() {
       }
     }
     fetchData()
+    setIsLoading(false)
   }, []);
 
   console.log(user)
@@ -190,7 +194,8 @@ const initialOptions = {
         />
         </header>
         <main className="mb-auto"><Routes>
-          <Route path='/' element={
+          <Route path='/' element={isLoading ?
+          <Loading /> :
           <Home 
             products={products}
             onSetProductsInCart={handleAddItemToCart}
