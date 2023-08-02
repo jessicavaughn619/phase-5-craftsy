@@ -47,7 +47,6 @@ def index():
 class CheckSession(Resource):
     def get(self):
         if current_user.is_authenticated:
-            redirect("https://craftsy-live.onrender.com")
             return current_user.to_dict(), 200
         elif session.get("user_id"):
             user = User.query.filter(User.id == session["user_id"]).first()
