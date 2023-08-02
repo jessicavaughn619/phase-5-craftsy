@@ -308,7 +308,7 @@ class Users(Resource):
 
 api.add_resource(LocalLogin, "/local_login", endpoint="local_login")
 api.add_resource(Signup, "/signup", endpoint="signup")
-# api.add_resource(CheckSession, "/check_session", endpoint="check_session")
+api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(Products, "/products", endpoint="products")
 api.add_resource(Cart, "/cart", endpoint="cart")
