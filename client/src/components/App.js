@@ -31,6 +31,11 @@ export default function App() {
           const user = await check_session_response.json();
           setUser(user);
         }
+        const check_backend_session_response = await fetch("https://craftsy.onrender.com/check_session");
+        if (check_backend_session_response.ok) {
+          const user = await check_backend_session_response.json();
+          setUser(user);
+        }
         const check_cart_response = await fetch("/api/cart");
         if (check_cart_response.ok) {
           const productsInCart = await check_cart_response.json();
