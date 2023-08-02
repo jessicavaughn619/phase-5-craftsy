@@ -43,16 +43,16 @@ def index():
     return f"<h1>Craftsy Backend Development</h1>"
 
 
-class CheckSession(Resource):
-    def get(self):
-        if current_user.is_authenticated:
-            return current_user.to_dict(), 200
-        elif session.get("user_id"):
-            user = User.query.filter(User.id == session["user_id"]).first()
-            return user.to_dict(), 200
-        else:
-            session["cart"] = []
-            return {"error": "401 Unauthorized"}, 401
+# class CheckSession(Resource):
+#     def get(self):
+#         if current_user.is_authenticated:
+#             return current_user.to_dict(), 200
+#         elif session.get("user_id"):
+#             user = User.query.filter(User.id == session["user_id"]).first()
+#             return user.to_dict(), 200
+#         else:
+#             session["cart"] = []
+#             return {"error": "401 Unauthorized"}, 401
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
@@ -117,7 +117,7 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    return current_user.to_dict(), 200
+    return redirect("https://craftsy-live.onrender.com/")
 
 class Logout(Resource):
     def delete(self):
@@ -306,7 +306,7 @@ class Users(Resource):
 
 api.add_resource(LocalLogin, "/local_login", endpoint="local_login")
 api.add_resource(Signup, "/signup", endpoint="signup")
-api.add_resource(CheckSession, "/check_session", endpoint="check_session")
+# api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(Products, "/products", endpoint="products")
 api.add_resource(Cart, "/cart", endpoint="cart")
