@@ -40,9 +40,9 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    if current_user.is_authenticated:
-        redirect("https://craftsy-live.onrender.com/")
-        return current_user.to_dict(), 200
+    # if current_user.is_authenticated:
+    #     redirect("https://craftsy-live.onrender.com/")
+    #     return current_user.to_dict(), 200
     return f"<h1>Craftsy Backend Development</h1>"
 
 
@@ -121,7 +121,8 @@ def callback():
     db_user = User.get(unique_id)
     login_user(db_user)
 
-    return redirect(url_for("index"))
+    next = request.args.get('next')
+    return redirect(next or "https://craftsy-live.onrender.com")
 
 class Logout(Resource):
     def delete(self):
