@@ -40,19 +40,20 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        return current_user.to_dict(), 200
     return f"<h1>Craftsy Backend Development</h1>"
 
-
-# class CheckSession(Resource):
-#     def get(self):
-#         if current_user.is_authenticated:
-#             return current_user.to_dict(), 200
-#         elif session.get("user_id"):
-#             user = User.query.filter(User.id == session["user_id"]).first()
-#             return user.to_dict(), 200
-#         else:
-#             session["cart"] = []
-#             return {"error": "401 Unauthorized"}, 401
+class CheckSession(Resource):
+    def get(self):
+        if current_user.is_authenticated:
+            return current_user.to_dict(), 200
+        elif session.get("user_id"):
+            user = User.query.filter(User.id == session["user_id"]).first()
+            return user.to_dict(), 200
+        else:
+            session["cart"] = []
+            return {"error": "401 Unauthorized"}, 401
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
@@ -117,7 +118,7 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    return redirect("https://craftsy-live.onrender.com/")
+    return redirect(url_for("index"))
 
 class Logout(Resource):
     def delete(self):
