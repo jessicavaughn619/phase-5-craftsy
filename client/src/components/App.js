@@ -46,7 +46,7 @@ export default function App() {
     }
     fetchData()
     setIsLoading(false)
-  }, [user]);
+  }, []);
 
   console.log(user)
 
