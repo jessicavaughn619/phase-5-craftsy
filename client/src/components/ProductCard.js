@@ -62,7 +62,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     return (
         <Context.Consumer>
         { user =>
-        <div className="max-w-sm rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default">
+        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default">
             <img className="object-contain h-48 w-96 hover:cursor-pointer active:object-cover" src={image} alt={item}/>
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{item}</div>
