@@ -39,12 +39,11 @@ def load_user(user_id):
 @app.route("/")
 @app.route("/about")
 @app.route("/contact")
-@app.route("/products")
 @app.route("/signup")
 @app.route("/login")
 @app.route("/products")
-@app.route("/products/:id")
-def index():
+@app.route("/products/<int:id>")
+def index(id=0):
     return render_template("index.html")
 
 class CheckSession(Resource):
