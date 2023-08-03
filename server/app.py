@@ -1,7 +1,7 @@
 import os
 import json
 import uuid
-from flask import redirect, request, session, make_response, jsonify, url_for
+from flask import redirect, request, session, make_response, jsonify, url_for, render_template
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_login import (
@@ -17,7 +17,7 @@ from flask_cors import CORS
 from config import app, db, api
 from models import Product, User, Review, Order
 
-CORS(app, resources={r"*": {"origins": "https://craftsy.onrender.com/"}}, supports_credentials=True)
+CORS(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -28,8 +28,6 @@ GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configura
 
 # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' - Use in testing only
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL")
-
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 
@@ -39,10 +37,15 @@ def load_user(user_id):
 
 
 @app.route("/")
+@app.route("/about")
+@app.route("/contact")
+@app.route("/products")
+@app.route("/signup")
+@app.route("/login")
+@app.route("/products")
+@app.route("/products/:id")
 def index():
-    if current_user.is_authenticated:
-        return current_user.to_dict(), 200
-    return f"<h1>Craftsy Backend Development</h1>"
+    return render_template("index.html")
 
 class CheckSession(Resource):
     def get(self):
@@ -59,7 +62,7 @@ class CheckSession(Resource):
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
-@app.route("/login")
+@app.route("/api/login")
 def login():
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
@@ -71,7 +74,7 @@ def login():
     )
     return redirect(request_uri)
 
-@app.route("/login/callback")
+@app.route("/api/login/callback")
 def callback():
     code = request.args.get("code")
 
@@ -119,7 +122,7 @@ def callback():
 
     db_user = User.get(unique_id)
     login_user(db_user, remember=True)
-    return redirect("https://craftsy-live.onrender.com/")
+    return redirect(url_for("index"))
 
 class Logout(Resource):
     def delete(self):
@@ -306,15 +309,15 @@ class Users(Resource):
         users = [user.to_dict() for user in User.query.all()]
         return make_response(users, 200)
 
-api.add_resource(LocalLogin, "/local_login", endpoint="local_login")
-api.add_resource(Signup, "/signup", endpoint="signup")
-api.add_resource(CheckSession, "/check_session", endpoint="check_session")
-api.add_resource(Logout, "/logout", endpoint="logout")
-api.add_resource(Products, "/products", endpoint="products")
-api.add_resource(Cart, "/cart", endpoint="cart")
-api.add_resource(ProductByID, "/product/<int:id>")
-api.add_resource(CartByID, "/cart/<int:id>")
-api.add_resource(Reviews, "/reviews", endpoint="reviews")
-api.add_resource(ReviewByID, "/review/<int:id>")
-api.add_resource(Orders, "/orders", endpoint="orders")
-api.add_resource(Users, "/users", endpoint="users")
+api.add_resource(LocalLogin, "/api/local_login", endpoint="local_login")
+api.add_resource(Signup, "/api/signup", endpoint="signup")
+api.add_resource(CheckSession, "/api/check_session", endpoint="check_session")
+api.add_resource(Logout, "/api/logout", endpoint="logout")
+api.add_resource(Products, "/api/products", endpoint="products")
+api.add_resource(Cart, "/api/cart", endpoint="cart")
+api.add_resource(ProductByID, "/api/product/<int:id>")
+api.add_resource(CartByID, "/api/cart/<int:id>")
+api.add_resource(Reviews, "/api/reviews", endpoint="reviews")
+api.add_resource(ReviewByID, "/api/review/<int:id>")
+api.add_resource(Orders, "/api/orders", endpoint="orders")
+api.add_resource(Users, "/api/users", endpoint="users")
