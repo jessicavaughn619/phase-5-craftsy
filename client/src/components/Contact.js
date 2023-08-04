@@ -8,29 +8,32 @@ export default function Contact() {
   const [message, setMessage] = useState("")
   const [errors, setErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [alert, setAlert] = useState("")
 
   const form = useRef();
 
-  function handleSetErrors(msg) {
-    setErrors(msg)
+  function handleSetAlert(msg) {
+    setAlert(msg)
     setTimeout(() => {
-      setErrors(null);
+      setAlert("");
     } , 3000);
   }
   
   const sendEmail = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    emailjs.sendForm('service_sunhybn', 'template_cwajhi7', form.current, 'JExJjzVLDyH1ul5rG')
+    emailjs.sendForm('service_sunhybn', 'contact_form', form.current, 'JExJjzVLDyH1ul5rG')
     .then((response) => {
        console.log('SUCCESS!', response.status, response.text);
-       handleSetErrors("Email successfully sent!")
+       handleSetAlert("Email successfully sent!")
        setIsLoading(false)
     }, (error) => {
        console.log('FAILED...', error);
        setErrors(error)
     });
-    e.target.reset()
+    setEmail("")
+    setName("")
+    setMessage("")
   }
   
   return (
@@ -50,6 +53,7 @@ export default function Contact() {
             autoComplete="off"
             required
             value={email}
+            name="email"
             onChange={(e) => setEmail(e.target.value)}/>
       </div>
       <div>
@@ -61,6 +65,7 @@ export default function Contact() {
             autoComplete="off"
             required
             value={name}
+            name="name"
             onChange={(e) => setName(e.target.value)}/>
       </div>
       <div>
@@ -72,12 +77,16 @@ export default function Contact() {
             autoComplete="off"
             required
             value={message}
+            name="message"
             onChange={(e) => setMessage(e.target.value)}/>
       </div>
       <div className="text-amber-600">
             {errors.error}
       </div>
       <Button type="submit" children={isLoading ? "Loading..." : "Submit"}/>
+      {alert ? <div className="text-amber-600 text-center">
+            {alert}
+      </div> : null}
       </div>
       </form>
   </div>
