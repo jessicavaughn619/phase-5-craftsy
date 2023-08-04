@@ -62,7 +62,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     return (
         <Context.Consumer>
         { user =>
-        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-center">
+        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-center justify-items-center max-w-full">
             <img className="object-contain h-48 w-96 hover:cursor-pointer active:object-cover" src={image} alt={item}/>
             <div className="flex flex-col px-6 py-4">
                 <div className="self-center font-bold text-xl mb-2">{item}</div>
@@ -70,12 +70,12 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                     <span className="hover:cursor-pointer hover:text-amber-600 pl-1 text-sm" onClick={handleReviewClick}>...more info</span>
                 </p>
             </div>
-                <div className="flex justify-between items-center px-6 pt-4 pb-2">
+                <div className="flex justify-between items-center px-6 pt-4 pb-2 gap-2">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {(quantity > 0) ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
             </div>
-            <div className="flex items-center justify-between px-6 pb-2">
+            <div className="flex items-center justify-between px-6 pb-2 max-w-full">
                 {(inCart.length > 0) ? 
                     <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed"/>
                      : (quantity > 0) ?
