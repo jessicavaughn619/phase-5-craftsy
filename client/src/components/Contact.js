@@ -6,7 +6,7 @@ export default function Contact() {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
-  const [errors, setErrors] = useState(null)
+  const [errors, setErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
@@ -50,7 +50,6 @@ export default function Contact() {
             type="text"
             id="email"
             autoComplete="off"
-            placeholder="Email..."
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}/>
@@ -62,7 +61,6 @@ export default function Contact() {
             type="text"
             id="name"
             autoComplete="off"
-            placeholder="Name..."
             required
             value={name}
             onChange={(e) => setName(e.target.value)}/>
@@ -74,7 +72,6 @@ export default function Contact() {
             type="text"
             id="message"
             autoComplete="off"
-            placeholder="Message..."
             required
             value={message}
             onChange={(e) => setMessage(e.target.value)}/>
