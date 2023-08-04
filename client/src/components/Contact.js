@@ -9,10 +9,9 @@ export default function Contact() {
   const [errors, setErrors] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => emailjs.init('JExJjzVLDyH1ul5rG'), []);
-
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
   const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY
 
   function handleSetErrors(msg) {
     setErrors(msg)
@@ -24,12 +23,12 @@ export default function Contact() {
   function handleSubmit(e) {
     e.preventDefault()
     setIsLoading(true)
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, '#myForm')
-    .then(function(response) {
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, '#myForm', PUBLIC_KEY)
+    .then((response) => {
        console.log('SUCCESS!', response.status, response.text);
        handleSetErrors("Email successfully sent!")
        setIsLoading(false)
-    }, function(error) {
+    }, (error) => {
        console.log('FAILED...', error);
        setErrors(error)
     });
@@ -70,7 +69,7 @@ export default function Contact() {
       </div>
       <div>
         <label htmlFor="message" className="block mb-2 font-medium text-gray-900 text-black">Message</label>
-        <input
+        <textarea
             className="border rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5 dark:text-black dark:focus:ring-amber-600 dark:focus:border-amber-600 bg-gray-50"
             type="text"
             id="message"
