@@ -42,14 +42,14 @@ export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart
             <div className="flex flex-col justify-between px-6">
                 <div className="space-y-1">
                 <p className="font-bold text-xl">{item}</p>
-                <p>{description}</p>
+                <p className="mb-2">{description}</p>
                 </div>
                 <div className="pb-4 space-y-2">
-                        <div className="flex justify-between">
-                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <div className="flex flex-col justify-between sm:flex-row">
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 self-center">
                         ${price}.00</span>
-                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        {quantity} In Stock</span>
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 self-center">
+                        In Stock: {quantity}</span>
                         </div>
                     <div className="flex justify-between items-center">
                     <BsCartX onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600" />

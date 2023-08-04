@@ -16,6 +16,16 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
           });
         }
 
+    function totalItems(productsInCart) {
+        let totalItems = 0;
+        for (let i = 0; i < productsInCart.length; i++) {
+            const product = productsInCart[i]
+            const quantity = product.quantity_in_cart || 0;
+            totalItems += quantity;
+        }
+        return totalItems;
+        }
+
     return (
         <Context.Consumer>
         {user => <nav className="m-5 pb-4">
@@ -54,7 +64,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
                 <span className="text-amber-600">{message}</span>
                 <NavLink to="/cart" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
-                    <BsCartCheck /></NavLink>
+                    <BsCartCheck />({totalItems})</NavLink>
             </div>
         </nav>
         }
