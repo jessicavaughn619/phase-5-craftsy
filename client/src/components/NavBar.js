@@ -21,7 +21,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
         {user => <nav className="m-10 pb-4">
             {user ? 
             <div className="flex">
-                <div className="flex flex-col sm:flex-row space-x-5">
+                <div className="flex flex-col sm:flex-row sm:space-x-5">
                 <NavLink to="/" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Products</NavLink>
                 <NavLink to="/about" className={({ isActive, isPending }) =>
@@ -29,13 +29,13 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
                 </div>
-                <div className="flex absolute right-0 pr-10 flex-col sm:flex-row space-x-5">
+                <div className="flex absolute right-0 pr-10 flex-col sm:flex-row sm:space-x-5">
                     <p className="italic">Welcome, {user.first_name}</p>
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div>
             </div> : 
             <div className="flex">
-                <div className="flex flex-col sm:flex-row space-x-5">
+                <div className="flex flex-col sm:flex-row sm:space-x-5">
                 <NavLink to="/" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Products</NavLink>
                 <NavLink to="/about" className={({ isActive, isPending }) =>
@@ -43,7 +43,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
                 </div>
-                <div className="flex absolute right-0 pr-10 flex-col sm:flex-row space-x-5">
+                <div className="flex absolute right-0 pr-10 flex-col sm:flex-row sm:space-x-5">
                     <NavLink to='/signup' className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Sign Up</NavLink>
                     <NavLink to='/login' className={({ isActive, isPending }) =>

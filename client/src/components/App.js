@@ -193,9 +193,9 @@ const initialOptions = {
           onSetProductsInCart={handleResetCart}
         />
         </header>
+        {isLoading ? <Loading /> :
         <main className="mb-auto"><Routes>
-          <Route path='/' element={isLoading ?
-          <Loading /> :
+          <Route path='/' element={
           <Home 
             products={products}
             onSetProductsInCart={handleAddItemToCart}
@@ -230,7 +230,7 @@ const initialOptions = {
             />} 
           />
         </Routes>
-        </main>
+        </main>}
         <footer className="h-10"><Footer /></footer>
     </div>
     </PayPalScriptProvider>
