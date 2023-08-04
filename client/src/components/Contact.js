@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import emailjs from '@emailjs/browser'
 import Button from "./Button";
 
@@ -9,9 +9,7 @@ export default function Contact() {
   const [errors, setErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
-  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
-  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+  const form = useRef();
 
   function handleSetErrors(msg) {
     setErrors(msg)
@@ -19,11 +17,11 @@ export default function Contact() {
       setErrors(null);
     } , 3000);
   }
-
-  function handleSubmit(e) {
+  
+  const sendEmail = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, '#myForm', PUBLIC_KEY)
+    emailjs.sendForm('service_sunhybn', 'template_cwajhi7', form.current, 'JExJjzVLDyH1ul5rG')
     .then((response) => {
        console.log('SUCCESS!', response.status, response.text);
        handleSetErrors("Email successfully sent!")
@@ -41,7 +39,7 @@ export default function Contact() {
       <h2 className="mb-4 text-3xl tracking-tight font-bold text-center text-gray-900 dark:text-white">Contact Us</h2>
       <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a question about our products? Need support with an order? Let us know.</p>
       
-      <form onSubmit={handleSubmit} id="myForm">
+      <form onSubmit={sendEmail} ref={form}>
       <div className="grid gap-6 mb-2 md:grid-cols-1">
       <div>
         <label htmlFor="email" className="block mb-2 font-medium text-gray-900 text-black">Email</label>
