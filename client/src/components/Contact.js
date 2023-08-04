@@ -1,5 +1,5 @@
 import { useState } from "react"
-import emailjs from 'emailjs-com'
+import emailjs from '@emailjs/browser'
 
 export default function Contact() {
   const [email, setEmail] = useState("")
@@ -9,6 +9,7 @@ export default function Contact() {
 
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
   const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY
 
   function handleSetErrors(msg) {
     setErrors(msg)
@@ -16,9 +17,16 @@ export default function Contact() {
       setErrors(null);
     } , 3000);
   }
+
+  const templateParams = {
+    email: email,
+    name: name,
+    message: message
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
     .then(function(response) {
        console.log('SUCCESS!', response.status, response.text);
        handleSetErrors("Email successfully sent!")
