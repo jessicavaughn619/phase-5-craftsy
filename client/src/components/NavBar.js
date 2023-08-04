@@ -18,7 +18,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
 
     return (
         <Context.Consumer>
-        {user => <nav className="m-10 pb-4">
+        {user => <nav className="m-5 pb-4">
             {user ? 
             <div className="flex">
                 <div className="flex flex-col sm:flex-row sm:space-x-5">
@@ -50,7 +50,7 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Login</NavLink>
                 </div>
             </div>}
-            <div className="flex absolute right-0 space-x-5 mr-10 mt-4 ml-10">
+            <div className="flex absolute right-0 space-x-5 mr-10 ml-10 sm:mt-2">
                 <span className="text-amber-600">{message}</span>
                 <NavLink to="/cart" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>

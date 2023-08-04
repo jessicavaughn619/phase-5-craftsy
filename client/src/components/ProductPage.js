@@ -99,7 +99,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
                 <p className="text-gray-700 text-base">{description}</p>
             </div>
         </div>
-        <div className="flex flex-col px-6 py-4 gap-4 self-center md:self-start">
+        <div className="flex flex-col py-4 gap-4 self-center md:self-start">
         {isEditReview ? null : 
         <div className="flex flex-col gap-2"><ButtonSec
         onClick={handleClick} children={isReview ? <div className="flex items-center justify-center space-x-2"><AiOutlineClose /><p>Close Form</p></div> : "Add Product Review"}></ButtonSec>
