@@ -4,19 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 import { Context } from '../context';
 
-export default function ProductCard({ product, productsInCart, onSetProductsInCart, onSetMessage }) {
+export default function ProductCard({ product, productsInCart, onSetProductsInCart }) {
     const user = useContext(Context)
     const navigate = useNavigate()
    
-    const [isError, setIsError] = useState(false)
+    const [isError, setIsError] = useState(null)
     const { id, item, description, image, price, quantity, reviews } = product;
     
     const inCart = productsInCart.filter(productInCart => productInCart.id===id)
 
-    function handleSetError() {
-        setIsError(true);
+    function handleSetError(error) {
+        setIsError(error);
         setTimeout(() => {
-          setIsError(false);
+          setIsError(null);
         }, 3000);
       }
 
@@ -38,10 +38,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         })
         .catch((error) => {
             console.log(error);
-            handleSetError();
+            handleSetError(error);
         })
     } else {
-        onSetMessage("Please login or sign up to add items to cart!")
+        handleSetError("Login to add items to cart")
     }}
 
     let sum = 0;
@@ -81,7 +81,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                     <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
                  : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
                  }
-                {isError ? <p>Item already in cart!</p> : null}
+                {isError ? <p>{isError}</p> : null}
                 <div className="flex">
             <Rating size="sm">
                 <Rating.Star
