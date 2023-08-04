@@ -8,7 +8,7 @@ import ButtonSec from "./ButtonSec";
 import EditReview from "./EditReview";
 import { AiOutlineClose } from 'react-icons/ai'
 
-export default function ProductPage({ products, onAddReview, onDeleteReview, onEditReview, onSetMessage }) {
+export default function ProductPage({ products, onAddReview, onDeleteReview, onEditReview }) {
     const user = useContext(Context)
     const [isReview, setIsReview] = useState(false)
     const [rating, setRating] = useState(0);
@@ -17,6 +17,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     const [isEditReview, setIsEditReview] = useState(false)
     const [reviewId, setReviewId] = useState(null)
     const [editedReview, setEditedReview] = useState({rating: null, content: null})
+    const [message, setMessage] = useState(null)
 
     const { id } = useParams()
 
@@ -59,7 +60,10 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
         setContent("")
         setRating(0)
     } else {
-        onSetMessage("Please login or sign up to leave a review!")
+        setMessage("Please login to leave a review!")
+        setTimeout(() => {
+            setMessage(null);
+          } , 3000);
     }
 }
 
@@ -87,18 +91,20 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
         <Context.Consumer>
         {user =>
         <div className="flex flex-col justify-evenly md:flex-row">
-        <div className="max-w-sm rounded shadow-lg p-4 hover:cursor-default">
+        <div className="max-w-sm rounded shadow-lg p-4 self-center hover:cursor-default">
             <img className="object-cover" src={image} alt={item} />
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">
-                <h2 className="self-center">{item}</h2></div>
+                <h2 className="font-bold text-xl mb-2">{item}</h2></div>
                 <p className="text-gray-700 text-base">{description}</p>
             </div>
         </div>
-        <div className="flex flex-col px-6 py-4 gap-4">
+        <div className="flex flex-col px-6 py-4 gap-4 self-center md:self-start">
         {isEditReview ? null : 
-        <ButtonSec
-        onClick={handleClick} children={isReview ? <div className="flex items-center justify-center space-x-2"><AiOutlineClose /><p>Close Form</p></div> : "Add Product Review"}></ButtonSec>}
+        <div className="flex flex-col gap-2"><ButtonSec
+        onClick={handleClick} children={isReview ? <div className="flex items-center justify-center space-x-2"><AiOutlineClose /><p>Close Form</p></div> : "Add Product Review"}></ButtonSec>
+        <div className="text-amber-600">{message}</div>
+        </div>}
         {isEditReview ? 
         <EditReview 
             editedReview={editedReview}

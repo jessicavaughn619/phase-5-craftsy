@@ -231,7 +231,6 @@ const initialOptions = {
             onAddReview={handleAddReview}
             onDeleteReview={handleDeleteReview}
             onEditReview={handleEditReview}
-            onSetMessage={handleSetMessage}
             user={user}
             />} 
           />
