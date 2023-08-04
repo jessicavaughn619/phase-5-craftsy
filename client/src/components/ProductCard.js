@@ -33,7 +33,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 onSetProductsInCart(id)
             }
             else {
-                throw new Error('Failed to add item to cart');
+                throw new Error('Failed to add item to cart!');
             }
         })
         .catch((error) => {
@@ -41,7 +41,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             handleSetError(error);
         })
     } else {
-        handleSetError("Login to add items to cart")
+        handleSetError("Login to add items to cart!")
     }}
 
     let sum = 0;

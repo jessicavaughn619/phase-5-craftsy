@@ -56,7 +56,7 @@ export default function App() {
     productToAdd.quantity_in_cart = 1;
     const updatedCart = [...productsInCart, productToAdd];
     setProductsInCart(updatedCart);
-    handleSetAddMessage("Added to cart");
+    handleSetAddMessage("Added to cart!");
   }
 
   function handleSetAddMessage(message) {
@@ -75,13 +75,13 @@ export default function App() {
       return product;
     })
     setProductsInCart(updatedProducts)
-    handleSetMessage("Updated quantity in cart")
+    handleSetMessage("Updated quantity in cart!")
   }
 
   function handleDeleteItemFromCart(id) {
     const updatedCart = productsInCart.filter(product => (product.id !== id));
     setProductsInCart(updatedCart);
-    setMessage("Removed from cart");
+    setMessage("Removed from cart!");
     setTimeout(() => {
       setMessage(null);
     } , 3000);
@@ -133,7 +133,7 @@ export default function App() {
       return product;
     })
     setProducts(updatedProducts)
-    handleSetMessage("Review submitted")
+    handleSetMessage("Review submitted!")
   }
 
   function handleEditReview(updatedReview) {
@@ -153,7 +153,7 @@ export default function App() {
       return product;
     })
     setProducts(updatedProducts)
-    handleSetMessage("Review updated")
+    handleSetMessage("Review updated!")
 
   }
 
@@ -175,7 +175,7 @@ export default function App() {
       return product;
     })
     setProducts(updatedProducts)
-    handleSetMessage("Review deleted")
+    handleSetMessage("Review deleted!")
 }
 
 const initialOptions = {
