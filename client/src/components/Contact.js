@@ -9,9 +9,7 @@ export default function Contact() {
   const [errors, setErrors] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-
-  useEffect(() => emailjs.init(PUBLIC_KEY), []);
+  useEffect(() => emailjs.init('JExJjzVLDyH1ul5rG'), []);
 
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
   const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
