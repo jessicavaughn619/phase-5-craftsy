@@ -124,7 +124,7 @@ def callback():
 
 class Logout(Resource):
     def delete(self):
-        if current_user:
+        if current_user or session["user_id"]:
             session["cart"] = []
             session["user_id"] = None
             logout_user()
