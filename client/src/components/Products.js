@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard"
 
-export default function Products({ products, productsInCart, onSetProductsInCart, onSetMessage }) {
+export default function Products({ products, productsInCart, onSetProductsInCart, onSetMessage, addMessage }) {
 
     const allProducts = products.map((product) => (
         <ProductCard 
@@ -9,6 +9,7 @@ export default function Products({ products, productsInCart, onSetProductsInCart
         onSetProductsInCart={onSetProductsInCart}
         productsInCart={productsInCart}
         onSetMessage={onSetMessage}
+        addMessage={addMessage}
         />
     ))
     return (

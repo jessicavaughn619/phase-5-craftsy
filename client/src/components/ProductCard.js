@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 import { Context } from '../context';
 
-export default function ProductCard({ product, productsInCart, onSetProductsInCart }) {
+export default function ProductCard({ product, productsInCart, onSetProductsInCart, addMessage }) {
     const user = useContext(Context)
     const navigate = useNavigate()
    
@@ -105,6 +105,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             {isError ? 
             <div>
                 <p className="text-amber-600 pb-2">{isError}</p>
+            </div> : null}
+            {addMessage ? 
+            <div>
+                <p className="text-amber-600 pb-2">{addMessage}</p>
             </div> : null}
         </div>
         }
