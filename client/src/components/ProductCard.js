@@ -81,7 +81,6 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                     <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
                  : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
                  }
-                {isError ? <p>{isError}</p> : null}
                 <div className="flex">
             <Rating size="sm">
                 <Rating.Star
@@ -103,6 +102,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             <p className="pl-1">{(avgRating > 0) ? avgRating : null}</p>
                 </div>
             </div>
+            {isError ? 
+            <div>
+                <p className="text-amber-600 pb-2">{isError}</p>
+            </div> : null}
         </div>
         }
         </Context.Consumer>

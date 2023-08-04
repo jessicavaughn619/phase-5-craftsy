@@ -72,7 +72,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
           {orderPlaced ? <div className="flex justify-center mb-5">
             <span className="text-xl">Thank you for your order, {user.first_name}!</span>
           </div> : null}
-            {cartItems ?
+            {user && cartItems ?
             <div className="space-y-4 mb-4">
             {cartItems}
               <div className="flex space-x-2">
@@ -80,11 +80,9 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
                 <p>${totalCost}</p>
               </div>
             </div>
-            : <div className="space-y-4">
-            <p>You have no products in your cart! </p>
-            {user ? null : <p>Login or sign up to start shopping!</p>}
-            </div>
-            }
+            : user ? <div className="space-y-4">
+            <p>You have no products in your cart! </p></div>
+            : <div className="space-y-4"><p>Login or sign up to start shopping!</p></div>}
         <div className="grid place-items-center">
           {checkout && cartItems ? 
         <PayPalButtons
