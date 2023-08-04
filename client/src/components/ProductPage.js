@@ -86,7 +86,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     return (
         <Context.Consumer>
         {user =>
-        <div className="flex justify-evenly">
+        <div className="flex flex-col justify-evenly sm:flex-row">
         <div className="max-w-sm rounded shadow-lg hover:cursor-default">
             <img className="object-cover" src={image} alt={item} />
             <div className="px-6 py-4">
