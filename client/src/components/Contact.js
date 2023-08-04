@@ -1,11 +1,15 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import emailjs from '@emailjs/browser'
+import Button from "./Button";
 
 export default function Contact() {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
   const [errors, setErrors] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => emailjs.init(PUBLIC_KEY), []);
 
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
   const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID 
@@ -18,18 +22,14 @@ export default function Contact() {
     } , 3000);
   }
 
-  const templateParams = {
-    email: email,
-    name: name,
-    message: message
-  }
-
   function handleSubmit(e) {
     e.preventDefault()
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+    setIsLoading(true)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, '#myForm')
     .then(function(response) {
        console.log('SUCCESS!', response.status, response.text);
        handleSetErrors("Email successfully sent!")
+       setIsLoading(false)
     }, function(error) {
        console.log('FAILED...', error);
        setErrors(error)
