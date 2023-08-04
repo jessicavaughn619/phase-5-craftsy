@@ -41,7 +41,7 @@ export default function Contact() {
       <h2 className="mb-4 text-3xl tracking-tight font-bold text-center text-gray-900 dark:text-white">Contact Us</h2>
       <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a question about our products? Need support with an order? Let us know.</p>
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="myForm">
       <div className="grid gap-6 mb-2 md:grid-cols-1">
       <div>
         <label htmlFor="email" className="block mb-2 font-medium text-gray-900 text-black">Email</label>
