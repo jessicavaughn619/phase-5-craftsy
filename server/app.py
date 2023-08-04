@@ -302,11 +302,6 @@ class Orders(Resource):
             session["cart"] = []
             return {"message": "Successfully created order and updated database."}, 201
 
-class Users(Resource):
-    def get(self):
-        users = [user.to_dict() for user in User.query.all()]
-        return make_response(users, 200)
-
 api.add_resource(LocalLogin, "/api/local_login", endpoint="local_login")
 api.add_resource(Signup, "/api/signup", endpoint="signup")
 api.add_resource(CheckSession, "/api/check_session", endpoint="check_session")
@@ -318,4 +313,3 @@ api.add_resource(CartByID, "/api/cart/<int:id>")
 api.add_resource(Reviews, "/api/reviews", endpoint="reviews")
 api.add_resource(ReviewByID, "/api/review/<int:id>")
 api.add_resource(Orders, "/api/orders", endpoint="orders")
-api.add_resource(Users, "/api/users", endpoint="users")

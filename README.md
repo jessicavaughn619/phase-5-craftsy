@@ -5,7 +5,7 @@ La Junta Crafts Website is a React-Flask full-stack e-commerce application. All 
 This site is a live site utilized by La Junta Crafts, a small business out of La Junta, CO.
 
 ## Live Site
-<a href="https://craftsy.onrender.com/" title="La Junta Crafts">La Junta Crafts</a>
+<a href="https://lajuntacrafts.com/" title="La Junta Crafts">La Junta Crafts</a>
 
 ## Walkthrough
 
