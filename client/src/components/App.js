@@ -21,7 +21,6 @@ export default function App() {
   const [productsInCart, setProductsInCart]= useState([])
   const [message, setMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [addMessage, setAddMessage] = useState(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -56,14 +55,6 @@ export default function App() {
     productToAdd.quantity_in_cart = 1;
     const updatedCart = [...productsInCart, productToAdd];
     setProductsInCart(updatedCart);
-    handleSetAddMessage("Added to cart!");
-  }
-
-  function handleSetAddMessage(message) {
-    setAddMessage(message)
-    setTimeout(() => {
-      setAddMessage(null);
-    } , 3000);
   }
 
   function handleUpdateQuantityInCart(id, quantityInCart) {
@@ -203,10 +194,8 @@ const initialOptions = {
           <Route path='/' element={
           <Home 
             products={products}
-            addMessage={addMessage}
             onSetProductsInCart={handleAddItemToCart}
             productsInCart={productsInCart}
-            onSetMessage={handleSetMessage}
             />}
             />
           <Route path='/*' element={<Error />}/>

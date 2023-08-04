@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 import { Context } from '../context';
 
-export default function ProductCard({ product, productsInCart, onSetProductsInCart, addMessage }) {
+export default function ProductCard({ product, productsInCart, onSetProductsInCart}) {
     const user = useContext(Context)
     const navigate = useNavigate()
    
-    const [isError, setIsError] = useState(null)
+    const [message, setMessage] = useState(null)
     const { id, item, description, image, price, quantity, reviews } = product;
     
     const inCart = productsInCart.filter(productInCart => productInCart.id===id)
 
-    function handleSetError(error) {
-        setIsError(error);
-        setTimeout(() => {
-          setIsError(null);
-        }, 3000);
-      }
+    function handleSetMessage(message) {
+    setMessage(message);
+    setTimeout(() => {
+        setMessage(null);
+    }, 3000);
+    }
 
     function handleClick() {
         if (user) {
@@ -31,6 +31,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         }).then((r) => {
             if (r.ok) {
                 onSetProductsInCart(id)
+                handleSetMessage("Added to cart!")
             }
             else {
                 throw new Error('Failed to add item to cart!');
@@ -38,10 +39,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         })
         .catch((error) => {
             console.log(error);
-            handleSetError(error);
+            handleSetMessage(error);
         })
     } else {
-        handleSetError("Login to add items to cart!")
+        handleSetMessage("Login to add items to cart!")
     }}
 
     let sum = 0;
@@ -102,13 +103,9 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             <p className="pl-1">{(avgRating > 0) ? avgRating : null}</p>
                 </div>
             </div>
-            {isError ? 
+            {message ? 
             <div>
-                <p className="text-amber-600 pb-2">{isError}</p>
-            </div> : null}
-            {addMessage ? 
-            <div>
-                <p className="text-amber-600 pb-2">{addMessage}</p>
+                <p className="text-amber-600 pb-2">{message}</p>
             </div> : null}
         </div>
         }

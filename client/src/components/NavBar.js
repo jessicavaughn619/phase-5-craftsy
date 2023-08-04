@@ -66,9 +66,9 @@ export default function NavBar({ onSetUser, message, onSetMessage, productsInCar
                 <span className="text-amber-600">{message}</span>
                 <NavLink to="/cart" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
-                    <div className="flex flex-row space-x-2">
+                    <div className="flex flex-row space-x-2 items-center">
                     <BsCartCheck />
-                    ({totalItemsInCart})
+                    <span className="text-sm">({totalItemsInCart})</span>
                     </div></NavLink>
             </div>
         </nav>
