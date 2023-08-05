@@ -43,6 +43,7 @@ def load_user(user_id):
 @app.route("/login")
 @app.route("/products")
 @app.route("/products/<int:id>")
+@app.route("/cart")
 def index(id=0):
     return render_template("index.html")
 
