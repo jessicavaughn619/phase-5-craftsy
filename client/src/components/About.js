@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function About() {
     return (
         <div className="m-5 mx-10 max-width-full flex flex-col justify-between gap-4">
-            <div className="flex flex-col justify-between shadow-lg p-4 sm:flex-row">
+            <div className="flex flex-col justify-between shadow-lg sm:flex-row">
                 <img className="object-cover rounded-md self-center object-top sm:w-2/4 sm:h-96" src={sandy_doyle} alt="Sandy & Doyle avatar"></img>
             <div className="flex flex-col justify-evenly p-5">
                 <h2 className="self-center text-amber-600 text-lg font-semibold">Owners</h2>
@@ -28,9 +28,9 @@ export default function About() {
             </div>
             <div className="flex flex-col justify-between shadow-lg sm:flex-row">
                 <img className="object-cover rounded-md self-center object-center sm:w-2/4 md:w-1/4 sm:h-96" src={jessica} alt="Jessica avatar"></img>
-                <div className="flex flex-col justify-evenly p-5">
+                <div className="flex flex-col justify-evenly p-5 w-full">
                     <h2 className="self-center text-amber-600 text-lg font-semibold">Webmaster</h2>
-                    <p className="pb-2">La Junta Craft's website is designed, built, and maintained by Jessica Vaughn.</p>
+                    <p className="pb-2 self-center">La Junta Craft's website is designed, built, and maintained by Jessica Vaughn.</p>
                     <Button children={
                     <div>
                     <Link to='https://www.buymeacoffee.com/jvaughn619' target="_blank" rel="noopener noreferrer">Buy Jessica a Coffee ☕</Link>
