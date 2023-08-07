@@ -27,10 +27,10 @@ export default function About() {
                 </div>
             </div>
             <div className="flex flex-col justify-between shadow-lg sm:flex-row">
-                <img className="object-cover rounded-md self-center object-center sm:w-2/4 sm:h-96" src={jessica} alt="Jessica avatar"></img>
+                <img className="object-cover rounded-md self-center object-top sm:w-2/4 sm:h-96" src={jessica} alt="Jessica avatar"></img>
                 <div className="flex flex-col justify-evenly p-5">
                     <h2 className="self-center text-amber-600 text-lg font-semibold">Webmaster</h2>
-                    <p className="pb-2">La Junta Craft's website is designed, built, and maintained by Sandy and Doyle's daughter, Jessica.</p>
+                    <p className="pb-2">La Junta Craft's website is designed, built, and maintained by Jessica Vaughn.</p>
                     <Button children={
                     <div>
                     <Link to='https://www.buymeacoffee.com/jvaughn619' target="_blank" rel="noopener noreferrer">Buy Jessica a Coffee ☕</Link>
