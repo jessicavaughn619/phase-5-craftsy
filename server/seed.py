@@ -125,7 +125,7 @@ with app.app_context():
         products.append(pig_family)
 
         medium_pig = Product(
-            item="Medium Pig",
+            item="Pig",
             image="https://i.imgur.com/wNrRp85.jpg",
             description="Medium pink pig with reddish spots",
             category="Ceramic",
@@ -145,7 +145,7 @@ with app.app_context():
         products.append(toadstool)
 
         frog_medium = Product(
-            item="Medium Frog",
+            item="Frog",
             image="https://i.imgur.com/lU4ZO0v.jpg",
             description="Medium frog holding fly",
             category="Ceramic",

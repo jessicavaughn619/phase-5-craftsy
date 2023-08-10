@@ -2,10 +2,10 @@ import Products from "./Products"
 
 export default function Home({ products, productsInCart, onSetProductsInCart, search }) {
 
-const filteredProducts = products.filter(product => 
-    (product.name.toLowerCase().includes(search.toLowerCase())) ||
-    (product.description.toLowerCase().includes(search.toLowerCase()))
-)
+const filteredProducts = products.filter((product) => 
+    (product.item.toLowerCase().includes(search.toLowerCase())) ||
+    (product.description.toLowerCase().includes(search.toLowerCase())
+));
 
     return (
         <div className="m-5 mt-0">

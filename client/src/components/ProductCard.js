@@ -1,4 +1,4 @@
-import { BsCartCheck, BsCartX, BsCartPlus } from 'react-icons/bs'
+import { BsFillCartCheckFill, BsCartX, BsCartPlus } from 'react-icons/bs'
 import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
@@ -77,7 +77,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             </div>
             <div className="flex items-center justify-between px-6 pb-2 w-4/5">
                 {(inCart.length > 0) ? 
-                    <BsCartCheck className="inline-block text-xl hover:cursor-not-allowed"/>
+                    <BsFillCartCheckFill className="inline-block text-xl hover:cursor-not-allowed"/>
                      : (quantity > 0) ?
                     <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
                  : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
