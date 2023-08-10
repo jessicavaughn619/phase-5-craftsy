@@ -41,7 +41,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Contact</NavLink>
                 </div>
-                <div className="flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5">
+                <div className="flex absolute right-0 mr-5 flex-col items-end sm:flex-row sm:space-x-5">
                     <NavLink to='/signup' className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"}>Sign Up</NavLink>
                     <NavLink to='/login' className={({ isActive, isPending }) =>

@@ -15,6 +15,8 @@ import React, { useEffect, useState } from 'react';
 import { Context } from "../context";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import NavIcons from "./NavIcons";
+import Search from "./Search";
+import Account from "./Account";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +24,7 @@ export default function App() {
   const [productsInCart, setProductsInCart]= useState([])
   const [message, setMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     setIsLoading(true)
@@ -180,13 +183,19 @@ const initialOptions = {
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
-        <header className="items-center">
-        <div className="flex items-center">
+        <header className="">
+        <div className="md:flex md:flex-row md:items-center">
         <Hero />
-        <NavIcons 
-          message={message}
-          productsInCart={productsInCart}
-        />
+          <div className="w-full flex items-center justify-between lg:w-[66%]">
+          <Search 
+            onSetSearch={setSearch}
+            search={search}
+          />
+          <NavIcons 
+            message={message}
+            productsInCart={productsInCart}
+          />
+          </div>
         </div>
         <NavBar 
           onSetUser={setUser}
@@ -199,6 +208,7 @@ const initialOptions = {
         <main className="mb-auto"><Routes>
           <Route path='/' element={
           <Home 
+            search={search}
             products={products}
             onSetProductsInCart={handleAddItemToCart}
             productsInCart={productsInCart}
@@ -228,6 +238,10 @@ const initialOptions = {
             onEditReview={handleEditReview}
             user={user}
             />} 
+            />
+          <Route path='/account' element={
+          <Account 
+          />}
           />
         </Routes>
         </main>}

@@ -2,6 +2,8 @@ import hero from '../images/logo.svg'
 
 export default function Hero() {
     return (
-            <img className="object-cover h-48 w-96" src={hero} alt="logo"/>
+        <div className="w-full lg:w-[33%]">
+            <img className="object-cover h-48 w-96 m-auto md:m-0" src={hero} alt="logo"/>
+        </div>
     )
 }
