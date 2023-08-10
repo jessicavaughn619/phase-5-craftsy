@@ -1,9 +1,7 @@
-import hero from '../images/logo.png'
+import hero from '../images/logo.svg'
 
 export default function Hero() {
     return (
-        <div>
-            <img className="max-w-none w-full" src={hero} alt="Craftsy logo"/>
-        </div>
+            <img className="object-cover h-48 w-96" src={hero} alt="logo"/>
     )
 }

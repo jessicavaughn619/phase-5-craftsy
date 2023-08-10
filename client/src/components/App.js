@@ -14,6 +14,7 @@ import { Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { Context } from "../context";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
+import NavIcons from "./NavIcons";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -179,11 +180,16 @@ const initialOptions = {
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
-        <header>
+        <header className="items-center">
+        <div className="flex items-center">
         <Hero />
+        <NavIcons 
+          message={message}
+          productsInCart={productsInCart}
+        />
+        </div>
         <NavBar 
           onSetUser={setUser}
-          message={message}
           onSetMessage={handleSetMessage}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
