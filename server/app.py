@@ -291,9 +291,6 @@ class Orders(Resource):
                 product_obj.quantity -= amount_to_decrement
                 db.session.commit()
 
-            for product, product_data in zip(allProducts, products):
-                product.quantity = product_data["quantity_in_cart"]
-
             order = Order(
                 paypal_id=paypal_id,
                 user_id=user_id,

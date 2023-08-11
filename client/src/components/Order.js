@@ -1,4 +1,4 @@
-import OrderCard from "./OrderCard"
+// import OrderCard from "./OrderCard"
 
 export default function Order({paypal_id, total_cost, created_at, products}) {
 
@@ -15,7 +15,7 @@ export default function Order({paypal_id, total_cost, created_at, products}) {
                 <span>Order ID: {paypal_id}</span>
                 <span>Total Cost: ${total_cost.toFixed(2)}</span>
             </div>
-        <span>Products: </span>
+        {/* <span>Products: </span>
         <div>
         {products.map((product) => (
         <OrderCard
@@ -25,7 +25,7 @@ export default function Order({paypal_id, total_cost, created_at, products}) {
             quantity={product.quantity}
             />
     ))}
-    </div>
+    </div> */}
     </div>
     )
 }

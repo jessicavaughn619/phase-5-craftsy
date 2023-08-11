@@ -36,13 +36,14 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Contact</NavLink>
                 </div>
-                {isMobile ? null: <Message message={message} />}
                 {user ?
                 <div className={isMenu ? "flex" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
+                    {isMobile ? null: <div className="flex"><Message message={message} /></div>}
                     {isMenu ? null : <p className="font-light">Welcome, {user.first_name}!</p>}
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div> : 
                 <div className={isMenu ? "flex flex-col": "flex absolute right-0 mr-5 flex-col items-end sm:flex-row sm:space-x-5"}>
+                    {isMobile ? null: <div className="flex"><Message message={message} /></div>}
                     <NavLink to='/signup' className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Sign Up</NavLink>
                     <NavLink to='/login' className={({ isActive, isPending }) =>
