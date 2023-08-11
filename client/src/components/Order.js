@@ -2,6 +2,8 @@ import OrderCard from "./OrderCard"
 
 export default function Order({paypal_id, total_cost, created_at, products}) {
 
+    console.log(products)
+
     return (
         <div className="flex flex-col p-5 gap-2">
         <span>Order Placed: {created_at}</span>
@@ -11,7 +13,7 @@ export default function Order({paypal_id, total_cost, created_at, products}) {
             </div>
         <span>Products: </span>
         <div>
-        {products.map(product => (
+        {products.map((product) => (
         <OrderCard
             key={product.id}
             item={product.item}
@@ -20,6 +22,6 @@ export default function Order({paypal_id, total_cost, created_at, products}) {
             />
     ))}
     </div>
-        </div>
+    </div>
     )
 }

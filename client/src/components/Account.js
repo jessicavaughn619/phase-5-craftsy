@@ -7,12 +7,15 @@ export default function Account() {
 
     const orders = user.orders
 
+    console.log(orders)
+    console.log(orders.length)
+
     return (
         <Context.Consumer>
         {user => 
         <div className="flex flex-col m-5 gap-2">
             <h2>{user.first_name}'s Order History</h2>
-            {orders.length > 0 ? <div className="rounded grid grid-template-row-auto-1fr shadow-lg cursor-default max-w-full pt-4">
+            {(orders.length > 0) ? <div className="rounded grid grid-template-row-auto-1fr shadow-lg cursor-default max-w-full pt-4">
             {user.orders.map((order) => (
                 <Order 
                 key={order.id}
