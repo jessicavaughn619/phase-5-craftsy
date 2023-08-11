@@ -2,7 +2,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { Context } from '../context';
 import { AiFillCloseSquare } from "react-icons/ai"
 
-export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetProductsInCart, isMenu, onSetIsMenuOpen }) {
+export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetProductsInCart, isMenu, onSetIsMenuOpen, isMobile, message }) {
     const navigate = useNavigate()
 
     function handleLogoutClick() {
@@ -35,6 +35,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Contact</NavLink>
                 </div>
+                {isMobile ? null: <Message message={message} />}
                 {user ?
                 <div className={isMenu ? "flex" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
                     {isMenu ? null : <p className="font-light">Welcome, {user.first_name}!</p>}

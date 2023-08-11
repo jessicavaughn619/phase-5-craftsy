@@ -44,6 +44,10 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
 
   function handleCreateOrder(products, orderId, totalCost) {
     const cost = parseInt(totalCost)
+    const purchasedProducts = products.map(product => {
+      return {...product, quantity: quantity_in_cart}
+    })
+    
     fetch("/api/orders", {
       method: "POST",
       headers: {
@@ -51,7 +55,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
       },
       body: JSON.stringify({ 
         paypal_id: orderId,
-        products: products,
+        products: purchasedProducts,
         user_id: user.id,
         total_cost: cost
       }),

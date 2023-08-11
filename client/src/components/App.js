@@ -234,11 +234,10 @@ function handleMenuOpen() {
         <NavBar 
           onSetUser={setUser}
           onSetMessage={handleSetMessage}
+          message={message}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
-        />}
-        {isMobile ? null : <Message
-            message={message}
+          isMobile={isMobile}
         />}
         </header>
         {isLoading ? <Loading /> :
