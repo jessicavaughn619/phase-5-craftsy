@@ -3,7 +3,7 @@ import { BsFillCartCheckFill } from "react-icons/bs"
 import { BiSolidUserCircle } from "react-icons/bi"
 import { Context } from '../context';
 
-export default function NavIcons({message, productsInCart}) {
+export default function NavIcons({productsInCart}) {
 
     function totalItems(productsInCart) {
         let totalItems = 0;
@@ -20,8 +20,7 @@ export default function NavIcons({message, productsInCart}) {
     return (
         <Context.Consumer>
         {user => 
-        <div className="flex absolute right-0 space-x-4 mr-5 md:relative">
-            <span className="text-amber-600">{message}</span>
+        <div className="flex absolute right-0 pl-5 space-x-4 mr-5 md:relative">
             {user ? <NavLink to="/account" className={({ isActive, isPending }) =>
                 isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
                 <BiSolidUserCircle />

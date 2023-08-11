@@ -19,12 +19,13 @@ import Search from "./Search";
 import Account from "./Account";
 import { BiMenu } from "react-icons/bi"
 import Menu from "./Menu";
+import Message from "./Message";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([])
   const [productsInCart, setProductsInCart]= useState([])
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [search, setSearch] = useState("")
   const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 768px)').matches);
@@ -204,7 +205,7 @@ function handleMenuOpen() {
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
-        <header className="">
+        <header>
         <div className="md:flex md:flex-row md:items-center">
         <Hero />
           <div className="w-full flex items-center justify-between lg:w-[66%]">
@@ -213,7 +214,6 @@ function handleMenuOpen() {
             search={search}
           />
           <NavIcons 
-            message={message}
             productsInCart={productsInCart}
           />
           </div>
@@ -221,16 +221,24 @@ function handleMenuOpen() {
         <Menu 
           isMenuOpen={isMenuOpen}
           onSetIsMenuOpen={setIsMenuOpen}
+          onSetUser={setUser}
+          onSetMessage={handleSetMessage}
+          productsInCart={productsInCart}
+          onSetProductsInCart={handleResetCart}
         />
         {isMobile ? 
-        <div className="m-5 py-2 border-y-2 border-gray-100">
+        <div className="flex justify-between items-center m-5 py-2 border-y-2 border-gray-100">
         <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
+        <span className="text-amber-600">{message}</span>
         </div> :
         <NavBar 
           onSetUser={setUser}
           onSetMessage={handleSetMessage}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
+        />}
+        {isMobile ? null : <Message
+            message={message}
         />}
         </header>
         {isLoading ? <Loading /> :
@@ -251,6 +259,10 @@ function handleMenuOpen() {
           path='/contact' 
           element={<Contact
            />}/>
+          <Route path='/account' element={
+          <Account 
+          />}
+          />
           <Route path='/cart' element={
           <Cart 
             products={productsInCart}
@@ -268,10 +280,6 @@ function handleMenuOpen() {
             user={user}
             />} 
             />
-          <Route path='/account' element={
-          <Account 
-          />}
-          />
         </Routes>
         </main>}
         <footer className="h-10"><Footer /></footer>
