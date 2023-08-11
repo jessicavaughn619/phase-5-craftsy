@@ -37,15 +37,10 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
             cartItems = null
         }
 
-  function handleAddOrder(id) {
-    const orderToAdd = user.orders.find(order => order.id===id)
-    user.orders = [...orders, orderToAdd]
-  }
-
   function handleSuccessfulOrder(order) {
     setOrderPlaced(true)
     onEmptyCart(products)
-    handleAddOrder(order.id)
+    console.log(order)
   }
 
   function handleCreateOrder(products, orderId, totalCost) {
