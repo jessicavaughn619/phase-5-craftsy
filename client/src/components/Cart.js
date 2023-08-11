@@ -45,7 +45,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
   function handleCreateOrder(products, orderId, totalCost) {
     const cost = parseInt(totalCost)
     const purchasedProducts = products.map(product => {
-      return {...product, quantity: quantity_in_cart}
+      return {...product, quantity: product.quantity_in_cart}
     })
     
     fetch("/api/orders", {
