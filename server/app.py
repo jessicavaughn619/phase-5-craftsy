@@ -279,10 +279,6 @@ class Orders(Resource):
         product_ids = [product["id"] for product in products]
 
         allProducts = Product.query.filter(Product.id.in_(product_ids)).all()
-        
-        for product in allProducts:
-            product["quantity"] = product["quantity_in_cart"]
-
 
         exists = Order.query.filter_by(paypal_id=paypal_id).first()
         if exists:
@@ -294,6 +290,9 @@ class Orders(Resource):
                 amount_to_decrement = product["quantity_in_cart"]
                 product_obj.quantity -= amount_to_decrement
                 db.session.commit()
+
+            for product, product_data in zip(allProducts, products):
+                product.quantity = product_data["quantity_in_cart"]
 
             order = Order(
                 paypal_id=paypal_id,
