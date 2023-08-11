@@ -113,6 +113,7 @@ class Order(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     paypal_id = db.Column(db.String)
     total_cost = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=func.now())
 
     user_id = db.Column(db.String, db.ForeignKey("users.id"))
     products = db.relationship(
