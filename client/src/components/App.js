@@ -19,7 +19,6 @@ import Search from "./Search";
 import Account from "./Account";
 import { BiMenu } from "react-icons/bi"
 import Menu from "./Menu";
-import Message from "./Message";
 
 export default function App() {
   const [user, setUser] = useState(null);

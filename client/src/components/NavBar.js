@@ -1,6 +1,7 @@
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Context } from '../context';
 import { AiFillCloseSquare } from "react-icons/ai"
+import Message from './Message';
 
 export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetProductsInCart, isMenu, onSetIsMenuOpen, isMobile, message }) {
     const navigate = useNavigate()
