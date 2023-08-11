@@ -1,14 +1,14 @@
 from config import app, db
-from models import Product
+from models import Order, order_product
 
 with app.app_context():
-    print("Updating products...")
+    print("Deleting orders...")
 
-    medium_pig = Product.query.filter(Product.item == "Medium Pig").first()
-    medium_pig.item = "Pig"
+    db.session.query(order_product).delete()
+    db.session.commit()
 
-    medium_frog = Product.query.filter(Product.item == "Medium Frog").first()
-    medium_frog.item = "Frog"
+    Order.query.delete()
+    db.session.commit()
 
     db.session.commit()
 
