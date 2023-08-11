@@ -37,9 +37,15 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
             cartItems = null
         }
 
-  function handleSuccessfulOrder() {
+  function handleAddOrder(id) {
+    const orderToAdd = user.orders.find(order => order.id===id)
+    user.orders = [...orders, orderToAdd]
+  }
+
+  function handleSuccessfulOrder(order) {
     setOrderPlaced(true)
     onEmptyCart(products)
+    handleAddOrder(order.id)
   }
 
   function handleCreateOrder(products, orderId, totalCost) {
@@ -59,7 +65,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
     }).then((r) => {
       if (r.ok) {
         r.json()
-        .then(handleSuccessfulOrder())
+        .then((order) => handleSuccessfulOrder(order))
       } else {
         r.json().then((err) => setErrors(err));
       }
@@ -81,7 +87,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
                 <p>${totalCost}</p>
               </div>
             </div>
-            : user ? <div className="space-y-4">
+            : user && !orderPlaced ? <div className="space-y-4">
             <p>You have no products in your cart! Let's start shopping!</p></div>
             : <div className="space-y-4"><p>Login or sign up to start shopping!</p></div>}
         <div className="grid place-items-center">
