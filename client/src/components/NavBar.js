@@ -35,7 +35,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                     isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Contact</NavLink>
                 </div>
                 {user ?
-                <div className={isMenu ? "flex flex-col" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
+                <div className={isMenu ? "flex" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
                     {isMenu ? null : <p className="font-light">Welcome, {user.first_name}</p>}
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div> : 
