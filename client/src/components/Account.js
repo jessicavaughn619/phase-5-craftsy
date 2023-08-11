@@ -6,7 +6,7 @@ export default function Account() {
         {user => 
         <div className="m-5">
             <h1>Account</h1>
-            <p>Welcome, {user.name}</p>
+            <p>Welcome, {user.first_name}</p>
         </div>
         }
         </Context.Consumer>

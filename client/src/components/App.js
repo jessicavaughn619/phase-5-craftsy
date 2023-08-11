@@ -17,6 +17,8 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import NavIcons from "./NavIcons";
 import Search from "./Search";
 import Account from "./Account";
+import { BiMenu } from "react-icons/bi"
+import Menu from "./Menu";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +27,21 @@ export default function App() {
   const [message, setMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [search, setSearch] = useState("")
+  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 768px)').matches);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const handleMediaChange = (e) => {
+      setIsMobile(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
 
   useEffect(() => {
     setIsLoading(true)
@@ -179,6 +196,10 @@ const initialOptions = {
   intent: "capture",
 };
 
+function handleMenuOpen() {
+  setIsMenuOpen(isMenuOpen => !isMenuOpen)
+}
+
   return (
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
@@ -197,12 +218,20 @@ const initialOptions = {
           />
           </div>
         </div>
+        <Menu 
+          isMenuOpen={isMenuOpen}
+          onSetIsMenuOpen={setIsMenuOpen}
+        />
+        {isMobile ? 
+        <div className="m-5 py-2 border-y-2 border-gray-100">
+        <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
+        </div> :
         <NavBar 
           onSetUser={setUser}
           onSetMessage={handleSetMessage}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
-        />
+        />}
         </header>
         {isLoading ? <Loading /> :
         <main className="mb-auto"><Routes>

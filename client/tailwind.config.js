@@ -23,6 +23,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {},
+    fontFamily: {
+      'sans': ['Poppins'],
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
