@@ -36,7 +36,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 </div>
                 {user ?
                 <div className={isMenu ? "flex flex-col" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
-                    <p className="italic">Welcome, {user.first_name}</p>
+                    {isMenu ? null : <p className="font-light">Welcome, {user.first_name}</p>}
                     <button onClick={handleLogoutClick} className="hover:text-amber-600">Logout</button>
                 </div> : 
                 <div className={isMenu ? "flex flex-col": "flex absolute right-0 mr-5 flex-col items-end sm:flex-row sm:space-x-5"}>
