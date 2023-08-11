@@ -121,4 +121,4 @@ class Order(db.Model, SerializerMixin):
     )
 
     def __repr__(self):
-        return f"<Order ID: {self.id} | Total Cost: {self.total_cost} >"
+        return f"<Order ID: {self.id} | PayPal ID: {self.paypal_id} | Total Cost: {self.total_cost} | Created: {self.created_at} >"
