@@ -279,6 +279,10 @@ class Orders(Resource):
         product_ids = [product["id"] for product in products]
 
         allProducts = Product.query.filter(Product.id.in_(product_ids)).all()
+        
+        for product in allProducts:
+            product["quantity"] = product["quantity_in_cart"]
+
 
         exists = Order.query.filter_by(paypal_id=paypal_id).first()
         if exists:
