@@ -22,7 +22,7 @@ import Menu from "./Menu";
 import Message from "./Message";
 
 export default function App() {
-  const [user, setUser] = useState({first_name: "Jessica"});
+  const [user, setUser] = useState(null);
   const [products, setProducts] = useState([])
   const [productsInCart, setProductsInCart]= useState([])
   const [message, setMessage] = useState("")
