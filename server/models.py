@@ -20,7 +20,7 @@ class User(db.Model, SerializerMixin, UserMixin):
         "-products.user",
         "-reviews.user",
         "-user",
-        "-orders.product.reviews",
+        "-orders.products.reviews",
     )
 
     id = db.Column(db.String, primary_key=True, unique=True)
@@ -108,6 +108,7 @@ class Order(db.Model, SerializerMixin):
 
     serialize_rules = (
         "-user",
+        "-products.reviews",
     )
 
     id = db.Column(db.Integer, primary_key=True)

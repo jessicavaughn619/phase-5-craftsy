@@ -8,7 +8,6 @@ export default function Account() {
     const orders = user.orders
 
     console.log(orders)
-    console.log(orders.length)
 
     return (
         <Context.Consumer>
