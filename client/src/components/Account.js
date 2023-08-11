@@ -7,8 +7,6 @@ export default function Account() {
 
     const orders = user.orders
 
-    console.log(orders)
-
     return (
         <Context.Consumer>
         {user => 
