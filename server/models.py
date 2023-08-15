@@ -108,7 +108,7 @@ class Order(db.Model, SerializerMixin):
 
     serialize_rules = (
         "-user",
-        "-products.reviews",
+        "-products",
     )
 
     id = db.Column(db.Integer, primary_key=True)
