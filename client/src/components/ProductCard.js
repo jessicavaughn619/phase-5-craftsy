@@ -77,9 +77,9 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
                 <div className={isHover ? "absolute inset-x-0 inset-y-0 h-full w-full bg-warm-gray-200/[.75] transition ease-in-out duration-300" : ""}>
-                    {isHover ? <div className="absolute h-[15px] w-[15px] top-2/4 left-2/4 cursor-pointer opacity-0">
-                        <CiCircleMore onClick={handleReviewClick} className="cursor-pointer text-lg hover:text-amber-600"/>
-                    </div> : null}
+                    <div className={isHover ? "absolute h-[15px] w-[15px] top-2/4 left-2/4 cursor-pointer opacity-0" : ""}>
+                        {isHover ? <CiCircleMore onClick={handleReviewClick} className="cursor-pointer text-lg hover:text-amber-600"/> : null}
+                    </div>
                 </div>
             </div>
             <div className="flex flex-col py-4 w-full">
@@ -87,26 +87,21 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                 {/* <span className="cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span> */}
             </div>
-                {/* <div className="flex justify-between items-center px-6 pt-4 pb-2 w-full">
-                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
-                    {(quantity > 0) ? 
-                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
-            </div> */}
             <div className="flex justify-between w-full">
                 {isHover && (inCart.length > 0) ? 
-                    <div className="flex space-x-2 items-center cursor-not-allowed">
+                    <div className="flex space-x-2 items-center cursor-not-allowed transition ease-in-out duration-300">
                         <BsFillCartCheckFill className="inline-block text-lg text-amber-600"/>
                         <p className="text-amber-600 text-bold">ITEM IN CART</p>
                     </div>
                      : isHover && (quantity > 0) ?
-                    <div onClick={handleClick} className="flex space-x-2 items-center cursor-pointer">
+                    <div onClick={handleClick} className="flex space-x-2 items-center cursor-pointer transition ease-in-out duration-300">
                         <BsCartPlus className="inline-block text-lg text-amber-600"/>
                         <p className="text-amber-600 text-bold">ADD TO CART</p>
                     </div>
                  : isHover ? 
-                 <div className="flex space-x-2 items-center cursor-not-allowed">
+                 <div className="flex space-x-2 items-center cursor-not-allowed transition ease-in-out duration-300">
                     <BsCartX className="inline-block text-lg text-amber-600"/>
-                    <p className="text-amber-600 text-bold">OUT OF STOCK</p>
+                    <p className="text-gray-700 text-bold">OUT OF STOCK</p>
                 </div>
                 : <div className="text-amber-600 text-bold">${price.toFixed(2)}
                 </div>}
