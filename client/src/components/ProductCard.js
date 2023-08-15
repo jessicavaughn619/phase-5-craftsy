@@ -1,4 +1,5 @@
 import { BsFillCartCheckFill, BsCartX, BsCartPlus } from 'react-icons/bs'
+import { CiCircleMore } from 'react-icons/ci'
 import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
@@ -75,9 +76,11 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
-                {isHover ? <div className="absolute inset-x-0 inset-y-0 h-full w-full bg-warm-gray-200/[.75] transition ease-in-out duration-300">
-                    <div className="absolute h-[15px] w-[15px] top-2/4 left-2/4 cursor-pointer opacity-0" onClick={handleReviewClick}>ICON</div>
-                </div> : null}
+                <div className={isHover ? "absolute inset-x-0 inset-y-0 h-full w-full bg-warm-gray-200/[.75] transition ease-in-out duration-300" : ""}>
+                    {isHover ? <div className="absolute h-[15px] w-[15px] top-2/4 left-2/4 cursor-pointer opacity-0">
+                        <CiCircleMore onClick={handleReviewClick} className="cursor-pointer text-lg hover:text-amber-600"/>
+                    </div> : null}
+                </div>
             </div>
             <div className="flex flex-col py-4 w-full">
                 <div className="font-bold text-md">{item}</div>
@@ -96,8 +99,8 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                         <p className="text-amber-600 text-bold">ITEM IN CART</p>
                     </div>
                      : isHover && (quantity > 0) ?
-                    <div className="flex space-x-2 items-center cursor-pointer">
-                        <BsCartPlus onClick={handleClick} className="inline-block text-lg text-amber-600"/>
+                    <div onClick={handleClick} className="flex space-x-2 items-center cursor-pointer">
+                        <BsCartPlus className="inline-block text-lg text-amber-600"/>
                         <p className="text-amber-600 text-bold">ADD TO CART</p>
                     </div>
                  : isHover ? 
@@ -131,7 +134,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             </div>
             {message ? 
             <div>
-                <p className="text-amber-600 pb-2">{message}</p>
+                <p className="pt-2 text-amber-600">{message}</p>
             </div> : null}
         </div>
         }
