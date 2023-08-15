@@ -63,10 +63,10 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     return (
         <Context.Consumer>
         { user =>
-        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-center justify-items-center max-w-full pt-4">
-            <img className="object-contain h-[275px]" src={image} alt={item}/>
-            <div className="flex flex-col px-6 py-4 w-4/5">
-                <div className="self-center font-bold text-lg mb-2">{item}</div>
+        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
+            <img className="object-contain" src={image} alt={item}/>
+            <div className="flex flex-col py-4 w-full">
+                <div className="font-bold text-lg mb-2">{item}</div>
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                 <span className="hover:cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span>
             </div>
