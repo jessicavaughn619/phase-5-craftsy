@@ -22,7 +22,12 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'cust-1': 'repeat(1,minmax(0,400px))',
+        'cust-2': 'repeat(2,minmax(0,400px))',
+      },
+    },
     fontFamily: {
       'sans': ['Poppins'],
     },
