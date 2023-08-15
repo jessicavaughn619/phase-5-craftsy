@@ -66,21 +66,21 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-center justify-items-center max-w-full pt-4">
             <img className="object-contain h-[275px]" src={image} alt={item}/>
             <div className="flex flex-col px-6 py-4 w-4/5">
-                <div className="self-center font-bold text-xl mb-2">{item}</div>
-                <p className="text-gray-700 text-base mb-2">{description}</p>
+                <div className="self-center font-bold text-lg mb-2">{item}</div>
+                <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                 <span className="hover:cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span>
             </div>
                 <div className="flex justify-between items-center px-6 pt-4 pb-2 w-4/5">
-                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
+                    <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {(quantity > 0) ? 
-                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
+                        <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
             </div>
             <div className="flex items-center justify-between px-6 pb-2 w-4/5">
                 {(inCart.length > 0) ? 
-                    <BsFillCartCheckFill className="inline-block text-xl hover:cursor-not-allowed"/>
+                    <BsFillCartCheckFill className="inline-block text-lg hover:cursor-not-allowed"/>
                      : (quantity > 0) ?
-                    <BsCartPlus onClick={handleClick} className="inline-block text-xl hover:cursor-pointer hover:text-amber-600"/>
-                 : <BsCartX className="inline-block text-xl hover:cursor-not-allowed"/>
+                    <BsCartPlus onClick={handleClick} className="inline-block text-lg hover:cursor-pointer hover:text-amber-600"/>
+                 : <BsCartX className="inline-block text-lg hover:cursor-not-allowed"/>
                  }
                 <div className="flex">
             <Rating size="sm">

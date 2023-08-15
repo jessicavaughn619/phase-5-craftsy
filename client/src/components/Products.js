@@ -11,7 +11,7 @@ export default function Products({ products, productsInCart, onSetProductsInCart
         />
     ))
     return (
-        <div className="grid justify-center grid-cols-cust-1 gap-4 md:grid-cols-cust-2 xl:grid-cols-cust-3">
+        <div className="grid justify-center grid-cols-cust-1 gap-4 sm:grid-cols-cust-2 lg:grid-cols-cust-3 xl:grid-cols-cust-4">
             {allProducts}
         </div>
     )
