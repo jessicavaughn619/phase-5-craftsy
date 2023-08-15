@@ -76,7 +76,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
-                <div className={`absolute inset-0 h-full w-full bg-white/${isHover ? "[.6]" : "0"} transition-opacity ease-in-out duration-300`}>
+                <div className={`absolute inset-0 h-full w-full bg-white bg-opacity-${isHover ? "60" : "0"} transition-opacity ease-in-out duration-300`}>
                     {isHover && (
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0">
                             <CiCircleMore onClick={handleReviewClick} className="cursor-pointer text-xl hover:text-amber-600" />
@@ -87,25 +87,23 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             <div className="flex flex-col py-4 w-full">
                 <div className="font-bold text-md">{item}</div>
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
-                {/* <span className="cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span> */}
             </div>
-            <div className="flex justify-between w-full">
-                {isHover && (inCart.length > 0) ? 
-                    <div className="flex space-x-2 items-center cursor-not-allowed transition ease-in-out duration-300">
-                        <BsFillCartCheckFill className="inline-block text-lg text-amber-600"/>
-                        <p className="text-amber-600 text-bold">ITEM IN CART</p>
-                    </div>
-                     : isHover && (quantity > 0) ?
-                    <div onClick={handleClick} className="flex space-x-2 items-center cursor-pointer transition ease-in-out duration-300">
+            <div className="flex justify-between w-full overflow-hidden">
+                <div className="text-amber-600 text-bold absolute">${price.toFixed(2)}</div>
+                {(inCart.length > 0) ? 
+                <div className={`flex space-x-2 items-center cursor-not-allowed relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
+                    <BsFillCartCheckFill className="inline-block text-lg text-amber-600"/>
+                    <p className="text-amber-600 text-bold">ITEM IN CART</p>
+                </div>
+                     : (quantity > 0) ?
+                    <div onClick={handleClick} className={`flex space-x-2 items-center cursor-pointer relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
                         <BsCartPlus className="inline-block text-lg text-amber-600"/>
                         <p className="text-amber-600 text-bold">ADD TO CART</p>
                     </div>
-                 : isHover ? 
-                 <div className="flex space-x-2 items-center cursor-not-allowed transition ease-in-out duration-300">
+                 :
+                 <div className={`flex space-x-2 items-center cursor-not-allowed relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
                     <BsCartX className="inline-block text-lg text-amber-600"/>
                     <p className="text-gray-700 text-bold">OUT OF STOCK</p>
-                </div>
-                : <div className="text-amber-600 text-bold">${price.toFixed(2)}
                 </div>}
                  
             <div className="flex">
