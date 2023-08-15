@@ -70,12 +70,12 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                 <span className="hover:cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span>
             </div>
-                <div className="flex justify-between items-center px-6 pt-4 pb-2 w-4/5">
+                <div className="flex justify-between items-center px-6 pt-4 pb-2 w-full">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {(quantity > 0) ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
             </div>
-            <div className="flex items-center justify-between px-6 pb-2 w-4/5">
+            <div className="flex items-center justify-between px-6 pb-2 w-full">
                 {(inCart.length > 0) ? 
                     <BsFillCartCheckFill className="inline-block text-lg hover:cursor-not-allowed"/>
                      : (quantity > 0) ?
