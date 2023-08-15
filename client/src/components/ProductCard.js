@@ -73,11 +73,16 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <Context.Consumer>
         { user =>
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
-            <img className="object-contain" src={image} alt={item}/>
+            <div className="relative">
+                <img className="object-contain" src={image} alt={item}/>
+                {isHover ? <div className="absolute inset-x-0 inset-y-0 h-full w-full bg-warm-gray-200/[.75] transition ease-in-out duration-300">
+                    <div className="absolute h-[15px] w-[15px] top-2/4 left-2/4 cursor-pointer opacity-0" onClick={handleReviewClick}>ICON</div>
+                </div> : null}
+            </div>
             <div className="flex flex-col py-4 w-full">
                 <div className="font-bold text-md">{item}</div>
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
-                <span className="cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span>
+                {/* <span className="cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span> */}
             </div>
                 {/* <div className="flex justify-between items-center px-6 pt-4 pb-2 w-full">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
