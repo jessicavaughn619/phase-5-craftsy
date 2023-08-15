@@ -26,6 +26,7 @@ module.exports = {
       gridTemplateColumns: {
         'cust-1': 'repeat(1,minmax(0,400px))',
         'cust-2': 'repeat(2,minmax(0,400px))',
+        'cust-3': 'repeat(3,minmax(0,400px))',
       },
     },
     fontFamily: {
