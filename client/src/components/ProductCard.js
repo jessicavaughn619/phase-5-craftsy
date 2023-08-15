@@ -9,6 +9,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
     const navigate = useNavigate()
    
     const [message, setMessage] = useState(null)
+    const [isHover, setIsHover] = useState(false)
     const { id, item, description, image, price, quantity, reviews } = product;
     
     const inCart = productsInCart.filter(productInCart => productInCart.id===id)
@@ -60,29 +61,49 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         navigate(`/products/${id}`)
     }
 
+    function handleMouseOver() {
+        setIsHover(true)
+    }
+
+    function handleMouseOut() {
+        setIsHover(false)
+    }
+
     return (
         <Context.Consumer>
         { user =>
-        <div className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
+        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
             <img className="object-contain" src={image} alt={item}/>
             <div className="flex flex-col py-4 w-full">
-                <div className="font-bold text-lg mb-2">{item}</div>
+                <div className="font-bold text-md">{item}</div>
                 <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                 <span className="hover:cursor-pointer hover:text-amber-600 text-sm self-center" onClick={handleReviewClick}>See more info...</span>
             </div>
-                <div className="flex justify-between items-center px-6 pt-4 pb-2 w-full">
+                {/* <div className="flex justify-between items-center px-6 pt-4 pb-2 w-full">
                     <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{(quantity > 0) ? `In Stock: ${quantity}` : "Sold Out"}</span>
                     {(quantity > 0) ? 
                         <span className="inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">${price}.00</span> : null}
-            </div>
+            </div> */}
             <div className="flex items-center justify-between px-6 pb-2 w-full">
-                {(inCart.length > 0) ? 
-                    <BsFillCartCheckFill className="inline-block text-lg hover:cursor-not-allowed"/>
-                     : (quantity > 0) ?
-                    <BsCartPlus onClick={handleClick} className="inline-block text-lg hover:cursor-pointer hover:text-amber-600"/>
-                 : <BsCartX className="inline-block text-lg hover:cursor-not-allowed"/>
-                 }
-                <div className="flex">
+                {isHover && (inCart.length > 0) ? 
+                    <div className="flex space-x-2 cursor-not-allowed">
+                        <BsFillCartCheckFill className="inline-block text-lg text-amber-600"/>
+                        <p className="text-amber-600 text-bold">ITEM IN CART</p>
+                    </div>
+                     : isHover && (quantity > 0) ?
+                    <div className="flex space-x-2 cursor-pointer">
+                        <BsCartPlus onClick={handleClick} className="inline-block text-lg text-amber-600"/>
+                        <p className="text-amber-600 text-bold">ADD TO CART</p>
+                    </div>
+                 : isHover ? 
+                 <div className="flex space-x-2 cursor-not-allowed">
+                    <BsCartX className="inline-block text-lg text-amber-600"/>
+                    <p className="text-amber-600 text-bold">OUT OF STOCK</p>
+                </div>
+                : <div className="text-amber-600 text-bold">${price.toFixed(2)}
+                </div>}
+                 
+            <div className="flex">
             <Rating size="sm">
                 <Rating.Star
                     filled={avgRating >= 1}
