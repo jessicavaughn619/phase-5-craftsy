@@ -76,7 +76,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
-                <div className={`absolute inset-0 h-full w-full bg-white bg-opacity-${isHover ? "60" : "0"} transition-opacity ease-in-out duration-300`}>
+                <div className={`absolute inset-0 h-full w-full bg-white transition-opacity ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
                     {isHover && (
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0">
                             <CiCircleMore onClick={handleReviewClick} className="cursor-pointer text-xl hover:text-amber-600" />
