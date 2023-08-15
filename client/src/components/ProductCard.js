@@ -76,7 +76,7 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="rounded grid grid-template-row-auto-1fr shadow-lg hover:cursor-default justify-items-center max-w-full p-4">
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
-                <div className={`absolute inset-0 h-full w-full bg-white transition-opacity ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
+                <div className={`absolute inset-0 h-full w-full bg-white transition-all ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
                     {isHover && (
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1">
                             <CiCircleMore onClick={handleReviewClick} data-tooltip-target="tooltip-light" className="cursor-pointer text-5xl hover:text-amber-600" />
@@ -97,17 +97,17 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 {(inCart.length > 0) ? 
                 <div className={`flex space-x-2 items-center cursor-not-allowed relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
                     <BsFillCartCheckFill className="inline-block text-lg text-amber-600"/>
-                    <p className="text-amber-600 text-bold">ITEM IN CART</p>
+                    <p className="text-amber-600 text-bold">Item in Cart</p>
                 </div>
                      : (quantity > 0) ?
                     <div onClick={handleClick} className={`flex space-x-2 items-center cursor-pointer relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
                         <BsCartPlus className="inline-block text-lg text-amber-600"/>
-                        <p className="text-amber-600 text-bold">ADD TO CART</p>
+                        <p className="text-amber-600 text-bold">Add to Cart</p>
                     </div>
                  :
                  <div className={`flex space-x-2 items-center cursor-not-allowed relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
                     <BsCartX className="inline-block text-lg text-amber-600"/>
-                    <p className="text-gray-700 text-bold">OUT OF STOCK</p>
+                    <p className="text-gray-700 text-bold">Out of Stock</p>
                 </div>}
                  
             <div className="flex">
