@@ -79,10 +79,9 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <div className={`absolute inset-0 h-full w-full bg-white transition-all ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
                     {isHover && (
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1">
-                            <CiCircleMore onClick={handleReviewClick} data-tooltip-target="tooltip-light" className="cursor-pointer text-5xl hover:text-amber-600" />
+                            <CiCircleMore onClick={handleReviewClick} data-tooltip-target="tooltip-light" data-tooltip-trigger="hover" data-tooltip-placement="top" className="cursor-pointer text-5xl hover:text-amber-600" />
                             <div id="tooltip-light" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-amber-600 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
                             More Info
-                            <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
                         </div>
                     )}
