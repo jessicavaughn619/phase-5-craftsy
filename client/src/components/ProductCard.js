@@ -1,5 +1,5 @@
 import { BsFillCartCheckFill, BsCartX, BsCartPlus } from 'react-icons/bs'
-import { CiCircleMore } from 'react-icons/ci'
+import { FiMoreHorizontal } from 'react-icons/fi'
 import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
@@ -77,15 +77,13 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
             <div className="relative">
                 <img className="object-contain" src={image} alt={item}/>
                 <div className={`absolute inset-0 h-full w-full bg-white transition-all ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
-                    {isHover && (
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1 transition-opacity duration-300">
-                            <CiCircleMore onClick={handleReviewClick} data-tooltip-target="tooltip-light" data-tooltip-trigger="hover" data-tooltip-placement="top" className="cursor-pointer text-5xl bg-white rounded-full transition-colors duration-300 hover:text-white hover:bg-amber-600" />
+                        <div className={`absolute top-1/2 left-1/2 transition-all duration-300 z-1 ${isHover ? "translate-x-0 opacity-100" : "-translate-x-20 opacity-0"}`}>
+                            <FiMoreHorizontal onClick={handleReviewClick} data-tooltip-target="tooltip-light" data-tooltip-trigger="hover" data-tooltip-placement="top" className="cursor-pointer text-4xl bg-white rounded-full transition-all duration-300 hover:text-white hover:bg-amber-600" />
                             <div id="tooltip-light" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-amber-600 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
                             More Info
                             <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
                         </div>
-                    )}
                  </div>
             </div>
             <div className="flex flex-col py-4 w-full">
