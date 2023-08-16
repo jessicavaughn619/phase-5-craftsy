@@ -7,10 +7,6 @@ This site is a live site utilized by La Junta Crafts, a small business out of La
 ## Live Site
 <a href="https://lajuntacrafts.com/" title="La Junta Crafts">La Junta Crafts</a>
 
-## Walkthrough
-
-<a href="https://youtu.be/jWwT2GTx5rs" title="La Junta Crafts eCommerce Application Walkthrough"><img src="./client/src/images/play.png" height="200px" alt="La Junta Crafts Walkthrough" /></a>
-
 ## Usage
 
 Users can create an account by signing up on the Sign Up page or login with Google credentials to create a local account on La Junta Crafts. Authenticated users can leave product reviews. All users can browse the product catalogue, and authenticated users can add/update/delete items from their cart and complete the order checkout process using PayPal, Venmo, or a credit or debit card. Authenticated users can create, edit, and delete reviews for each product on the product page. Once leaving a review, the average rating for the product will update to reflect the new rating and will be displayed on the front of the product card. 
