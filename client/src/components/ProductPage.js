@@ -92,7 +92,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
         {user =>
         <div className="flex flex-col justify-evenly md:flex-row">
             <div className="flex flex-col justify-evenly gap-4">
-            <Link to="/" className="cursor-pointer hover:text-amber-600">Back to Products</Link>
+            <Link to="/" className="ml-5 cursor-pointer hover:text-amber-600">Back to Products</Link>
                 <div className="max-w-sm rounded shadow-lg p-4 self-center hover:cursor-default">
                     <img className="object-cover" src={image} alt={item} />
                     <div className="flex flex-col py-4 w-full">
@@ -100,7 +100,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
                         <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                     </div>
                     <div className="flex justify-between w-full overflow-hidden">
-                        <div className="text-amber-600 text-bold absolute">${price.toFixed(2)}</div>
+                        <div className="text-amber-600 text-bold">${price.toFixed(2)}</div>
                     </div>   
                 </div>
             </div>
