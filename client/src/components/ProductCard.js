@@ -80,11 +80,11 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <div className={`absolute inset-0 h-full w-full bg-white transition-all ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
                     <div className={`absolute top-1/2 left-1/2 transition-all duration-300 z-1 -translate-x-1/2 ${isHover ? "-translate-y-1/2 opacity-100" : "translate-y-20 opacity-0"}`}>
                         <Tooltip
-                            content="More Info"
-                            style="light"
-                            placement="top"
-                            trigger="hover"
-                            animation="duration-300">
+                            content='More Info'
+                            style={light}
+                            placement={top}
+                            trigger='hover'
+                            animation='duration-300'>
                             <FiMoreHorizontal onClick={handleReviewClick} className="cursor-pointer text-4xl bg-white rounded-full transition-all duration-300 hover:text-white hover:bg-amber-600" />
                         </Tooltip>
                     </div>
