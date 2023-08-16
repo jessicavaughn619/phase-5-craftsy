@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Rating } from "flowbite-react"
 import { Context } from "../context";
 import Review from "./Review";
@@ -20,10 +20,6 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     const [message, setMessage] = useState(null)
 
     const { id } = useParams()
-    const navigate = useNavigate()
-    const goBack = () => {
-		navigate(-1);
-	}
 
     let user_id;
     if (user) {
@@ -43,7 +39,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     }
 
     const currentProduct = products.find(product => product.id === parseInt(id))
-    const { item, description, image, reviews } = currentProduct;
+    const { item, description, image, price, quantity, reviews } = currentProduct;
 
     const allReviews = reviews.map(review => (
         <Review 
@@ -96,13 +92,16 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
         {user =>
         <div className="flex flex-col justify-evenly md:flex-row">
             <div className="flex flex-col justify-evenly gap-4">
-                <a href={goBack} className="cursor-pointer hover:text-amber-600">Back to Products</a>
+            <Link to="/" className="cursor-pointer hover:text-amber-600">Back to Products</Link>
                 <div className="max-w-sm rounded shadow-lg p-4 self-center hover:cursor-default">
                     <img className="object-cover" src={image} alt={item} />
                     <div className="flex flex-col py-4 w-full">
                         <div className="font-bold text-md">{item}</div>
                         <p className="text-gray-700 text-base text-sm mb-2">{description}</p>
                     </div>
+                    <div className="flex justify-between w-full overflow-hidden">
+                        <div className="text-amber-600 text-bold absolute">${price.toFixed(2)}</div>
+                    </div>   
                 </div>
             </div>
         <div className="flex flex-col py-4 gap-4 self-center md:self-start">
