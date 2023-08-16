@@ -61,6 +61,7 @@ class Product(db.Model, SerializerMixin):
         "-reviews.product",
         "-reviews.user.reviews",
         "-orders",
+        "-reviews.user.orders",
     )
 
     id = db.Column(db.Integer, primary_key=True)
