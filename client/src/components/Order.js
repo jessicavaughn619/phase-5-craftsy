@@ -13,7 +13,7 @@ export default function Order({paypal_id, total_cost, created_at, products}) {
         <span>Order Placed: {formattedDate}</span>
             <div className="flex justify-between">
                 <span>Order ID: {paypal_id}</span>
-                <span>Total Cost: ${total_cost.toFixed(2)}</span>
+                <span>Total: ${total_cost.toFixed(2)}</span>
             </div>
         {/* <span>Products: </span>
         <div>

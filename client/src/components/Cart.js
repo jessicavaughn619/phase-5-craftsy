@@ -84,7 +84,7 @@ export default function Cart({ products, onDeleteItem, onUpdateQuantityInCart, o
             </div>
             : user && !orderPlaced ? <div className="space-y-4">
             <p>You have no products in your cart! Let's start shopping!</p></div>
-            : <div className="space-y-4"><p>Login or sign up to start shopping!</p></div>}
+            : !user ? <div className="space-y-4"><p>Login or sign up to start shopping!</p></div> : null}
         <div className="grid place-items-center">
           {checkout && cartItems ? 
         <PayPalButtons
