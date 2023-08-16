@@ -4,6 +4,7 @@ import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Rating } from "flowbite-react"
 import { Context } from '../context';
+import { Tooltip } from 'flowbite-react';
 
 export default function ProductCard({ product, productsInCart, onSetProductsInCart}) {
     const user = useContext(Context)
@@ -78,11 +79,14 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 <img className="object-contain" src={image} alt={item}/>
                 <div className={`absolute inset-0 h-full w-full bg-white transition-all ease-in-out duration-300 ${isHover ? "bg-opacity-60" : "bg-opacity-0"}`}>
                     <div className={`absolute top-1/2 left-1/2 transition-all duration-300 z-1 -translate-x-1/2 ${isHover ? "-translate-y-1/2 opacity-100" : "translate-y-20 opacity-0"}`}>
-                        <FiMoreHorizontal onClick={handleReviewClick} data-tooltip-target="tooltip-default" data-tooltip-trigger="hover" data-tooltip-placement="top" className="cursor-pointer text-4xl bg-white rounded-full transition-all duration-300 hover:text-white hover:bg-amber-600" />
-                        <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        More Info
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
+                        <Tooltip
+                            content="More Info"
+                            style="light"
+                            placement="top"
+                            trigger="hover"
+                            animation="duration-300">
+                            <FiMoreHorizontal onClick={handleReviewClick} className="cursor-pointer text-4xl bg-white rounded-full transition-all duration-300 hover:text-white hover:bg-amber-600" />
+                        </Tooltip>
                     </div>
                  </div>
             </div>
