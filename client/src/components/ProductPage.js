@@ -39,7 +39,7 @@ export default function ProductPage({ products, onAddReview, onDeleteReview, onE
     }
 
     const currentProduct = products.find(product => product.id === parseInt(id))
-    const { item, description, image, price, quantity, reviews } = currentProduct;
+    const { item, description, image, price, reviews } = currentProduct;
 
     const allReviews = reviews.map(review => (
         <Review 
