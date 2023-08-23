@@ -58,6 +58,7 @@ export default function App() {
         if (check_cart_response.ok) {
           const productsInCart = await check_cart_response.json();
           setProductsInCart(productsInCart)
+          console.log(productsInCart)
         }
         const product_response = await fetch("/api/products");
         const products = await product_response.json();

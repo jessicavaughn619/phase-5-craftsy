@@ -226,31 +226,14 @@ class Cart(Resource):
             product_dicts = []
             for product in products:
                 product_dict = product.to_dict()
-                product_dict['quantityInCart'] = cart_contents[product.id]  # Add quantity info to each product
+                product_dict['quantityInCart'] = cart_contents[product.id]
                 product_dicts.append(product_dict)
             
             return make_response(product_dicts, 200)
         else:
             return jsonify(cart_data)
-        
-    # def get(self):
-    #     cart_data = session.get("cart", [])
-    #     if cart_data:
-    #         cart_ids = tuple(cart_data)
-    #         products = Product.query.filter(Product.id.in_(cart_ids)).all()
-    #         product_dicts = [product.to_dict() for product in products]
-    #         return make_response(product_dicts, 200)
-    #     else:
-    #         return jsonify(cart_data)
 
 class CartByID(Resource):
-    # def post(self, id):
-    #     if id in session["cart"]:
-    #         return {"error": "Item already added to cart"}, 401
-    #     session["cart"].append(id)
-    #     session.modified = True
-    #     return {"message": "Item added to cart"}, 201
-
     def post(self, id):
         cart = session.get("cart", [])
         
