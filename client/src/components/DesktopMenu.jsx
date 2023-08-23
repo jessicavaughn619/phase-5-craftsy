@@ -1,6 +1,6 @@
 import NavBar from "./NavBar"
 
-export default function DesktopMenu({onSetUser, onSetMessage, message, productsInCart, onSetProductsInCart, isMobile}) {
+export default function DesktopMenu({onSetUser, onSetMessage, message, productsInCart, onSetProductsInCart, isMobile, isMenuOpen, onSetIsMenuOpen}) {
     return (
         <div>
             <NavBar 
@@ -10,6 +10,8 @@ export default function DesktopMenu({onSetUser, onSetMessage, message, productsI
             productsInCart={productsInCart}
             onSetProductsInCart={onSetProductsInCart}
             isMobile={isMobile}
+            onSetIsMenuOpen={onSetIsMenuOpen}
+            isMenuOpen={isMenuOpen}
             />
         </div>
     )

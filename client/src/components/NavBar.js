@@ -3,7 +3,8 @@ import { Context } from '../context';
 import { AiFillCloseSquare } from "react-icons/ai"
 import Message from './Message';
 
-export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetProductsInCart, isMenu, onSetIsMenuOpen, isMobile, message }) {
+export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetProductsInCart, 
+                                isMenu, onSetIsMenuOpen, isMobile, message }) {
     const navigate = useNavigate()
 
     function handleLogoutClick() {
@@ -31,11 +32,11 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 <div className={isMenu ? "flex flex-col" : "flex flex-col sm:flex-row sm:space-x-5"}>
                 {user && isMenu ? <p className="font-light pb-2">Welcome, {user.first_name}!</p> : null}
                 <NavLink to="/" className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={isMenu ? {handleMenuCloseClick} : null}>Products</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Products</NavLink>
                 <NavLink to="/about" className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={isMenu ? {handleMenuCloseClick} : null}>About</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>About</NavLink>
                 <NavLink to="/contact" className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={isMenu ? {handleMenuCloseClick} : null}>Contact</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Contact</NavLink>
                 </div>
                 {user ?
                 <div className={isMenu ? "flex" : "flex absolute right-0 pr-10 flex-col items-end sm:flex-row sm:space-x-5"}>
@@ -46,9 +47,9 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
                 <div className={isMenu ? "flex flex-col": "flex absolute right-0 mr-5 flex-col items-end sm:flex-row sm:space-x-5"}>
                     {isMobile ? null : <div className="flex"><Message message={message} /></div>}
                     <NavLink to='/signup' className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={isMenu ? {handleMenuCloseClick} : null}>Sign Up</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Sign Up</NavLink>
                     <NavLink to='/login' className={({ isActive, isPending }) =>
-                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={isMenu ? {handleMenuCloseClick} : null}>Login</NavLink>
+                    isPending ? "" : isActive ? "text-amber-600" : "hover:text-amber-600"} onClick={handleMenuCloseClick}>Login</NavLink>
                 </div>}
             </div>
         </div>

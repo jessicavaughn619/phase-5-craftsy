@@ -1,4 +1,3 @@
-import Hero from "./Hero";
 import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
@@ -13,12 +12,8 @@ import { Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { Context } from "../context";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
-import NavIcons from "./NavIcons";
-import Search from "./Search";
 import Account from "./Account";
-import { BiMenu } from "react-icons/bi"
-import Menu from "./Menu";
-import DesktopMenu from "./DesktopMenu";
+import Header from "./Header";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,7 +22,6 @@ export default function App() {
   const [message, setMessage] = useState("")
   const [search, setSearch] = useState("")
   const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 768px)').matches);
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [initialDataFetched, setInitialDataFetched] = useState(false)
 
   useEffect(() => {
@@ -216,10 +210,6 @@ const initialOptions = {
   intent: "capture",
 };
 
-function handleMenuOpen() {
-  setIsMenuOpen(isMenuOpen => !isMenuOpen)
-}
-
 function handleSetUser(state) {
   setUser(state)
 }
@@ -232,41 +222,16 @@ if (!initialDataFetched) {
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
     <div className="flex flex-col h-screen justify-between hover:cursor-default">
-        <header>
-        <div className="md:flex md:flex-row md:items-center">
-        <Hero />
-          <div className="w-full flex items-center justify-between lg:w-[66%]">
-          <Search 
-            onSetSearch={setSearch}
-            search={search}
-          />
-          <NavIcons 
-            productsInCart={productsInCart}
-          />
-          </div>
-        </div>
-        <Menu 
-          isMenuOpen={isMenuOpen}
-          onSetIsMenuOpen={setIsMenuOpen}
-          onSetUser={handleSetUser}
-          onSetMessage={handleSetMessage}
-          productsInCart={productsInCart}
-          onSetProductsInCart={handleResetCart}
-        />
-        {!isMobile ? 
-        <DesktopMenu
-          onSetUser={handleSetUser}
-          onSetMessage={handleSetMessage}
-          message={message}
-          productsInCart={productsInCart}
-          onSetProductsInCart={handleResetCart}
-          isMobile={isMobile}
-        /> : 
-        <div className="flex justify-between items-center m-5 py-2 border-y-2 border-gray-100">
-        <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
-        <span className="text-amber-600">{message}</span>
-        </div> }
-        </header>
+      <Header 
+        onSetSearch={setSearch}
+        search={search}
+        productsInCart={productsInCart}
+        onSetUser={handleSetUser}
+        onSetMessage={handleSetMessage}
+        onSetProductsInCart={handleResetCart}
+        message={message}
+        isMobile={isMobile}
+      />
         <main className="mb-auto">
         <Routes>
           <Route exact path='/' element={
