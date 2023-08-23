@@ -4,7 +4,6 @@ import About from "./About";
 import Contact from "./Contact";
 import Cart from "./Cart";
 import ProductPage from "./ProductPage";
-import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
@@ -19,6 +18,7 @@ import Search from "./Search";
 import Account from "./Account";
 import { BiMenu } from "react-icons/bi"
 import Menu from "./Menu";
+import DesktopMenu from "./DesktopMenu";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -253,19 +253,19 @@ if (!initialDataFetched) {
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
         />
-        {isMobile ? 
-        <div className="flex justify-between items-center m-5 py-2 border-y-2 border-gray-100">
-        <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
-        <span className="text-amber-600">{message}</span>
-        </div> :
-        <NavBar 
+        {!isMobile ? 
+        <DesktopMenu
           onSetUser={handleSetUser}
           onSetMessage={handleSetMessage}
           message={message}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
           isMobile={isMobile}
-        />}
+        /> : 
+        <div className="flex justify-between items-center m-5 py-2 border-y-2 border-gray-100">
+        <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
+        <span className="text-amber-600">{message}</span>
+        </div> }
         </header>
         <main className="mb-auto">
         <Routes>
