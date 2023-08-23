@@ -220,6 +220,10 @@ function handleMenuOpen() {
   setIsMenuOpen(isMenuOpen => !isMenuOpen)
 }
 
+function handleSetUser(state) {
+  setUser(state)
+}
+
 if (!initialDataFetched) {
   return <Loading />
 }
@@ -244,7 +248,7 @@ if (!initialDataFetched) {
         <Menu 
           isMenuOpen={isMenuOpen}
           onSetIsMenuOpen={setIsMenuOpen}
-          onSetUser={setUser}
+          onSetUser={handleSetUser}
           onSetMessage={handleSetMessage}
           productsInCart={productsInCart}
           onSetProductsInCart={handleResetCart}
@@ -255,7 +259,7 @@ if (!initialDataFetched) {
         <span className="text-amber-600">{message}</span>
         </div> :
         <NavBar 
-          onSetUser={setUser}
+          onSetUser={handleSetUser}
           onSetMessage={handleSetMessage}
           message={message}
           productsInCart={productsInCart}
