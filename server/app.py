@@ -250,6 +250,25 @@ class CartByID(Resource):
         session.modified = True
     
         return {"message": "Item added to cart"}, 201
+    
+    def patch(self, id):
+        new_quantity = request.json.get('quantityInCart')
+    
+        if new_quantity is None:
+            return jsonify(error="New quantity not provided"), 400
+        
+        cart = session.get('cart', [])
+        
+        item_to_update = next((item for item in cart if item['id'] == id), None)
+        
+        if item_to_update is None:
+            return jsonify(error="Item not found in cart"), 404
+        
+        item_to_update['quantity_in_cart'] = new_quantity
+        session['cart'] = cart
+        session.modified = True
+        
+        return make_response(jsonify(message="Quantity in cart updated"), 200)
 
     def delete(self, id):
         if id in session["cart"]:

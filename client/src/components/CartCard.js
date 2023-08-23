@@ -3,10 +3,9 @@ import { BsCartX } from 'react-icons/bs'
 
 export default function CardCard({ product, onDeleteItem, onUpdateQuantityInCart }) {
     const { id, item, description, image, price, quantity, quantity_in_cart } = product;
-   const [quantityInCart, setQuantityInCart] = useState(quantity_in_cart)
-   const [isHover, setIsHover] = useState(false)
-   const numRef = useRef(quantityInCart)
-
+    const [quantityInCart, setQuantityInCart] = useState(quantity_in_cart)
+    const [isHover, setIsHover] = useState(false)
+    const numRef = useRef(quantityInCart)
 
    function handleDecrementClick() {
     if (quantityInCart > 1) {

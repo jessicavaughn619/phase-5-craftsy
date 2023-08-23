@@ -54,15 +54,17 @@ export default function App() {
           const user = await check_session_response.json();
           setUser(user);
         }
+        const product_response = await fetch("/api/products");
+        if (product_response.ok) {
+          const products = await product_response.json();
+          setProducts(products);
+        }
         const check_cart_response = await fetch("/api/cart");
         if (check_cart_response.ok) {
           const productsInCart = await check_cart_response.json();
           setProductsInCart(productsInCart)
           console.log(productsInCart)
         }
-        const product_response = await fetch("/api/products");
-        const products = await product_response.json();
-        setProducts(products);
 
       } catch (error) {
         console.log(error)
@@ -88,7 +90,24 @@ export default function App() {
       return product;
     })
     setProductsInCart(updatedProducts)
-    handleSetMessage("Updated quantity in cart!")
+
+    fetch(`/api/cart/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantityInCart }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to update quantity in cart');
+        }
+        return response.json()
+        .then(handleSetMessage("Updated quantity in cart"))
+      })
+      .catch(error => {
+        console.error('Error updating quantity in cart:', error);
+      });
   }
 
   function handleDeleteItemFromCart(id) {
