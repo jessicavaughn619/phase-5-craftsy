@@ -28,7 +28,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
         {user => 
         <div className="m-5 py-2 border-y-2 border-gray-100">
             <div className={isMenu ? "flex flex-col gap-2" : "flex"}>
-                {isMenu ? <AiFillCloseSquare className="text-xl hover:text-amber-600 cursor-pointer self-end" onClick={handleMenuCloseClick} /> : null}
+                {isMenu ? <AiFillCloseSquare className="text-3xl hover:text-amber-600 cursor-pointer self-end" onClick={handleMenuCloseClick} /> : null}
                 <div className={isMenu ? "flex flex-col" : "flex flex-col sm:flex-row sm:space-x-5"}>
                 {user && isMenu ? <p className="font-light pb-2">Welcome, {user.first_name}!</p> : null}
                 <NavLink to="/" className={({ isActive, isPending }) =>

@@ -74,7 +74,7 @@ export default function SignUpForm({ onLogin }) {
   return (
     <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
       <h2 className="mb-4 text-3xl tracking-tight font-bold text-center text-gray-900 dark:text-white">Sign Up</h2>
-      <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Create an account with Craftsy</p>
+      <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Create an account with La Junta Crafts</p>
       <form onSubmit={formik.handleSubmit}>
       <div className="grid gap-6 mb-2 md:grid-cols-1">
       <div>

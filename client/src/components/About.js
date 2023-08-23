@@ -10,7 +10,7 @@ export default function About() {
             <div className="flex flex-col justify-between shadow-lg sm:flex-row">
                 <img className="object-cover rounded-md self-center object-top sm:w-2/4 sm:h-96" src={sandy_doyle} alt="Sandy & Doyle avatar"></img>
             <div className="flex flex-col justify-evenly p-5">
-                <h2 className="self-center text-amber-600 text-lg font-semibold">Owners</h2>
+                <h2 className="self-center text-black text-3xl font-semibold mb-4">Owners</h2>
                 <p>La Junta Crafts is a small-business owned and operated by Sandy and Doyle.</p>
                 <p>Doyle and Sandy are a part of the entire process for their ceramics - from pouring slip into molds to firing the product for the final time, they take pride in creating custom, unique products.</p>
                 <p>In addition to painting, Sandy enjoys photography, cross-stitching, and gardening. Doyle is a retired contractor and loves woodworking, fixing things, and brainstorming his next million-dollar idea.</p>
@@ -20,7 +20,7 @@ export default function About() {
             <div className="flex flex-col justify-between shadow-lg sm:flex-row-reverse">
                 <img className="object-cover rounded-md self-center object-center sm:w-2/4 sm:h-96" src={backyard} alt="La Junta, CO landscape"></img>
                 <div className="flex flex-col justify-evenly p-5">
-                    <h2 className="self-center text-amber-600 text-lg font-semibold">Location</h2>
+                    <h2 className="self-center text-black text-3xl font-semibold mb-4">Location</h2>
                     <p>La Junta Crafts is located in beautiful  
                     <a className="hover:text-amber-600" href="https://visitlajunta.net/" target="_blank" rel="noreferrer"> La Junta, Colorado!</a> Consider passing through 'the junction' when planning your next road trip!</p>
                     <p>Thank you for visiting La Junta Crafts and for supporting small-businesses!</p>
@@ -29,7 +29,7 @@ export default function About() {
             <div className="flex flex-col justify-between shadow-lg sm:flex-row">
                 <img className="object-cover rounded-md self-center object-center sm:w-2/4 md:w-1/4 sm:h-96" src={jessica} alt="Jessica avatar"></img>
                 <div className="flex flex-col justify-evenly p-5 w-full">
-                    <h2 className="self-center text-amber-600 text-lg font-semibold">Webmaster</h2>
+                    <h2 className="self-center text-black text-3xl font-semibold mb-4">Webmaster</h2>
                     <p className="pb-2 self-center">La Junta Craft's website is designed, built, and maintained by Jessica Vaughn.</p>
                     <Button children={
                     <div>

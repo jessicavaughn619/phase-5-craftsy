@@ -48,7 +48,7 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
       isMobile={isMobile}
     /> : 
     <div className="flex justify-between items-center m-5 py-2 border-y-2 border-gray-100">
-    <BiMenu className="hover:text-amber-600 cursor-pointer text-xl m-5" onClick={handleMenuOpen}/>
+    <BiMenu className="hover:text-amber-600 cursor-pointer text-3xl m-5" onClick={handleMenuOpen}/>
     <span className="text-amber-600">{message}</span>
     </div> }
     </header>
