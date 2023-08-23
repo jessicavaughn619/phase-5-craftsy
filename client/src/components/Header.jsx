@@ -14,8 +14,6 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
         setIsMenuOpen(isMenuOpen => !isMenuOpen)
       }
 
-    console.log(isMenuOpen)
-
     return (
     <header>
     <div className="md:flex md:flex-row md:items-center">
