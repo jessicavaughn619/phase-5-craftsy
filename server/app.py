@@ -106,7 +106,7 @@ def callback():
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["given_name"]
     else:
-        return {"error": "User email not available or not verified by Google."}, 400
+        return {"error": "User email not available or not verified by Google"}, 400
 
     user = User(
         id=unique_id, first_name=users_name, email=users_email, profile_pic=picture
@@ -129,7 +129,7 @@ class Logout(Resource):
             session["cart"] = []
             session["user_id"] = None
             logout_user()
-            return {"message": "Successfully logged out user!"}, 204
+            return {"message": "Logged out"}, 204
         return {"error": "401 Unauthorized"}, 401
 
 class Signup(Resource):
@@ -172,7 +172,7 @@ class LocalLogin(Resource):
                 session["user_id"] = user.id
                 return user.to_dict(), 200
 
-            return {"error": "Incorrect password."}, 401
+            return {"error": "Incorrect password"}, 401
 
         return {"error": "401 Unauthorized"}, 401
 
@@ -207,7 +207,7 @@ class ProductByID(Resource):
             db.session.add(review)
             db.session.commit()
             return review.to_dict(), 201
-        return {"error": "Please login to leave a review!"}, 401
+        return {"error": "Please login to leave a review"}, 401
 
 class Cart(Resource):
     def get(self):
@@ -222,17 +222,25 @@ class Cart(Resource):
 
 class CartByID(Resource):
     def post(self, id):
-        if id in session["cart"]:
-            return {"error": "Item already added to cart!"}, 401
-        session["cart"].append(id)
-        session.modified = True
-        return {"message": "Successfully added item to cart"}, 201
+        item_id = id
+        quantity = 1
+
+        cart = session.get('cart', {})
+
+        if item_id in cart:
+            return {"error": "Item already added to cart"}, 401
+        else:
+            cart[item_id] = {
+                "quantityInCart": quantity,
+            }
+        session['cart'] = cart
+        return {"message": "Item added to cart"}, 201
 
     def delete(self, id):
         if id in session["cart"]:
             session["cart"].remove(id)
             session.modified = True
-            return {"message": "Successfully removed item from cart"}, 204
+            return {"message": "Item removed from cart"}, 204
         return {"error": "Item not found in cart"}, 404
 
 class Reviews(Resource):
@@ -259,9 +267,9 @@ class ReviewByID(Resource):
         if review:
             db.session.delete(review)
             db.session.commit()
-            return {"message": "Review deleted successfully."}, 204
+            return {"message": "Review deleted"}, 204
         else:
-            return {"error": "Review not found."}, 404
+            return {"error": "Review not found"}, 404
 
 class Orders(Resource):
     def get(self):
@@ -282,7 +290,7 @@ class Orders(Resource):
 
         exists = Order.query.filter_by(paypal_id=paypal_id).first()
         if exists:
-            return {"error": "Order already exists in database."}, 401
+            return {"error": "Order already exists in database"}, 401
 
         else:
             for product in products:
@@ -301,7 +309,7 @@ class Orders(Resource):
             db.session.commit()
 
             session["cart"] = []
-            return {"message": "Successfully created order and updated database."}, 201
+            return {"message": "Order created"}, 201
 
 api.add_resource(LocalLogin, "/api/local_login", endpoint="local_login")
 api.add_resource(Signup, "/api/signup", endpoint="signup")
