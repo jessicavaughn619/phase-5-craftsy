@@ -222,16 +222,14 @@ class Cart(Resource):
 
 class CartByID(Resource):
     def post(self, id):
-        quantity = 1
-        cart = session.get('cart', [])
+        cart = session.get("cart", [])
 
         if id in cart:
             return {"error": "Item already added to cart"}, 401
-        else:
-            cart[id] = {
-                "quantityInCart": quantity,
-            }
-        session['cart'] = cart
+        cart.append(id)
+        cart[id] = {
+            "quantityInCart": 1,
+        }
         session.modified = True
         return {"message": "Item added to cart"}, 201
 
