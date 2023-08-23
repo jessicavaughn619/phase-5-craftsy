@@ -217,7 +217,7 @@ class Cart(Resource):
             cart_contents = {}
             for item in cart_data:
                 product_id = item['id']
-                quantity = item['quantityInCart']
+                quantity = item['quantity_in_cart']
                 cart_contents[product_id] = quantity
             
             product_ids = list(cart_contents.keys())
@@ -226,7 +226,7 @@ class Cart(Resource):
             product_dicts = []
             for product in products:
                 product_dict = product.to_dict()
-                product_dict['quantityInCart'] = cart_contents[product.id]
+                product_dict['quantity_in_cart'] = cart_contents[product.id]
                 product_dicts.append(product_dict)
             
             return make_response(product_dicts, 200)
@@ -242,7 +242,7 @@ class CartByID(Resource):
 
         new_item = {
             "id": id,
-            "quantityInCart": 1
+            "quantity_in_cart": 1
         }
 
         cart.append(new_item)
