@@ -1,4 +1,4 @@
-import { BsFillCartCheckFill, BsCartX, BsCartPlus } from 'react-icons/bs'
+import { BsFillCartCheckFill, BsFillCartXFill, BsFillCartPlusFill } from 'react-icons/bs'
 import { FiMoreHorizontal } from 'react-icons/fi'
 import { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom';
@@ -101,12 +101,12 @@ export default function ProductCard({ product, productsInCart, onSetProductsInCa
                 </div>
                      : (quantity > 0) ?
                     <div onClick={handleClick} className={`flex space-x-2 items-center cursor-pointer relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
-                        <BsCartPlus className="inline-block text-lg text-amber-600"/>
+                        <BsFillCartPlusFill className="inline-block text-lg text-amber-600"/>
                         <p className="text-amber-600 text-bold">Add to Cart</p>
                     </div>
                  :
                  <div className={`flex space-x-2 items-center cursor-not-allowed relative bg-white z-1 transition ease-in-out duration-300 ${isHover ? "translate-x-0" : "-translate-x-full"}`}>
-                    <BsCartX className="inline-block text-lg text-amber-600"/>
+                    <BsFillCartXFill className="inline-block text-lg text-amber-600"/>
                     <p className="text-gray-700 text-bold">Out of Stock</p>
                 </div>}
                  
