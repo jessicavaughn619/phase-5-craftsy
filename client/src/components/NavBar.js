@@ -26,7 +26,7 @@ export default function NavBar({ onSetUser, onSetMessage, productsInCart, onSetP
     return (
         <Context.Consumer>
         {user => 
-        <div className={isMenu ? "m-5 py-2 border-y-2 border-gray-100" : "m-5 py-2 border-y-2 border-gray-100"}>
+        <div className="m-5 py-2 border-y-2 border-gray-100">
             <div className={isMenu ? "flex flex-col gap-2" : "flex"}>
                 {isMenu ? <AiFillCloseSquare className="text-xl hover:text-amber-600 cursor-pointer self-end" onClick={handleMenuCloseClick} /> : null}
                 <div className={isMenu ? "flex flex-col" : "flex flex-col sm:flex-row sm:space-x-5"}>

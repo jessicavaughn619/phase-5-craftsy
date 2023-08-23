@@ -221,7 +221,7 @@ if (!initialDataFetched) {
   return (
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
-    <div className="flex flex-col h-screen justify-between hover:cursor-default">
+    <div className="flex flex-col h-screen justify-between hover:cursor-default text-gray-600">
       <Header 
         onSetSearch={setSearch}
         search={search}

@@ -10,7 +10,7 @@ export default function Footer() {
     }
 
     return (
-        <div className="flex flex-col items-center py-5 justify-between bg-gradient-to-t from-amber-600 to-45%">
+        <div className="flex flex-col items-center py-5 justify-between text-gray-800 bg-gradient-to-t from-amber-600 to-45%">
             <img onClick={handleClick} className="object-cover h-48 w-96 md:m-0 hover:cursor-pointer" src={hero} alt="logo"/>
             <span>Made with ❤️ & 🍺</span>
             <span>© 
