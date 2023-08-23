@@ -205,7 +205,7 @@ export default function App() {
 }
 
 const initialOptions = {
-  clientId: "AXmdt024Q6sKUwG88HayNtol9x5fLiFOQzLOkS1Q87iBiKP98mCWF5_HVibYMVAIIUv7YmYoRHATOZRU",
+  clientId: "AZLV44_ACpRm8jaWC6AwhJnYzX7Lc9CJjAWHg481Gk4C1kf_JRxEuKtQpMAYeEPPCKvMEND33ILfaqF0",
   currency: "USD",
   intent: "capture",
 };
