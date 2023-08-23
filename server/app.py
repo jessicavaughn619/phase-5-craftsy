@@ -178,8 +178,12 @@ class LocalLogin(Resource):
 
 class Products(Resource):
     def get(self):
-        products = [product.to_dict() for product in Product.query.all()]
-        return make_response(products, 200)
+        try:
+            products = [product.to_dict() for product in Product.query.all()]
+            return make_response(products, 200)
+        except Exception as e:
+            print(e)
+            return make_response("Internal server error", 500)
 
 class ProductByID(Resource):
     def get(self, id):
