@@ -271,8 +271,13 @@ class CartByID(Resource):
         return make_response(jsonify(message="Quantity in cart updated"), 200)
 
     def delete(self, id):
-        if id in session["cart"]:
-            session["cart"].remove(id)
+        cart = session.get("cart", [])
+        
+        item_to_remove = next((item for item in cart if item["id"] == id), None)
+        
+        if item_to_remove:
+            cart.remove(item_to_remove)
+            session["cart"] = cart
             session.modified = True
             return {"message": "Item removed from cart"}, 204
         return {"error": "Item not found in cart"}, 404
