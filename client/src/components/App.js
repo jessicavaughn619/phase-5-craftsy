@@ -263,8 +263,9 @@ if (!initialDataFetched) {
           isMobile={isMobile}
         />}
         </header>
-        <main className="mb-auto"><Routes>
-          <Route path='/' element={
+        <main className="mb-auto">
+        <Routes>
+          <Route exact path='/' element={
           <Home 
             search={search}
             products={products}
@@ -273,11 +274,11 @@ if (!initialDataFetched) {
             />}
             />
           <Route path='/*' element={<Error />}/>
-          <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
-          <Route path='/login' element={<LoginForm onLogin={setUser}/>}/>
-          <Route path='/about' element={<About />}/>
+          <Route exact path='/signup' element={<SignUpForm onLogin={setUser}/>}/>
+          <Route exact path='/login' element={<LoginForm onLogin={setUser}/>}/>
+          <Route exact path='/about' element={<About />}/>
           <Route 
-          path='/contact' 
+          exact path='/contact' 
           element={<Contact
            />}/>
           <Route path='/account' element={
