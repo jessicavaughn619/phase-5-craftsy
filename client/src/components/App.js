@@ -25,10 +25,10 @@ export default function App() {
   const [products, setProducts] = useState([])
   const [productsInCart, setProductsInCart]= useState([])
   const [message, setMessage] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
   const [search, setSearch] = useState("")
   const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 768px)').matches);
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [initialDataFetched, setInitialDataFetched] = useState(false)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -44,35 +44,35 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true)
-    const fetchData = async () => {
-      try {
-        const check_session_response = await fetch("/api/check_session", {
-          credentials: "same-origin",
-        });
-        if (check_session_response.ok) {
-          const user = await check_session_response.json();
-          setUser(user);
-        }
-        const product_response = await fetch("/api/products");
-        if (product_response.ok) {
-          const products = await product_response.json();
-          setProducts(products);
-        }
-        const check_cart_response = await fetch("/api/cart");
-        if (check_cart_response.ok) {
-          const productsInCart = await check_cart_response.json();
-          setProductsInCart(productsInCart)
-          console.log(productsInCart)
-        }
+    if (!initialDataFetched) {
+      const fetchInitialData = async () => {
+        try {
+          const check_session_response = await fetch("/api/check_session", {
+            credentials: "same-origin",
+          });
+          if (check_session_response.ok) {
+            const user = await check_session_response.json();
+            setUser(user);
+          }
+          const product_response = await fetch("/api/products");
+          if (product_response.ok) {
+            const products = await product_response.json();
+            setProducts(products);
+          }
+          const check_cart_response = await fetch("/api/cart");
+          if (check_cart_response.ok) {
+            const productsInCart = await check_cart_response.json();
+            setProductsInCart(productsInCart)
+          }
+          setInitialDataFetched(true)
 
-      } catch (error) {
-        console.log(error)
+        } catch (error) {
+          console.log(error)
+        }
       }
+      fetchInitialData()
     }
-    fetchData()
-    setIsLoading(false)
-  }, []);
+    }, [initialDataFetched]);
 
   function handleAddItemToCart(id) {
     const productToAdd = products.find(product => (product.id===id));
@@ -220,6 +220,10 @@ function handleMenuOpen() {
   setIsMenuOpen(isMenuOpen => !isMenuOpen)
 }
 
+if (!initialDataFetched) {
+  return <Loading />
+}
+
   return (
     <Context.Provider value={user}>
       <PayPalScriptProvider options={initialOptions}>
@@ -259,7 +263,6 @@ function handleMenuOpen() {
           isMobile={isMobile}
         />}
         </header>
-        {isLoading ? <Loading /> :
         <main className="mb-auto"><Routes>
           <Route path='/' element={
           <Home 
@@ -299,7 +302,7 @@ function handleMenuOpen() {
             />} 
             />
         </Routes>
-        </main>}
+        </main>
         <footer className="h-10"><Footer /></footer>
     </div>
     </PayPalScriptProvider>
