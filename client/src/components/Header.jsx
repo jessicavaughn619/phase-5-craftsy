@@ -22,15 +22,19 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
     <header>
     <div className="md:flex md:flex-row md:items-center">
     <Hero />
-      <div className="flex items-center justify-between w-full md:justify-end lg:w-[66%]">
-      {renderSearch && <Search 
+    {renderSearch ? <div className="flex items-center justify-between w-full md:justify-end lg:w-[66%]">
+       <Search 
         onSetSearch={onSetSearch}
         search={search}
-      />}
+      />
       <NavIcons 
         productsInCart={productsInCart}
       />
-      </div>
+      </div> :
+      <div className="flex items-center w-full justify-end self-end">
+      <NavIcons 
+        productsInCart={productsInCart}
+      /></div>}
     </div>
     <Menu 
       isMenuOpen={isMenuOpen}
