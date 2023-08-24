@@ -22,7 +22,7 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
     <header>
     <div className="md:flex md:flex-row md:items-center">
     <Hero />
-    {renderSearch ? <div className="flex items-center justify-between w-full md:justify-end lg:w-[66%]">
+    {renderSearch ? <div className="flex items-center justify-between w-full self-end md:justify-end lg:w-[66%]">
        <Search 
         onSetSearch={onSetSearch}
         search={search}

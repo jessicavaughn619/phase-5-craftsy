@@ -9,7 +9,7 @@ export default function Hero() {
     }
     
     return (
-        <div onClick={handleClick} className="w-full lg:w-[33%] hover:cursor-pointer">
+        <div onClick={handleClick} className="w-full lg:w-[50%] hover:cursor-pointer">
             <img className="object-cover h-48 w-96 m-auto md:m-0" src={hero} alt="logo"/>
         </div>
     )
