@@ -150,7 +150,6 @@ export default function App() {
   }
 
   function handleAddReview(review) {
-    console.log(review)
     const productToUpdate = products.find(product => (product.id===review.product_id))
     const updatedProducts = products.map(product => {
       if (product.id===productToUpdate.id) {
