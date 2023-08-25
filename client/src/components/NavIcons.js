@@ -20,11 +20,11 @@ export default function NavIcons({productsInCart}) {
     return (
         <Context.Consumer>
         {user => 
-        <div className="flex absolute right-0 pl-5 space-x-4 mr-5 md:relative">
-            {user ? <NavLink to="/account" className={({ isActive, isPending }) =>
+        <div className="flex absolute right-0 pl-5 space-x-4 mr-5">
+            <NavLink to="/account" className={({ isActive, isPending }) =>
                 isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
                 <BiSolidUserCircle className="text-3xl" />
-            </NavLink> : null}
+            </NavLink>
             <NavLink to="/cart" className={({ isActive, isPending }) =>
                 isPending ? "" : isActive ? "text-amber-600 text-xl" : "hover:text-amber-600 text-xl"}>
                 <div className="flex flex-row space-x-1 items-center">

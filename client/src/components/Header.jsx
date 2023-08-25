@@ -6,6 +6,7 @@ import Search from "./Search"
 import NavIcons from "./NavIcons"
 import Menu from "./Menu"
 import DesktopMenu from "./DesktopMenu"
+import { Context } from "../context"
 
 export default function Header({onSetSearch, search, productsInCart, onSetUser, onSetMessage, onSetProductsInCart,
                                 message, isMobile}) {
@@ -19,22 +20,22 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
       }
 
     return (
+    <Context.Consumer>
+    {user => 
     <header>
     <div className="md:flex md:flex-row md:items-center">
     <Hero />
-    {renderSearch ? <div className="flex items-center justify-between w-full self-end md:justify-end lg:w-[66%]">
+    <div className={`flex items-center justify-between w-full self-end ${!renderSearch ? "mb-6" : "pb-0"} md:justify-end lg:w-[50%]`}>
+    {renderSearch && 
        <Search 
         onSetSearch={onSetSearch}
         search={search}
-      />
+      />}
+    {user && 
       <NavIcons 
         productsInCart={productsInCart}
-      />
-      </div> :
-      <div className="flex items-center w-full justify-end self-end">
-      <NavIcons 
-        productsInCart={productsInCart}
-      /></div>}
+      />}
+    </div>
     </div>
     <Menu 
       isMenuOpen={isMenuOpen}
@@ -60,5 +61,7 @@ export default function Header({onSetSearch, search, productsInCart, onSetUser, 
     <span className="text-amber-600">{message}</span>
     </div> }
     </header>
+    }
+    </Context.Consumer>
     )
 }
