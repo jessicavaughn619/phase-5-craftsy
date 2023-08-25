@@ -26,7 +26,7 @@ with app.app_context():
 
         duck_family = Product(
             item="Duck Family",
-            image="https://i.imgur.com/mfqf985.jpg",
+            image="https://i.imgur.com/KOR0IHP.jpg",
             description="Blue ceramic duck with white speckles with two baby ducklings",
             category="Ceramic",
             price=50.00,
@@ -36,7 +36,7 @@ with app.app_context():
 
         birdbath_large = Product(
             item="Bird Bath",
-            image="https://i.imgur.com/MJvLDfO.jpg",
+            image="https://i.imgur.com/zzDL7E0.jpg",
             description="Blue ceramic birdbath with white speckles",
             category="Ceramic",
             price=75.00,
@@ -46,7 +46,7 @@ with app.app_context():
 
         frog_large = Product(
             item="Frog",
-            image="https://i.imgur.com/Q7sHnTu.jpg",
+            image="https://i.imgur.com/NNaEDD8.jpg",
             description="Large green ceramic frog painted with brown speckles",
             category="Ceramic",
             price=30.00,
@@ -56,7 +56,7 @@ with app.app_context():
 
         rabbit_medium = Product(
             item="Rabbit",
-            image="https://i.imgur.com/nGDkNnj.jpg",
+            image="https://i.imgur.com/9GgtWyk.jpg",
             description="Medium brown rabbit with dark brown streaks in fur",
             category="Ceramic",
             price=20.00,
@@ -66,7 +66,7 @@ with app.app_context():
 
         rabbit_large = Product(
             item="Rabbit",
-            image="https://i.imgur.com/Blfj1ij.jpg",
+            image="https://i.imgur.com/hgX1Tb6.jpg",
             description="Large gray rabbit",
             category="Ceramic",
             price=30.00,
@@ -76,7 +76,7 @@ with app.app_context():
 
         snail_medium = Product(
             item="Snail",
-            image="https://i.imgur.com/HelV5vJ.jpg",
+            image="https://i.imgur.com/4ivdIZb.jpg",
             description="Medium brown snail with red shell",
             category="Ceramic",
             price=20.00,
@@ -86,7 +86,7 @@ with app.app_context():
 
         rabbit_small = Product(
             item="Rabbit",
-            image="https://i.imgur.com/VWqfw0N.jpg",
+            image="https://i.imgur.com/Ofk7eht.jpg",
             description="Small gray rabbit",
             category="Ceramic",
             price=10.00,
@@ -106,7 +106,7 @@ with app.app_context():
 
         lizard_small = Product(
             item="Lizard",
-            image="https://i.imgur.com/ESsh9WF.jpg",
+            image="https://i.imgur.com/bSRJM8W.jpg",
             description="Small green lizard",
             category="Ceramic",
             price=10.00,
@@ -116,7 +116,7 @@ with app.app_context():
 
         pig_family = Product(
             item="Pig Family",
-            image="https://i.imgur.com/8dziTIR.jpg",
+            image="https://i.imgur.com/pdcOyka.jpg",
             description="Medium tower of five pigs stacked on each others' shoulders",
             category="Ceramic",
             price=20.00,
@@ -126,7 +126,7 @@ with app.app_context():
 
         medium_pig = Product(
             item="Pig",
-            image="https://i.imgur.com/wNrRp85.jpg",
+            image="https://i.imgur.com/Al3sCNx.jpg",
             description="Medium pink pig with reddish spots",
             category="Ceramic",
             price=20.00,
@@ -136,7 +136,7 @@ with app.app_context():
 
         toadstool = Product(
             item="Toadstool",
-            image="https://i.imgur.com/FzINcuC.jpg",
+            image="https://i.imgur.com/AFqkCak.jpg",
             description="Medium colorful toadstool",
             category="Ceramic",
             price=20.00,
@@ -146,7 +146,7 @@ with app.app_context():
 
         frog_medium = Product(
             item="Frog",
-            image="https://i.imgur.com/lU4ZO0v.jpg",
+            image="https://i.imgur.com/eMOsRN9.jpg",
             description="Medium frog holding fly",
             category="Ceramic",
             price=20.00,
