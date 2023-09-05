@@ -96,7 +96,7 @@ with app.app_context():
 
         frog_small = Product(
             item="Frog",
-            image="https://i.imgur.com/FBWy1Jm.jpg",
+            image="https://i.imgur.com/aRXpG6V.jpg",
             description="Small green frog with brown speckles",
             category="Ceramic",
             price=10.00,
